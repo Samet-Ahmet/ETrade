@@ -15,10 +15,12 @@ namespace WebUI.Controllers
     public class AccountController : Controller
     {
         private IAuthService _authService;
+        private IUserService _userService;
 
-        public AccountController(IAuthService authService)
+        public AccountController(IAuthService authService, IUserService userService)
         {
             _authService = authService;
+            _userService = userService;
         }
 
 
@@ -35,24 +37,33 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(UserForLoginDto userForLogin)
         {
-            if (LoginUser(userForLogin.Email, userForLogin.Password))
+            var result = _authService.Login(userForLogin);
+            if (!result.Success)
             {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Email, userForLogin.Email),
-                    new Claim(ClaimTypes.Role,"Admin")
-                };
-
-                var userIdentity = new ClaimsIdentity(claims, "login");
-
-                ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
-                await HttpContext.SignInAsync(principal);
-                HttpContext.Session.SetString("login", "yes");
-
-                //Just redirect to our index after logging in. 
-                return RedirectToAction("Index", "Home");
+                return View();
             }
-            return View();
+
+            var roles = _userService.GetRoles(result.Data);
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Email, userForLogin.Email)
+            };
+
+            foreach (var role in roles.Data)
+            {
+                claims.Add(new Claim(ClaimTypes.Role,role.RoleName));
+            }
+
+            var userIdentity = new ClaimsIdentity(claims, "login");
+
+            ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+
+            await HttpContext.SignInAsync(principal);
+
+            HttpContext.Session.SetString("login", "yes"); //login oldu mu? kontrol için
+
+            return RedirectToAction("Index2", "Home");
         }
 
         [HttpGet]
@@ -69,6 +80,7 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
+            userForRegisterDto.GenderId = 1;
            var result = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
 
            if (!result.Success)
@@ -76,10 +88,11 @@ namespace WebUI.Controllers
                return View();
            }
 
-           return RegisteredSuccessfully(userForRegisterDto);
+           return RedirectToAction("RegisteredSuccessfully","Account");
+          //   return RegisteredSuccessfully(userForRegisterDto);
         }
 
-        private IActionResult RegisteredSuccessfully(UserForRegisterDto userForRegisterDto)
+        public IActionResult RegisteredSuccessfully(UserForRegisterDto userForRegisterDto)
         {
             var model = new RegisterViewModel
             {
@@ -96,18 +109,6 @@ namespace WebUI.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private bool LoginUser(string username, string password)
-        {
-            if (username == "ahmetkkn07@gmail.com" && password == "1")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
 
         public IActionResult AccessDenied()
         {
