@@ -1,0 +1,14 @@
+Y:\Documents\GitHub\ETrade\ETrade\DataAccess\obj\Debug\netstandard2.0\DataAccess.csprojAssemblyReference.cache
+Y:\Documents\GitHub\ETrade\ETrade\DataAccess\obj\Debug\netstandard2.0\DataAccess.csproj.CoreCompileInputs.cache
+Y:\Documents\GitHub\ETrade\ETrade\DataAccess\obj\Debug\netstandard2.0\DataAccess.AssemblyInfoInputs.cache
+Y:\Documents\GitHub\ETrade\ETrade\DataAccess\obj\Debug\netstandard2.0\DataAccess.AssemblyInfo.cs
+Y:\Documents\GitHub\ETrade\ETrade\DataAccess\bin\Debug\netstandard2.0\DataAccess.deps.json
+Y:\Documents\GitHub\ETrade\ETrade\DataAccess\bin\Debug\netstandard2.0\DataAccess.dll
+Y:\Documents\GitHub\ETrade\ETrade\DataAccess\bin\Debug\netstandard2.0\DataAccess.pdb
+Y:\Documents\GitHub\ETrade\ETrade\DataAccess\bin\Debug\netstandard2.0\Core.dll
+Y:\Documents\GitHub\ETrade\ETrade\DataAccess\bin\Debug\netstandard2.0\Entities.dll
+Y:\Documents\GitHub\ETrade\ETrade\DataAccess\bin\Debug\netstandard2.0\Core.pdb
+Y:\Documents\GitHub\ETrade\ETrade\DataAccess\bin\Debug\netstandard2.0\Entities.pdb
+Y:\Documents\GitHub\ETrade\ETrade\DataAccess\obj\Debug\netstandard2.0\DataAccess.csproj.CopyComplete
+Y:\Documents\GitHub\ETrade\ETrade\DataAccess\obj\Debug\netstandard2.0\DataAccess.dll
+Y:\Documents\GitHub\ETrade\ETrade\DataAccess\obj\Debug\netstandard2.0\DataAccess.pdb

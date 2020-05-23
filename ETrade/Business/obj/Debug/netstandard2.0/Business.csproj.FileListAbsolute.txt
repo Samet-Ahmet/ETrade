@@ -1,0 +1,16 @@
+Y:\Documents\GitHub\ETrade\ETrade\Business\obj\Debug\netstandard2.0\Business.csprojAssemblyReference.cache
+Y:\Documents\GitHub\ETrade\ETrade\Business\obj\Debug\netstandard2.0\Business.csproj.CoreCompileInputs.cache
+Y:\Documents\GitHub\ETrade\ETrade\Business\obj\Debug\netstandard2.0\Business.AssemblyInfoInputs.cache
+Y:\Documents\GitHub\ETrade\ETrade\Business\obj\Debug\netstandard2.0\Business.AssemblyInfo.cs
+Y:\Documents\GitHub\ETrade\ETrade\Business\bin\Debug\netstandard2.0\Business.deps.json
+Y:\Documents\GitHub\ETrade\ETrade\Business\bin\Debug\netstandard2.0\Business.dll
+Y:\Documents\GitHub\ETrade\ETrade\Business\bin\Debug\netstandard2.0\Business.pdb
+Y:\Documents\GitHub\ETrade\ETrade\Business\bin\Debug\netstandard2.0\Core.dll
+Y:\Documents\GitHub\ETrade\ETrade\Business\bin\Debug\netstandard2.0\DataAccess.dll
+Y:\Documents\GitHub\ETrade\ETrade\Business\bin\Debug\netstandard2.0\Entities.dll
+Y:\Documents\GitHub\ETrade\ETrade\Business\bin\Debug\netstandard2.0\DataAccess.pdb
+Y:\Documents\GitHub\ETrade\ETrade\Business\bin\Debug\netstandard2.0\Entities.pdb
+Y:\Documents\GitHub\ETrade\ETrade\Business\bin\Debug\netstandard2.0\Core.pdb
+Y:\Documents\GitHub\ETrade\ETrade\Business\obj\Debug\netstandard2.0\Business.csproj.CopyComplete
+Y:\Documents\GitHub\ETrade\ETrade\Business\obj\Debug\netstandard2.0\Business.dll
+Y:\Documents\GitHub\ETrade\ETrade\Business\obj\Debug\netstandard2.0\Business.pdb
