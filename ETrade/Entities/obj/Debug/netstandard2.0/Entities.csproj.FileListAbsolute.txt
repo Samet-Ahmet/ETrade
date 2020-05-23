@@ -10,3 +10,15 @@ Y:\Documents\GitHub\ETrade\ETrade\Entities\obj\Debug\netstandard2.0\Entities.Ass
 Y:\Documents\GitHub\ETrade\ETrade\Entities\obj\Debug\netstandard2.0\Entities.csproj.CopyComplete
 Y:\Documents\GitHub\ETrade\ETrade\Entities\obj\Debug\netstandard2.0\Entities.dll
 Y:\Documents\GitHub\ETrade\ETrade\Entities\obj\Debug\netstandard2.0\Entities.pdb
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\Entities\bin\Debug\netstandard2.0\Entities.deps.json
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\Entities\bin\Debug\netstandard2.0\Entities.dll
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\Entities\bin\Debug\netstandard2.0\Entities.pdb
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\Entities\bin\Debug\netstandard2.0\Core.dll
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\Entities\bin\Debug\netstandard2.0\Core.pdb
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\Entities\obj\Debug\netstandard2.0\Entities.csprojAssemblyReference.cache
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\Entities\obj\Debug\netstandard2.0\Entities.csproj.CoreCompileInputs.cache
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\Entities\obj\Debug\netstandard2.0\Entities.AssemblyInfoInputs.cache
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\Entities\obj\Debug\netstandard2.0\Entities.AssemblyInfo.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\Entities\obj\Debug\netstandard2.0\Entities.csproj.CopyComplete
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\Entities\obj\Debug\netstandard2.0\Entities.dll
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\Entities\obj\Debug\netstandard2.0\Entities.pdb

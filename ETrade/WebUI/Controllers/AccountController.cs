@@ -3,19 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Business.Abstract;
 using Entities.Dtos;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Models;
 
 namespace WebUI.Controllers
 {
     public class AccountController : Controller
     {
+        private IAuthService _authService;
+
+        public AccountController(IAuthService authService)
+        {
+            _authService = authService;
+        }
+
+
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            var model = new LoginViewModel
+            {
+                UserForLoginDto = new UserForLoginDto()
+            };
+
+            return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> Login(UserForLoginDto userForLogin)
@@ -38,6 +53,40 @@ namespace WebUI.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            var model = new RegisterViewModel
+            {
+                UserForRegisterDto = new UserForRegisterDto()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
+        {
+           var result = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
+
+           if (!result.Success)
+           {
+               return View();
+           }
+
+           return RegisteredSuccessfully(userForRegisterDto);
+        }
+
+        private IActionResult RegisteredSuccessfully(UserForRegisterDto userForRegisterDto)
+        {
+            var model = new RegisterViewModel
+            {
+                UserForRegisterDto = userForRegisterDto
+            };
+
+            return View(model);
         }
 
         public async Task<IActionResult> LogOut()

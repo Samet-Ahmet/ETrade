@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 
 namespace Business.Concrete
 {
@@ -16,14 +18,71 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        public User GetByMail(string email)
+        public IDataResult<User> GetByMail(string email)
         {
-            return _userDal.Get(u => u.Email == email);
+            try
+            {
+                return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+            }
+            catch (Exception e)
+            {
+                return new ErrorDataResult<User>();
+            }
+           
         }
 
-        public void Add(User user)
+        public IDataResult<List<UsersRoleDto>> GetRoles(User user)
         {
-            _userDal.Add(user);
+            try
+            {
+                return new SuccessDataResult<List<UsersRoleDto>>(_userDal.GetRoles(user));
+
+            }
+            catch (Exception e)
+            {
+               return new ErrorDataResult<List<UsersRoleDto>>();
+            }
+          
+        }
+
+        public IResult Add(User user)
+        {
+            try
+            {
+                _userDal.Add(user);
+                return new SuccessResult();
+            }
+            catch (Exception e)
+            {
+                return new ErrorResult();
+            }
+        }
+
+        public IResult Delete(User user)
+        {
+
+            try
+            {
+                _userDal.Delete(user);
+                return new SuccessResult();
+            }
+            catch (Exception e)
+            {
+                return new ErrorResult();
+            }
+        }
+
+        public IResult Update(User user)
+        {
+            try
+            {
+                _userDal.Update(user);
+                return new SuccessResult();
+            }
+            catch (Exception e)
+            {
+                return new ErrorResult();
+            }
         }
     }
 }

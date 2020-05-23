@@ -6229,19 +6229,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ahmet\\.nuget\\packages\\": {}
+    "C:\\Users\\samet\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\DataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\DataAccess.csproj",
       "projectName": "DataAccess",
-      "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\DataAccess.csproj",
-      "packagesPath": "C:\\Users\\ahmet\\.nuget\\packages\\",
-      "outputPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\obj\\",
+      "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\DataAccess.csproj",
+      "packagesPath": "C:\\Users\\samet\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ahmet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\samet\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6254,11 +6254,11 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj": {
-              "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj"
+            "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj"
             },
-            "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj": {
-              "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj"
+            "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj": {
+              "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj"
             }
           }
         }
@@ -6289,7 +6289,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
