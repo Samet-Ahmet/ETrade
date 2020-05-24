@@ -12,5 +12,6 @@ namespace Business.Constants
         public static string OldPasswordCheck = "OldPasswordCheck";
         public static string ManageInfo = "ManageInfo";
         public static string GenderError = "GenderError";
+        public static string ManageUpdateError = "ManageUpdateError";
     }
 }

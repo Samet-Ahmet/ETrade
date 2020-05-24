@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Constants;
+using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
 using DataAccess.Abstract;
 using Entities.Dtos;
@@ -227,16 +228,89 @@ namespace WebUI.Controllers
             var user = _userService.GetByMail(User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Email).Value);
             var model = new ManageProfileViewModel
             {
-                User = user.Data
+                User = user.Data,
+                GenderNamesSelectItems = new List<SelectListItem>()
             };
+
+            foreach (var gender in _genderDal.GetList())
+            {
+                model.GenderNamesSelectItems.Add(new SelectListItem
+                {
+                    Text = gender.GenderName,
+                    Value = gender.GenderId.ToString()
+                });
+            }
+
+            model.GenderNamesSelectItems.SingleOrDefault(g => g.Value.Equals(user.Data.GenderId.ToString())).Selected = true;
+
+
             return View(model);
         }
 
         [Authorize(Roles = "Customer")]
         [HttpPost]
-        public IActionResult ManageProfile(String a)
+        public async Task<IActionResult> ManageProfile(ManageProfileViewModel manageProfileViewModel)
         {
-            return View();
+            var user = _userService.GetByMail(User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Email).Value);
+            var model = new ManageProfileViewModel
+            {
+                User = user.Data,
+                GenderNamesSelectItems = new List<SelectListItem>()
+            };
+
+            foreach (var gender in _genderDal.GetList())
+            {
+                model.GenderNamesSelectItems.Add(new SelectListItem
+                {
+                    Text = gender.GenderName,
+                    Value = gender.GenderId.ToString()
+                });
+            }
+
+            model.GenderNamesSelectItems.SingleOrDefault(g => g.Value.Equals(user.Data.GenderId.ToString())).Selected = true;
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            user.Data.FirstName = manageProfileViewModel.User.FirstName;
+            user.Data.LastName = manageProfileViewModel.User.LastName;
+            user.Data.PhoneNumber = manageProfileViewModel.User.PhoneNumber;
+            user.Data.GenderId = manageProfileViewModel.User.GenderId;
+
+            var result = _userService.Update(user.Data);
+
+            if (!result.Success)
+            {
+                TempData.Add(TempDataTypes.ManageUpdateError,result.Message);
+                return View(model);
+            }
+
+            await HttpContext.SignOutAsync();
+
+            var roles = _userService.GetRoles(user.Data);
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Email, user.Data.Email),
+                new Claim(ClaimTypes.Name,user.Data.FirstName + " " + user.Data.LastName)
+            };
+
+            foreach (var role in roles.Data)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role.RoleName));
+            }
+
+            var userIdentity = new ClaimsIdentity(claims, "login");
+
+            ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+
+            await HttpContext.SignInAsync(principal);
+
+            TempData.Add(TempDataTypes.ManageInfo,Messages.UserUpdatedSuccessfully);
+
+            return RedirectToAction("Manage", "Account");
         }
     }
 

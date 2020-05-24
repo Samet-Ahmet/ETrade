@@ -23,5 +23,6 @@ namespace Business.Constants
         public static string PasswordChanged = "Şifreniz başarılı bir şekilde değiştirildi.";
         public static string ErrorWhileUpdatingEntity = "Veri tabanında güncelleme yaparken bir hata oluştu.";
         public static string IncorrectEmailOrPassword = "E-posta adresi veya şifre yanlış.";
+        public static string UserUpdatedSuccessfully = "Bilgileriniz başarıyla güncellendi.";
     }
 }

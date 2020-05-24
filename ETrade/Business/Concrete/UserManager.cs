@@ -84,7 +84,7 @@ namespace Business.Concrete
             }
             catch (Exception e)
             {
-                return new ErrorResult();
+                return new ErrorResult(Messages.ErrorWhileUpdatingEntity);
             }
         }
     }

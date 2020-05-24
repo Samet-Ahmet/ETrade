@@ -128,8 +128,6 @@ C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\bin\Debug\netcoreapp3.1\Core
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\bin\Debug\netcoreapp3.1\DataAccess.pdb
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\bin\Debug\netcoreapp3.1\Entities.pdb
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.csprojAssemblyReference.cache
-C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.csproj.CoreCompileInputs.cache
-C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.RazorAssemblyInfo.cache
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.RazorAssemblyInfo.cs
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.AssemblyInfoInputs.cache
@@ -170,3 +168,14 @@ Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Acco
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Account\ChangePassword.cshtml.g.cs
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ManageAccount.cshtml.g.cs
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Account\ManageProfile.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\bin\Debug\netcoreapp3.1\FluentValidation.dll
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\bin\Debug\netcoreapp3.1\FluentValidation.AspNetCore.dll
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\bin\Debug\netcoreapp3.1\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Account\ChangePassword.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Account\Manage.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Account\ManageProfile.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ManageAccount.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.csproj.CoreCompileInputs.cache
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.MvcApplicationPartsAssemblyInfo.cache
