@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,7 +30,7 @@ namespace WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            
             services.AddSession();
 
             services.AddMvc();
@@ -43,6 +45,13 @@ namespace WebUI
             services.AddSingleton<IUserDal, EfUserDal>();
             services.AddSingleton<IUserService, UserManager>();
             services.AddSingleton<IAuthService, AuthManager>();
+            services.AddSingleton<IUserRoleDal,EfUserRoleDal>();
+            services.AddSingleton<IGenderDal, EfGenderDal>();
+
+
+            services.AddControllersWithViews()
+                .AddFluentValidation(option =>
+                    option.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

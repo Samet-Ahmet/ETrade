@@ -1,0 +1,11 @@
+﻿@using System.Security.Claims
+
+@{
+    Layout = "_ManageAccount";
+}
+
+<h1>Hesabım</h1>
+<h5>
+    Merhaba, @User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Name).Value
+</h5>
+

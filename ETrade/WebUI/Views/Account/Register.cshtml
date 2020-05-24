@@ -1,110 +1,151 @@
-﻿@model RegisterViewModel
+﻿@using Business.Constants
+@model RegisterViewModel
 <style>
 
     body {
         margin: 0;
         padding: 0;
         font-family: sans-serif;
-        background: linear-gradient(to right, #b92b27, #1565c0)
+        background-color: #d9d9d9;
+        /*  background: linear-gradient(to right, #b92b27, #1565c0)*/
     }
 
-    .box {
+    .box_register {
         width: 700px;
         padding: 40px;
         position: absolute;
         top: 50%;
         left: 35%;
-        background: #191919;
+        background: #262626;
         text-align: center;
         transition: 0.25s;
-        margin-top: 100px
+        margin-top: 0px
     }
 
-        .box input[type="text"],
-        .box input[type="password"] {
-            border: 0;
-            background: none;
-            display: block;
-            margin: 20px auto;
-            text-align: center;
-            border: 2px solid #3498db;
-            padding: 10px 10px;
-            width: 250px;
-            outline: none;
-            color: white;
-            border-radius: 24px;
-            transition: 0.25s
-        }
+    .box_register input[type="text"],
+    .box_register input[type="password"] {
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #3498db;
+        padding: 10px 10px;
+        width: 250px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s
+    }
 
-        .box h1 {
-            color: white;
-            font-weight: 500
-        }
+    .box_register h1 {
+        color: white;
+        font-weight: 500
+    }
 
-        .box input[type="text"]:focus,
-        .box input[type="password"]:focus {
-            width: 325px;
-            border-color: #2ecc71
-        }
+    .box_register input[type="text"]:focus,
+    .box_register input[type="password"]:focus {
+        width: 325px;
+        border-color: #2ecc71
+    }
 
-        .box input[type="submit"] {
-            border: 0;
-            background: none;
-            display: block;
-            margin: 20px auto;
-            text-align: center;
-            border: 2px solid #2ecc71;
-            padding: 10px 40px;
-            outline: none;
-            color: white;
-            border-radius: 24px;
-            transition: 0.25s;
-            cursor: pointer
-        }
+    .box_register input[type="submit"] {
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #2ecc71;
+        padding: 10px 40px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+        cursor: pointer
+    }
 
-            .box input[type="submit"]:hover {
-                background: #2ecc71
-            }
+    .box_register input[type="submit"]:hover {
+        background: #2ecc71
+    }
 
     .forgot {
         text-decoration: underline
     }
+
 </style>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <form class="box" asp-controller="Account" asp-action="Register" method="post">
-                    <h1>Hesap Oluştur</h1>
-                    <p class="text-muted">Yeni misin? aşağıdaki bilgileri tamamlayarak hesap oluşturabilirsin.</p>
-                    <div class="row">
-                        <div class="col-6">
-                            <input name="FirstName" type="text" asp-for="UserForRegisterDto.FirstName" placeholder="Adınız *">
-                        </div>
-                        <div class="col-6">
-                            <input name="LastName" type="text" asp-for="UserForRegisterDto.LastName" placeholder="Soyadınız *">
-                        </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form class="box_register" asp-controller="Account" asp-action="Register" method="post">
+                <h1>Hesap Oluştur</h1>
+                <p class="text-muted">Yeni misin? Aşağıdaki bilgileri tamamlayarak hesap oluşturabilirsin.</p>
+                <div class="row">
+                    <div class="col-6">
+                        <input class="form-control" type="text" asp-for="UserForRegisterDto.FirstName" placeholder="Adınız *">
+                        <span asp-validation-for="UserForRegisterDto.FirstName" class="text-danger"></span>
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <input name="PhoneNumber" type="text" asp-for="UserForRegisterDto.PhoneNumber" placeholder="Telefon Numaranız *">
-                        </div>
-                        <div class="col-6">
-                            <input name="Email" type="text" asp-for="UserForRegisterDto.Email" placeholder="Eposta Adresiniz *">
-                        </div>
+                    <div class="col-6">
+                        <input class="form-control" type="text" asp-for="UserForRegisterDto.LastName" placeholder="Soyadınız *">
+                        <span class="text-danger" asp-validation-for="UserForRegisterDto.LastName"></span>
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <input name="Password" type="password" asp-for="UserForRegisterDto.Password" placeholder="Şifreniz *">
-                        </div>
-                        <div class="col-6">
-                            <input name="PasswordConfirm" type="password" asp-for="UserForRegisterDto.PasswordConfirm" placeholder="Şifrenizi Doğrulayın *">
-                        </div>
+                </div>
+                <!--
+                <div class="row">
+                    <div class="col-12">
+                        <input asp-for="UserForRegisterDto.GenderId" type="radio" value="1">
+                        <label asp-for="UserForRegisterDto.GenderId"> Erkek</label>&emsp;&emsp;&emsp;&emsp;&emsp;
+                        <input asp-for="UserForRegisterDto.GenderId" type="radio" value="2">
+                        <label asp-for="UserForRegisterDto.GenderId"> Dişi</label>&emsp;&emsp;&emsp;&emsp;&emsp;
+                        <input asp-for="UserForRegisterDto.GenderId" type="radio" value="4">
+                        <label asp-for="UserForRegisterDto.GenderId"> Belirtmek İstemiyorum</label><br>
+                        <span class="text-danger" asp-validation-for="UserForRegisterDto.GenderId"></span>
                     </div>
-                    <a class="forgot text-muted" href="/Account/Login">Zaten hesabınız var mı?</a>
-                    <input type="submit" value="Hesabımı Oluştur">
-                </form>
-            </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+
+                        <select asp-for="UserForRegisterDto.GenderId" class="form-control" style="background-color: #262626; text-decoration: #ffffff " asp-items="Model.GenderNamesSelectItems"></select>
+                        @if (TempData[TempDataTypes.GenderError] != null)
+                        {
+                            <span class="text-danger">@TempData[TempDataTypes.GenderError].ToString()</span>
+                        }
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <input class="form-control" type="text" asp-for="UserForRegisterDto.PhoneNumber" placeholder="Telefon Numaranız *">
+                        <span class="text-danger" asp-validation-for="UserForRegisterDto.PhoneNumber"></span>
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control" type="text" asp-for="UserForRegisterDto.Email" placeholder="Eposta Adresiniz *">
+                        <span class="text-danger" asp-validation-for="UserForRegisterDto.Email"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <input class="form-control" type="password" asp-for="UserForRegisterDto.Password" placeholder="Şifreniz *">
+                        <span class="text-danger" asp-validation-for="UserForRegisterDto.Password"></span>
+                        @if (TempData[TempDataTypes.PasswordConfirm] != null)
+                        {
+                            <span class="text-danger">@TempData[TempDataTypes.PasswordConfirm].ToString()</span>
+                        }
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control" type="password" asp-for="UserForRegisterDto.PasswordConfirm" placeholder="Şifrenizi Doğrulayın *">
+                        <span class="text-danger" asp-validation-for="UserForRegisterDto.PasswordConfirm"></span>
+                    </div>
+                </div>
+                <a class="forgot text-muted" href="/Account/Login">Zaten hesabınız var mı?</a>
+                @if (TempData[TempDataTypes.RegisterError] != null)
+                {
+                    <br /><span class="text-danger">@TempData[TempDataTypes.RegisterError].ToString()</span>
+                }
+                <input type="submit" value="Hesabımı Oluştur">
+            </form>
         </div>
     </div>
+</div>
 </body>

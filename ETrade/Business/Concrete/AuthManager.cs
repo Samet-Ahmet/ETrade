@@ -15,17 +15,18 @@ namespace Business.Concrete
     {
         private IUserDal _userDal;
         private IUserService _userService;
+        private IUserRoleDal _userRoleDal;
     
-        public AuthManager(IUserDal userDal, IUserService userService)
+        public AuthManager(IUserDal userDal, IUserService userService, IUserRoleDal userRoleDal)
         {
             _userDal = userDal;
             _userService = userService;
+            _userRoleDal = userRoleDal;
         }
-
 
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
         {
-            if (UserExists(userForRegisterDto.Email).Success)
+            if (UserExists(userForRegisterDto.Email))
             {
                 return new ErrorDataResult<User>(Messages.UserAlreadyExists);
             }
@@ -48,11 +49,16 @@ namespace Business.Concrete
             try
             {
                 _userDal.Add(user);
+                _userRoleDal.Add(new UserRole
+                {
+                    RoleId = 1, //customer
+                    UserId = _userService.GetByMail(user.Email).Data.Id
+                });
                 return new SuccessDataResult<User>(user);
             }
             catch (Exception e)
             {
-                return new ErrorDataResult<User>(Messages.Error);
+                return new ErrorDataResult<User>(Messages.ErrorWhileAddingEntity);
             }
             
             
@@ -61,18 +67,13 @@ namespace Business.Concrete
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {
 
-            if (UserExists(userForLoginDto.Email).Success)
+            if (!UserExists(userForLoginDto.Email))
             {
                 return new ErrorDataResult<User>(Messages.UserNotFound);
             }
 
-            var result = _userService.GetByMail(userForLoginDto.Email);
-            User userToCheck;
-            if (!result.Success)
-            {
-                return new ErrorDataResult<User>(Messages.UserNotFound);
-            }
-            userToCheck = result.Data;
+            var userToCheck = _userService.GetByMail(userForLoginDto.Email).Data;
+
             if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password,userToCheck.PasswordHash, userToCheck.PasswordSalt))
             {
                 return new ErrorDataResult<User>(Messages.PasswordError);
@@ -81,14 +82,37 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(userToCheck);
         }
 
-        public IResult UserExists(string email)
+        public bool UserExists(string email)
         {
-            if (_userService.GetByMail(email) != null) //veri tabanında yoksa 
+            if (!_userService.GetByMail(email).Success) //veri tabanında yoksa false
             {
-                 return new ErrorResult(Messages.UserAlreadyExists); //result false
+                return false;
             }
 
-            return new SuccessResult(); //veri tabanında varsa result true
+            return true; //veri tabanında varsa result ture
+        }
+
+
+        public IDataResult<User> ChangePassword(User user, string newPassword)
+        {
+            byte[] passwordSalt, passwordHash;
+
+            HashingHelper.CreatePasswordHash(newPassword, out passwordHash, out passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            try
+            {
+                _userDal.Update(user);
+                return new SuccessDataResult<User>(user);
+            }
+            catch (Exception e)
+            {
+                return new ErrorDataResult<User>(Messages.ErrorWhileUpdatingEntity);
+            }
+
+
         }
     }
 }

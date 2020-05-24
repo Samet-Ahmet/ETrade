@@ -1,0 +1,37 @@
+﻿@using Business.Constants
+@model ManageProfileViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_ManageAccount";
+}
+
+<h2>Kişisel Bilgilerim</h2>
+
+
+<form asp-controller="Account" asp-action="ManageProfile" method="post">
+    <div class="form-group">
+        <label asp-for="User.FirstName">Adınız</label>
+        <input asp-for="User.FirstName" type="text" class="form-control" value="@Model.User.FirstName" placeholder="" />
+        <span class="text-danger" class="alert-danger" asp-validation-for="User.FirstName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="User.LastName">Soyadınız</label>
+        <input asp-for="User.LastName" type="text" class="form-control" value="@Model.User.LastName" placeholder="" />
+        <span class="text-danger" asp-validation-for="User.LastName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="User.PhoneNumber">Yeni Şifrenizi Onaylayınız</label>
+        <input asp-for="User.PhoneNumber" type="text" class="form-control" value="@Model.User.PhoneNumber" placeholder="" />
+        <span class="text-danger" asp-validation-for="User.PhoneNumber"></span>
+    </div>
+    @if (TempData[TempDataTypes.OldPasswordCheck] != null)
+    {
+        <div class="text-danger">@TempData[TempDataTypes.OldPasswordCheck].ToString()</div>
+    }
+    @if (TempData[TempDataTypes.ManageInfo] != null)
+    {
+        <div class="text-danger">@TempData[TempDataTypes.ManageInfo].ToString()</div>
+    }
+    <input type="submit" value="Değiştir" class="btn btn-success btn-sm" />
+</form>

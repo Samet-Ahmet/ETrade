@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -20,15 +21,16 @@ namespace Business.Concrete
 
         public IDataResult<User> GetByMail(string email)
         {
-            try
+
+            var user = _userDal.Get(u => u.Email == email);
+            if (user == null)
             {
-                return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+                return new ErrorDataResult<User>(Messages.UserAlreadyExists);
             }
-            catch (Exception e)
-            {
-                return new ErrorDataResult<User>();
-            }
-           
+            return new SuccessDataResult<User>(user);
+
+
+
         }
 
         public IDataResult<List<UsersRoleDto>> GetRoles(User user)
@@ -40,9 +42,9 @@ namespace Business.Concrete
             }
             catch (Exception e)
             {
-               return new ErrorDataResult<List<UsersRoleDto>>();
+                return new ErrorDataResult<List<UsersRoleDto>>();
             }
-          
+
         }
 
         public IResult Add(User user)
@@ -50,6 +52,7 @@ namespace Business.Concrete
             try
             {
                 _userDal.Add(user);
+                
                 return new SuccessResult();
             }
             catch (Exception e)

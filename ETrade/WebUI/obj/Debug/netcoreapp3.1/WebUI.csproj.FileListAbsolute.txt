@@ -10,8 +10,6 @@ Y:\Documents\GitHub\ETrade\ETrade\WebUI\bin\Debug\netcoreapp3.1\WebUI.pdb
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\bin\Debug\netcoreapp3.1\WebUI.Views.dll
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\bin\Debug\netcoreapp3.1\WebUI.Views.pdb
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.csprojAssemblyReference.cache
-Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.csproj.CoreCompileInputs.cache
-Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.MvcApplicationPartsAssemblyInfo.cache
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.RazorAssemblyInfo.cache
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.RazorAssemblyInfo.cs
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.AssemblyInfoInputs.cache
@@ -162,3 +160,13 @@ C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razo
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Account\RegisteredSuccessfully.cshtml.g.cs
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Account\RegisteredSuccessfully.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\bin\Debug\netcoreapp3.1\FluentValidation.dll
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\bin\Debug\netcoreapp3.1\FluentValidation.AspNetCore.dll
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\bin\Debug\netcoreapp3.1\FluentValidation.DependencyInjectionExtensions.dll
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.csproj.CoreCompileInputs.cache
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.MvcApplicationPartsAssemblyInfo.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.MvcApplicationPartsAssemblyInfo.cache
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Account\Manage.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Account\ChangePassword.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ManageAccount.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Account\ManageProfile.cshtml.g.cs

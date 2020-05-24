@@ -1,0 +1,23 @@
+﻿@using System.Security.Claims
+@using Business.Constants
+@{
+    Layout = "_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-3">
+        <ul id="leftnav" class="list-group">
+            <li class="list-group-item"><a href="/Order/GetByEmail?email=@User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Email).Value">Sipariş Bilgilerim</a></li>
+            <li class="list-group-item"><a href="/Account/ManageProfile">Kişisel Bilgilerim</a></li>
+            <li class="list-group-item"><a href="/Account/ChangePassword">Şifre Güncelleme</a></li>
+        </ul>
+    </div>
+    <div class="col-9">
+        @if (TempData[TempDataTypes.ManageInfo] != null)
+        {
+            <div class="alert alert-info">@TempData[TempDataTypes.ManageInfo].ToString()</div>
+        }
+
+        @RenderBody()
+    </div>
+</div>

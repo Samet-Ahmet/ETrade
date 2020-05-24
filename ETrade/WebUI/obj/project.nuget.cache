@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "F6ySCgfHXa3Q6/xkL42A2WMES3UCg8+eCffnNK0ZNDyXE8nah60LB08e6ujsSNimcIzu7TyBIXruJOYpONnFEw==",
+  "dgSpecHash": "tIg26wN1cQvMbj3+CeHBTYybZpyp/i7WC/GH4jMbiRaUfFTonU/Xe/4ziwjHD+DTnrEeWZS0DcRdWBkXQ6nS7Q==",
   "success": true,
   "projectFilePath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\WebUI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ahmet\\.nuget\\packages\\fluentvalidation\\8.6.2\\fluentvalidation.8.6.2.nupkg.sha512",
+    "C:\\Users\\ahmet\\.nuget\\packages\\fluentvalidation.aspnetcore\\8.6.2\\fluentvalidation.aspnetcore.8.6.2.nupkg.sha512",
+    "C:\\Users\\ahmet\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\8.6.2\\fluentvalidation.dependencyinjectionextensions.8.6.2.nupkg.sha512",
     "C:\\Users\\ahmet\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\ahmet\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "C:\\Users\\ahmet\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
