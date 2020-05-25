@@ -1,0 +1,176 @@
+﻿@using Business.Constants
+@using DataAccess.Abstract
+@using Business.Abstract
+@model AddManagerViewModel
+@inject ICityService _cityService
+@{
+    Layout = "_AdminLayout";
+}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="container" style="margin-top: 5%;">
+    <h2>Yönetici Ekle</h2>
+
+    <form asp-controller="User" asp-action="AddManager" method="post">
+        Yöneticinin;
+        <div class="form-group">
+            <label asp-for="Manager.IdentityNo">TC Kimlik Numarası</label>
+            <input asp-for="Manager.IdentityNo" type="text" class="form-control" placeholder="" />
+            <span class="text-danger" asp-validation-for="Manager.IdentityNo"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Manager.FirstName">Adı</label>
+            <input asp-for="Manager.FirstName" type="text" class="form-control" placeholder="" />
+            <span class="text-danger" asp-validation-for="Manager.FirstName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Manager.LastName">Soyadı</label>
+            <input asp-for="Manager.LastName" type="text" class="form-control" placeholder="" />
+            <span class="text-danger" asp-validation-for="Manager.LastName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Manager.Email">E-posta Adresi</label>
+            <input asp-for="Manager.Email" type="text" class="form-control" placeholder="" />
+            <span class="text-danger" asp-validation-for="Manager.PhoneNumber"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Manager.PhoneNumber">Telefon Numarası</label>
+            <input asp-for="Manager.PhoneNumber" type="text" class="form-control" placeholder="" />
+            <span class="text-danger" asp-validation-for="Manager.PhoneNumber"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Manager.Password">Şifresi</label>
+            <input asp-for="Manager.Password" type="password" class="form-control" placeholder="" />
+            <span class="text-danger" asp-validation-for="Manager.Password"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Manager.GenderId">Cinsiyeti</label>
+            <select asp-for="Manager.GenderId" class="form-control" asp-items="@Model.GenderNamesSelectItems"></select>
+        </div>
+        <div class="form-group row">
+
+            <div class="col-4">
+                Doğum Tarihi
+                <select asp-for="Manager.BirthDateDay" class="form-control">
+                    <option value="0">Gün</option>
+                    @for (int i = 1; i < 32; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+                <span class="text-danger" asp-validation-for="Manager.BirthDateDay"></span>
+            </div>
+
+
+            <div class="col-4">
+                <select asp-for="Manager.BirthDateMounth" class="form-control">
+                    <option value="0">Ay</option>
+                    @for (int i = 1; i < 13; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+                <span class="text-danger" asp-validation-for="Manager.BirthDateMounth"></span>
+            </div>
+
+            <div class="col-4">
+                <select asp-for="Manager.BirthDateYear" class="form-control">
+                    <option value="0">Yıl</option>
+                    @for (int i = 1920; i < 2003; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+                <span class="text-danger" asp-validation-for="Manager.BirthDateYear"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Manager.Street">Cadde/Sokak</label>
+            <input asp-for="Manager.Street" type="text" class="form-control" placeholder="" />
+            <span class="text-danger" asp-validation-for="Manager.Street"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Manager.AddressNumber">Adres No</label>
+            <input asp-for="Manager.AddressNumber" type="text" class="form-control" placeholder="" />
+            <span class="text-danger" asp-validation-for="Manager.AddressNumber"></span>
+        </div>
+        @{
+            var cities = _cityService.GetAll().Data;
+            var cityitems = new List<SelectListItem>();
+            foreach (var city in cities)
+            {
+                cityitems.Add(new SelectListItem
+                {
+                    Text = city.CityName,
+                    Value = city.CityId.ToString()
+                });
+            }
+            <div class="form-group">
+                <label asp-for="Manager.CityId">İl</label>
+                <select id="city" asp-for="Manager.CityId" class="form-control" asp-items="cityitems"></select>
+            </div>
+        }
+        
+        <select id="district" name="district"> </select>
+ 
+        <script type="text/javascript">
+            $("#city").change(function () {
+                $("#district").empty();
+ 
+                var city = $("#city").val();
+ 
+                $.ajax({
+                    url: '@Url.Action("GetDistricts","User")',
+                    type: "POST",
+                    dataType: "json",
+                    data: { cityId: city },
+                    success: function (data)
+                    {
+                        $.each(data, function ()
+                        {
+                           // $('#district').append('<option value=' + this.DistrictId + '>' + this.DistrictName + '</option>');
+                            var o = new Option(this.DistrictName, this.DistrictId);
+
+                            $(o).html("İlçe");
+                            $("#district").append(o);
+                        });
+                    }
+                });
+            });
+        </script>
+
+        <!--
+        if (Model.Manager.CityId != 0)
+        {
+            var districts = _cityService.GetDistrictsByCityId(Model.Manager.CityId).Data;
+            var districtitems = new List<SelectListItem>();
+            foreach (var district in districts)
+            {
+                districtitems.Add(new SelectListItem
+                {
+                    Text = district.DistrictName,
+                    Value = district.DistrictId.ToString()
+                });
+            }
+            <div class="form-group">
+                <label asp-for="Manager.DistrictId">İlçe</label>
+                <select asp-for="Manager.DistrictId" class="form-control" asp-items="districtitems"></select>
+            </div>
+        }
+        */
+            -->
+
+
+
+
+        @if (TempData[TempDataTypes.ManageUpdateError] != null)
+        {
+            <div class="text-danger">@TempData[TempDataTypes.ManageUpdateError].ToString()</div>
+        }
+        <input type="submit" value="Güncelle" class="btn btn-success btn-sm" />
+    </form>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker();
+    });
+</script>

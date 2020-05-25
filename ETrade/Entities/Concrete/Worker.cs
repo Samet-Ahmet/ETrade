@@ -8,7 +8,7 @@ namespace Entities.Concrete
     public class Worker : IEntity
     {
         public int WorkerId { get; set; }
-        public int IdentityNo { get; set; }
+        public long IdentityNo { get; set; }
         public DateTime BirthDate { get; set; }
         public DateTime HireDate { get; set; }
         public byte CityId { get; set; }

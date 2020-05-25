@@ -16,11 +16,16 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (var context = new ETradeContext())
             {
-                var result = from role in context.Roles
-                    join userRole in context.UserRoles
-                        on role.RoleId equals userRole.RoleId
-                    where userRole.UserId == user.Id
-                    select new UsersRoleDto{ UserId = user.Id,  RoleName= role.RoleName };
+                var result = from r in context.Roles
+                    join ur in context.UserRoles on r.RoleId equals ur.RoleId
+                    join u in context.Users on ur.UserId equals u.Id
+                             where u.Id==user.Id
+                    select
+                        new UsersRoleDto
+                        {
+                            RoleName = r.RoleName,
+                            UserId = u.Id
+                        };
                 return result.ToList();
             }
         }

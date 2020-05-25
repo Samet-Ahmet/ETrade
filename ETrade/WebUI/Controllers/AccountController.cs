@@ -63,10 +63,14 @@ namespace WebUI.Controllers
                 new Claim(ClaimTypes.Email, userForLogin.Email),
                 new Claim(ClaimTypes.Name,result.Data.FirstName + " " + result.Data.LastName)
             };
-
+            bool isManagerOrWorker = false;
             foreach (var role in roles.Data)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role.RoleName));
+                if (role.RoleName.Equals("Manager") || role.RoleName.Equals("Worker"))
+                {
+                    isManagerOrWorker = true;
+                }
             }
 
             var userIdentity = new ClaimsIdentity(claims, "login");
@@ -76,7 +80,11 @@ namespace WebUI.Controllers
             await HttpContext.SignInAsync(principal);
 
             HttpContext.Session.SetString("login", "yes"); //login oldu mu? kontrol için
-
+            
+            if (isManagerOrWorker)
+            {
+                return RedirectToAction("Index", "AdminCategory");
+            }
             return RedirectToAction("Index2", "Home");
         }
 

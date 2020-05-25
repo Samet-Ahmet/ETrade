@@ -1,0 +1,9 @@
+﻿@model CategoryListViewModel
+
+<h2>Kategoriler</h2>
+<div class="list-group">
+    @foreach (var category in Model.Categories)
+    {
+        <a href="/Category/Index?categoryId=@category.CategoryId" class="list-group-item list-group-item-action">@category.CategoryName</a>
+    }
+</div>

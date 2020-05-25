@@ -179,3 +179,14 @@ C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\bin\Debug\netcoreapp3.1\Newt
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.csproj.CoreCompileInputs.cache
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.MvcApplicationPartsAssemblyInfo.cache
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Category\Index.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Error\InternalError.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\CategoryList\Default.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_WithCategoryListLayout.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\AdminCategory\Index.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_AdminLayout.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Admin.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\User\Index.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\User\Worker.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\User\AddManager.cshtml.g.cs

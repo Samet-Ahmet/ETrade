@@ -30,7 +30,7 @@ namespace WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             services.AddSession();
 
             services.AddMvc();
@@ -44,9 +44,21 @@ namespace WebUI
 
             services.AddSingleton<IUserDal, EfUserDal>();
             services.AddSingleton<IUserService, UserManager>();
-            services.AddSingleton<IAuthService, AuthManager>();
-            services.AddSingleton<IUserRoleDal,EfUserRoleDal>();
+            services.AddSingleton<IUserRoleDal, EfUserRoleDal>();
             services.AddSingleton<IGenderDal, EfGenderDal>();
+
+            services.AddSingleton<IAuthService, AuthManager>();
+
+            services.AddSingleton<ICategoryDal, EfCategoryDal>();
+            services.AddSingleton<ISubCategoryDal, EfSubCategoryDal>();
+            services.AddSingleton<ICategoryService, CategoryManager>();
+
+            services.AddSingleton<IWorkerDal, EfWorkerDal>();
+            services.AddSingleton<IWorkerService, WorkerManager>();
+
+            services.AddSingleton<ICityDal, EfCityDal>();
+            services.AddSingleton<ICityService, CityManager>();
+            services.AddSingleton<IDistrictDal, EfDistrictDal>();
 
 
             services.AddControllersWithViews()

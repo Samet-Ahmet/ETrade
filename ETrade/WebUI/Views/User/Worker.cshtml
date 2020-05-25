@@ -1,0 +1,63 @@
+﻿@model WorkerListViewModel
+@{
+    Layout = "_AdminLayout";
+}
+
+
+    <ul style="width: 100%; margin-left:-2%" class="list-group list-group-horizontal">
+        <a style="width: 25%;  color: #818181" href="/User/Index" class="list-group-item">Yöneticiler</a>
+        <a style="width: 16%; background-color: #262626;  color: #818181" href="/User/Worker" class="list-group-item">Çalışanlar</a>
+        <a style="width: 9%;  color: #818181" href="/User/AddWorker" class="list-group-item">Çalışan Ekle</a>
+        <a style="width: 25%;  color: #818181" href="/User/Customer" class="list-group-item">Müşteriler</a>
+        <a style="width: 25%;  color: #818181" href="" class="list-group-item">Diğer</a>
+    </ul>
+
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th><center>TC Kimlik No</center></th>
+            <th><center>Adı Soyadı</center></th>
+            <th><center>E-posta Adresi</center></th>
+            <th><center>Telefon No</center></th>
+            <th><center>Adres</center></th>
+            <th><center>Cinsiyet</center></th>
+            <th><center>Doğum Tarihi</center></th>
+            <th><center>İşe Giriş Tarihi</center></th>
+            <th><center>İşten Çıkış Tarihi</center></th>
+        </tr>
+
+
+    </thead>
+    <tbody>
+
+        @foreach (var worker in Model.Workers)
+        {
+            <tr>
+                <td><center>@worker.IdentityNo</center></td>
+                <td><center>@worker.FirstName @worker.LastName</center></td>
+                <td><center>@worker.Email</center></td>
+                <td><center>@worker.PhoneNumber</center></td>
+                <td><center>@worker.Street @worker.AddressNumber @worker.DistrictName / @worker.CityName</center></td>
+                <td><center>@worker.GenderName</center></td>
+                <td><center>@worker.BirthDate.ToString("dd/MM/yyyy")</center></td>
+                <td><center>@worker.HireDate.ToString("dd/MM/yyyy")</center></td>
+                <td>
+                    <center>
+                        @if ((worker.QuitDate - DateTime.MinValue).Days == 0)
+                        {
+                            @worker.QuitDate.ToString("dd/MM/yyyy")
+                        }
+                    </center>
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="/User/EditManager?managerId=@worker.WorkerId" role="button">Düzenle</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $('tr[data-href]').on("click", function() {
+        document.location = $(this).data('href');
+    });
+</script>

@@ -1,0 +1,56 @@
+﻿@model ManagerListViewModel
+@{
+    Layout = "_AdminLayout";
+}
+
+
+    <ul style="width: 100%; margin-left:-2%" class="list-group list-group-horizontal">
+        <a style="width: 16%; background-color: #262626; color: #818181" href="/User/Index" class="list-group-item">Yöneticiler</a>
+        <a style="width: 9%;  color: #818181" href="/User/AddManager" class="list-group-item">Yönetici Ekle</a>
+        <a style="width: 25%;  color: #818181" href="/User/Worker" class="list-group-item">Çalışanlar</a>
+        <a style="width: 25%;  color: #818181" href="/User/Customer" class="list-group-item">Müşteriler</a>
+        <a style="width: 25%;  color: #818181" href="" class="list-group-item">Diğer</a>
+    </ul>
+
+<table class="table table-hover table-striped">
+    <thead>
+    <tr>
+        <th><center>TC Kimlik No</center></th>
+        <th><center>Adı Soyadı</center></th>
+        <th><center>E-posta Adresi</center></th>
+        <th><center>Telefon No</center></th>
+        <th><center>Adres</center></th>
+        <th><center>Cinsiyet</center></th>
+        <th><center>Doğum Tarihi</center></th>
+        <th><center>İşe Giriş Tarihi</center></th>
+        <th><center>İşten Çıkış Tarihi</center></th>
+    </tr>
+    </thead>
+    <tbody>
+
+    @foreach (var manager in Model.Managers)
+    {
+        <tr>
+            <td><center>@manager.IdentityNo</center></td>
+            <td><center>@manager.FirstName @manager.LastName</center></td>
+            <td><center>@manager.Email</center></td>
+            <td><center>@manager.PhoneNumber</center></td>
+            <td><center>@manager.Street @manager.AddressNumber @manager.DistrictName / @manager.CityName</center></td>
+            <td><center>@manager.GenderName</center></td>
+            <td><center>@manager.BirthDate.ToString("dd/MM/yyyy")</center></td>
+            <td><center>@manager.HireDate.ToString("dd/MM/yyyy")</center></td>
+            <td>
+                <center>
+                    @if ((@manager.QuitDate - DateTime.MinValue).Days == 0)
+                    {
+                        @manager.QuitDate.ToString("dd/MM/yyyy")
+                    }
+                </center>
+            </td>
+            <td>
+                <a class="btn btn-primary" href="/User/EditManager?managerId=@manager.WorkerId" role="button">Düzenle</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

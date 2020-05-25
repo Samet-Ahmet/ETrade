@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="col-3">
+        @await Component.InvokeAsync("CategoryList")
+    </div>
+    <div class="col-9">
+        @RenderBody()
+    </div>
+</div>

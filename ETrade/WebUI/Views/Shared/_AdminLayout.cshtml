@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+        .sidenav {
+            font-family: "Lato", sans-serif;
+            height: 100%;
+            width: 17%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #262626;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            padding-top: 20px;
+        }
+
+            .sidenav a, .admin {
+                font-family: "Lato", sans-serif;
+                padding: 6px 8px 6px 16px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+
+        #cikis_yap {
+            font-family: "Lato", sans-serif;
+            position: relative;
+            top: 65%;
+        }
+
+        #menuler {
+            font-family: "Lato", sans-serif;
+            position: relative;
+            top: 5%;
+        }
+    </style>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+    <div class="sidenav">
+
+        <a href="/Admin/Index">Manager</a>
+        <a href="/Product/Index">Ürünler</a>
+        <a href="/AdminCategory/Index">Kategoriler</a>
+        <a href="/User/Index">Kullanıcılar</a>
+        <a href="/Admin/ManageAccount">Hesabım</a>
+
+        <a id="cikis_yap" href="/Account/Logout">Çıkış Yap &#9166;</a>
+    </div>
+
+    <div style="margin-left: 20%;">
+        @RenderBody()
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+</body>
+</html>
+
