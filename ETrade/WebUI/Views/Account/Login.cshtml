@@ -74,28 +74,43 @@
     }
 </style>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <form class="box_login" asp-controller="Account" asp-action="Login" method="post">
-                    <h1>Üye Girişi</h1>
-                    <p class="text-muted">Eposta adresinizi ve şifrenizi kullanarak giriş yapabilirsiniz</p>
-                    <div class="col-12">
-                        <input name="Email" type="text" asp-for="UserForLoginDto.Email" class="form-control" placeholder="Eposta *">
-                        <span class="text-danger" asp-validation-for="UserForLoginDto.Email"></span>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form class="box_login" asp-controller="Account" asp-action="Login" method="post">
+                <h1>Üye Girişi</h1>
+                <p class="text-muted">Eposta adresinizi ve şifrenizi kullanarak giriş yapabilirsiniz</p>
+                <div class="col-12">
+                    <input name="Email" type="text" asp-for="UserForLoginDto.Email" class="form-control" placeholder="Eposta *">
+                    <span class="text-danger" asp-validation-for="UserForLoginDto.Email"></span>
+                </div>
+                <div class="col-12">
+                    <input name="Password" type="password" id="sifre" asp-for="UserForLoginDto.Password" class="form-control" placeholder="Şifre *">
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" onclick="myFunction()">Şifreyi Göster
+                        </label>
                     </div>
-                    <div class="col-12">
-                        <input name="Password" type="password" asp-for="UserForLoginDto.Password" class="form-control" placeholder="Şifre *">
-                        <span class="text-danger" asp-validation-for="UserForLoginDto.Password"></span>
-                    </div>
-                    <a class="forgot text-muted" href="/Account/Register">Henüz kaydolmadınız mı?</a>
-                    @if (TempData[TempDataTypes.LoginError] != null)
-                    {
-                        <br /><span class="text-danger">@TempData[TempDataTypes.LoginError].ToString()</span>
-                    }
-                    <input type="submit" value="Giriş">
-                </form>
-            </div>
+                    <span class="text-danger" asp-validation-for="UserForLoginDto.Password"></span>
+                </div>
+                <a class="forgot text-muted" href="/Account/Register">Henüz kaydolmadınız mı?</a>
+                @if (TempData[TempDataTypes.LoginError] != null)
+                {
+                    <br /><span class="text-danger">@TempData[TempDataTypes.LoginError].ToString()</span>
+                }
+                <input type="submit" value="Giriş">
+            </form>
         </div>
     </div>
+</div>
 </body>
+<script>
+    function myFunction() {
+        var x = document.getElementById("sifre");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>

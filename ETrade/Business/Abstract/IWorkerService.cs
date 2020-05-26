@@ -10,8 +10,8 @@ namespace Business.Abstract
     public interface IWorkerService
     {
         IResult AddWorker(Worker worker, User user);
-        IResult AddManager(Worker worker, User user);
-        IDataResult<Worker> GetById(int worerId);
+        IResult AddManager(Worker worker);
+        IDataResult<Worker> GetById(int workerId);
         IResult Quit(Worker worker);
         IResult Update(Worker worker, User user);
         IResult DoManager(int workerId);

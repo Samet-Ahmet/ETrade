@@ -15,6 +15,8 @@ namespace WebUI.ValidationRules.FluentValidation
         {
             RuleFor(ufl => ufl.Email).NotEmpty().WithMessage(Messages.MustBeFilled);
             RuleFor(ufl => ufl.Email).EmailAddress().WithMessage(Messages.InvalidEmail);
+            RuleFor(ufl => ufl.Email).Length(0,50).WithMessage(Messages.Max50Characters);
+
             RuleFor(ufl => ufl.Password).NotEmpty().WithMessage(Messages.MustBeFilled);
         }
     }

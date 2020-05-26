@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Business.Constants
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,6 +45,7 @@
             top: 5%;
         }
     </style>
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
@@ -61,8 +63,22 @@
     <div style="margin-left: 20%;">
         @RenderBody()
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="~/littlecloset/js/jquery-3.2.1.min.js"></script>
+    <script src="~/littlecloset/styles/bootstrap-4.1.2/popper.js"></script>
+    <script src="~/littlecloset/styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+    <script src="~/littlecloset/plugins/greensock/TweenMax.min.js"></script>
+    <script src="~/littlecloset/plugins/greensock/TimelineMax.min.js"></script>
+    <script src="~/littlecloset/plugins/scrollmagic/ScrollMagic.min.js"></script>
+    <script src="~/littlecloset/plugins/greensock/animation.gsap.min.js"></script>
+    <script src="~/littlecloset/plugins/greensock/ScrollToPlugin.min.js"></script>
+    <script src="~/littlecloset/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="~/littlecloset/plugins/easing/easing.js"></script>
+    <script src="~/littlecloset/plugins/progressbar/progressbar.min.js"></script>
+    <script src="~/littlecloset/plugins/parallax-js-master/parallax.min.js"></script>
+    <script src="~/littlecloset/js/custom.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
-

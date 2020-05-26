@@ -45,15 +45,20 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(UserForLoginDto userForLogin)
         {
+            var model = new LoginViewModel
+            {
+                UserForLoginDto = userForLogin
+            };
+
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(model);
             }
             var result = _authService.Login(userForLogin);
             if (!result.Success)
             {
                 TempData.Add(TempDataTypes.LoginError, Messages.IncorrectEmailOrPassword);
-                return View();
+                return View(model);
             }
 
             var roles = _userService.GetRoles(result.Data);

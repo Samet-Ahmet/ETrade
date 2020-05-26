@@ -55,15 +55,12 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.ErrorWhileAddingEntity);
             }
         }
-        public IResult AddManager(Worker worker, User user)
+        public IResult AddManager(Worker worker)
         {
             try
             {
                 worker.HireDate = DateTime.Now;
-                _userService.Add(user);
-                var addedUSer = _userService.GetByMail(user.Email);
-                worker.WorkerId = addedUSer.Data.Id;
-                worker.QuitDate = DateTime.MinValue;
+                worker.QuitDate = new DateTime(1900,01,01,0,0,0);
                 _workerDal.Add(worker);
 
                 var userRole = new UserRole

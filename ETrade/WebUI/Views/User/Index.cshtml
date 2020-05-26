@@ -1,4 +1,5 @@
-﻿@model ManagerListViewModel
+﻿@using Business.Constants
+@model ManagerListViewModel
 @{
     Layout = "_AdminLayout";
 }
@@ -11,7 +12,10 @@
         <a style="width: 25%;  color: #818181" href="/User/Customer" class="list-group-item">Müşteriler</a>
         <a style="width: 25%;  color: #818181" href="" class="list-group-item">Diğer</a>
     </ul>
-
+@if (TempData[TempDataTypes.ManageInfo] != null)
+{
+    <div class="alert alert-info">@TempData[TempDataTypes.ManageInfo].ToString()</div>
+}
 <table class="table table-hover table-striped">
     <thead>
     <tr>
@@ -48,7 +52,7 @@
                 </center>
             </td>
             <td>
-                <a class="btn btn-primary" href="/User/EditManager?managerId=@manager.WorkerId" role="button">Düzenle</a>
+                <a class="btn btn-info" href="/User/EditManager?managerId=@manager.WorkerId" role="button">Düzenle</a>
             </td>
         </tr>
     }

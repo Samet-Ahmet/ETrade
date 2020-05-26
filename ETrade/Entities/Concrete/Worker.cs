@@ -12,7 +12,7 @@ namespace Entities.Concrete
         public DateTime BirthDate { get; set; }
         public DateTime HireDate { get; set; }
         public byte CityId { get; set; }
-        public byte DistrictId { get; set; }
+        public short DistrictId { get; set; }
         public string Street { get; set; }
         public string AddressNumber { get; set; }
         public DateTime QuitDate { get; set; }

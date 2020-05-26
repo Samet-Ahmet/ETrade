@@ -32,5 +32,12 @@ namespace Business.Constants
 
         public static string CategoryCantDeleted =
             "Silmeye çalıştığınız kategorinin, alt kategorleri bulunduğu için işleminiz gerçekleştirilmedi. Bu kategoriyi silmek istiyorsanız lütfen ilk önce alt kategorilerini siliniz.";
+
+        public static string Max50Characters = "En fazla 50 karakter girebilirsiniz.";
+        public static string Max30Characters = "En fazla 30 karakter girebilirsiniz.";
+        public static string PhoneError = "Telefon numaranızı, 10 karakter olacak şekilde başında 0 olmadan giriniz.";
+        public static string OnlyLetters = "Sadece harf girebilirsiniz";
+        public static string TcError = "Geçersiz bir TC Kimlik Numarası girdiniz.";
+        public static string ManagerAddedSuccessfully = "Yönetici başarıyla eklendi. E-posta adresi ve şifresini kullanarak giriş yapabilir.";
     }
 }

@@ -9,9 +9,7 @@ namespace WebUI.Models
 {
     public class AddManagerViewModel
     {
-        public WorkerDetailsDto Manager { get; set; }
+        public AddWorkerDto AddWorkerDto { get; set; }
         public List<SelectListItem> GenderNamesSelectItems { get; set; }
-        public List<SelectListItem> CitiesSelectItems { get; set; }
-        public List<SelectListItem> DistrictsSelectItems { get; set; }
     }
 }
