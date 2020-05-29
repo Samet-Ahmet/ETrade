@@ -40,5 +40,6 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<ProductPhotoPath> ProductPhotoPaths { get; set; }
         public DbSet<ShippingDetail> ShippingDetails { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Brand> Brands { get; set; }
     }
 }
