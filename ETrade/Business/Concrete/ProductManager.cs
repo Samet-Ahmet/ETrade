@@ -27,19 +27,20 @@ namespace Business.Concrete
         {
             try
             {
-               _productDal.Add(productDetailDto.Product);
-               Thread.Sleep(100);
-               var productId = _productDal.Get(p => p.ProductDef == productDetailDto.Product.ProductDef
-                                                    && p.ProductName == productDetailDto.Product.ProductName
-                                                    && p.UnitPrice == productDetailDto.Product.UnitPrice
-                                                    && p.BrandId == productDetailDto.Product.BrandId
-                                                    && p.CategoryId == productDetailDto.Product.CategoryId).ProductId;
-                
+                _productDal.Add(productDetailDto.Product);
+                Thread.Sleep(200);
+                var productId = _productDal.Get(p => p.ProductDef == productDetailDto.Product.ProductDef
+                                                     && p.ProductName == productDetailDto.Product.ProductName
+                                                     && p.UnitPrice == productDetailDto.Product.UnitPrice
+                                                     && p.BrandId == productDetailDto.Product.BrandId
+                                                     && p.CategoryId == productDetailDto.Product.CategoryId).ProductId;
+
                 foreach (var productPhotoPath in productDetailDto.ProductPhotoPaths)
                 {
                     productPhotoPath.ProductId = productId;
                     _productPhotoPathDal.Add(productPhotoPath);
                 }
+
                 return new SuccessResult();
             }
             catch (Exception)
@@ -57,6 +58,7 @@ namespace Business.Concrete
                 {
                     _productPhotoPathDal.Update(productPhotoPath);
                 }
+
                 return new SuccessResult();
             }
             catch (Exception)
@@ -94,6 +96,7 @@ namespace Business.Concrete
                         ProductPhotoPaths = _productPhotoPathDal.GetList(p => p.ProductId == product.ProductId)
                     });
                 }
+
                 return new SuccessDataResult<List<ProductDetailDto>>(productDetails);
             }
             catch (Exception)
@@ -116,6 +119,7 @@ namespace Business.Concrete
                         ProductPhotoPaths = _productPhotoPathDal.GetList(p => p.ProductId == product.ProductId)
                     });
                 }
+
                 return new SuccessDataResult<List<ProductDetailDto>>(productDetails);
             }
             catch (Exception)
@@ -157,11 +161,40 @@ namespace Business.Concrete
                         ProductPhotoPaths = _productPhotoPathDal.GetList(p => p.ProductId == product.ProductId)
                     });
                 }
+
                 return new SuccessDataResult<List<ProductDetailDto>>(productDetails);
             }
             catch (Exception)
             {
                 return new ErrorDataResult<List<ProductDetailDto>>(Messages.ErrorWhileGettingEntity);
+            }
+        }
+
+        public IDataResult<int> GetStockInformation(int productId)
+        {
+            try
+            {
+                var count = _productDal.Get(p => p.ProductId == productId).UnitsInStock;
+                return new SuccessDataResult<int>(count);
+            }
+            catch (Exception)
+            {
+                return new ErrorDataResult<int>(Messages.ErrorWhileGettingEntity);
+            }
+        }
+
+        public IResult Sell(int productId, int saleAmount)
+        {
+            try
+            {
+                var product = _productDal.Get(p => p.ProductId == productId);
+                product.UnitsInStock -= saleAmount;
+                _productDal.Update(product);
+                return new SuccessResult();
+            }
+            catch (Exception)
+            {
+                return new ErrorResult(Messages.ErrorWhileUpdatingEntity);
             }
         }
     }

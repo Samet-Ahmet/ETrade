@@ -19,7 +19,7 @@ namespace WebUI.Helpers
 
         public void Clear()
         {
-            _httpContextAccessor.HttpContext.Session.Clear();
+            _httpContextAccessor.HttpContext.Session.Remove("cart");
         }
 
         public Cart GetCart(string key)

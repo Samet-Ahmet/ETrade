@@ -8,8 +8,6 @@ namespace Entities.DomainModels
     {
         public Cart()
         {
-            //samete sor 
-            //neden list instance değil?
             CartLines = new List<CartLine>();
         }
         public List<CartLine> CartLines { get; set; }

@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DomainModels;
 using Entities.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebUI.Helpers;
 using WebUI.Models;
@@ -18,12 +21,20 @@ namespace WebUI.Controllers
         private ICartService _cartService;
         private ICartSessionHelper _cartSessionHelper;
         private IProductService _productService;
+        private IShippingDetailService _shippingDetailService;
+        private IUserService _userService;
+        private ICityService _cityService;
+        private IOrderService _orderService;
 
-        public CartController(ICartService cartService, ICartSessionHelper cartSessionHelper, IProductService productService)
+        public CartController(ICartService cartService, ICartSessionHelper cartSessionHelper, IProductService productService, IShippingDetailService shippingDetailService, IUserService userService, ICityService cityService, IOrderService orderService)
         {
             _cartService = cartService;
             _cartSessionHelper = cartSessionHelper;
             _productService = productService;
+            _shippingDetailService = shippingDetailService;
+            _userService = userService;
+            _cityService = cityService;
+            _orderService = orderService;
         }
 
         public IActionResult AddToCart(int productId)
@@ -86,16 +97,56 @@ namespace WebUI.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Customer")]
         [HttpGet]
         public IActionResult Complete()
         {
+
             var model = new ShippingDetailsViewModel
             {
-                ShippingDetails = 
+                ShippingDetails = new List<ShippingDetail>()
             };
+            var user = _userService.GetByMail(User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Email).Value).Data;
+            var result = _shippingDetailService.GetList(user.Id);
+            var cart = _cartSessionHelper.GetCart("cart");
+            bool error = false;
+            foreach (var cartLine in cart.CartLines.ToList())
+            {
+                var stock = _productService.GetStockInformation(cartLine.Product.ProductId).Data;
+
+                if (stock == 0) 
+                {
+                    error = true;
+                    _cartService.RemoveFromCart(cart,cartLine.Product.ProductId);
+                }
+
+                if (cartLine.Quantity > stock)
+                {
+                    error = true;
+                    cartLine.Quantity = stock;
+                }
+            }
+            _cartSessionHelper.SetCart("cart",cart);
+            if (error)
+            {
+                TempData.Add(TempDataTypes.StockInsufficient, Messages.StockInsufficient);
+                return RedirectToAction("Index","Cart");
+            }
+
+            if (!result.Success)
+            {
+                if (result.Message.Equals(Messages.ThereIsntShippingDetails))
+                {
+                    return RedirectToAction("AddShippingDetail", "Cart");
+                }
+            }
+            
+            model.ShippingDetails = result.Data;
+
             return View(model);
         }
 
+        [Authorize(Roles = "Customer")]
         [HttpPost]
         public IActionResult Complete(ShippingDetail shippingDetail)
         {
@@ -107,5 +158,78 @@ namespace WebUI.Controllers
             _cartSessionHelper.Clear();
             return RedirectToAction("Index", "Cart");
         }
+
+        [Authorize(Roles = "Customer")]
+        [HttpGet]
+        public IActionResult AddShippingDetail()
+        {
+            var model = new AddShippingDetailViewModel
+            {
+                ShippingDetail = new ShippingDetail()
+            };
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "Customer")]
+        [HttpPost]
+        public IActionResult AddShippingDetail(ShippingDetail shippingDetail)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var user = _userService.GetByMail(User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Email).Value).Data;
+            shippingDetail.CustomerId = user.Id;
+            var result = _shippingDetailService.Add(shippingDetail);
+
+            if (!result.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = result.Message });
+            }
+
+            return RedirectToAction("Complete","Cart");
+        }
+
+        [HttpPost]
+        public ActionResult GetDistricts(int cityId)
+        {
+            var model = _cityService.GetDistrictsByCityId(cityId).Data;
+
+            //return Ok(model);
+            return Json(model);
+        }
+
+        [Authorize(Roles = "Customer")]
+        [HttpGet]
+        public IActionResult Complete2(int shippingDetailId)
+        {
+            var model = new CompleteOrderViewModel
+            {
+                ShippingDetail = _shippingDetailService.GetById(shippingDetailId).Data,
+                Cart = _cartSessionHelper.GetCart("cart")
+            };
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "Customer")]
+        [HttpGet]
+        public IActionResult Completed(ShippingDetail shippingDetail)
+        {
+            var result = _orderService.Add(shippingDetail, _cartSessionHelper.GetCart("cart"));
+
+            if (!result.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = result.Message });
+            }
+
+            _cartSessionHelper.Clear();
+
+            return View();
+        }
+
+
     }
 }

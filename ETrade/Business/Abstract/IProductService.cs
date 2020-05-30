@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using Core.Utilities.Results;
 using Entities.Concrete;
@@ -16,5 +17,7 @@ namespace Business.Abstract
         IDataResult<List<ProductDetailDto>> GetByCategoryId(int categoryId);
         IDataResult<ProductDetailDto> GetById(int productId);
         IDataResult<List<ProductDetailDto>> GetByBrandId(int brandId);
+        IDataResult<int> GetStockInformation(int productId);
+        IResult Sell(int productId, int saleAmount);
     }
 }

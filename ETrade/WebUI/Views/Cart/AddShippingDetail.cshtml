@@ -1,0 +1,78 @@
+﻿@using Business.Constants
+@using Business.Abstract
+@model AddShippingDetailViewModel
+@inject ICityService _cityService
+
+@{
+    Layout = "_ManageAccount";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<h2>Teslimat Bilgisi Ekle</h2>
+
+
+<form asp-controller="Cart" asp-action="AddShippingDetail" method="post">
+    <div class="form-group">
+        <label asp-for="ShippingDetail.AddressName">Adresinize İsim Verin</label>
+        <input asp-for="ShippingDetail.AddressName" type="text" class="form-control" placeholder="" />
+        <span class="text-danger" asp-validation-for="ShippingDetail.AddressName"></span>
+    </div>
+    @{
+        var cities = _cityService.GetAll().Data;
+        var cityitems = new List<SelectListItem>();
+        foreach (var city in cities)
+        {
+            cityitems.Add(new SelectListItem
+            {
+                Text = city.CityName,
+                Value = city.CityId.ToString()
+            });
+        }
+        <div class="form-group">
+            <label asp-for="ShippingDetail.CityId">İl</label>
+            <select id="city" asp-for="ShippingDetail.CityId" class="form-control" asp-items="cityitems"></select>
+        </div>
+    }
+    <div class="form-group">
+        <label asp-for="ShippingDetail.DistrictId">İlçe</label>
+        <select id="district" asp-for="ShippingDetail.DistrictId" class="form-control"></select>
+        <script type="text/javascript">
+            $("#city").change(function ()
+            {
+                $("#district").empty();
+
+                var city = $("#city").val();
+
+                $.ajax(
+                    {
+                        url: '@Url.Action("GetDistricts", "Cart")',
+                        type: "POST",
+                        dataType: "json",
+                        data: { cityId: city },
+
+                        success: function (data)
+                        {
+                            $.each(data, function ()
+                            {
+                                $("#district").append('<option id=' + this.districtId + ' value=' + this.districtId + '>' + this.districtName + '</option>');
+                            });
+                        }
+                    });
+            });
+        </script>
+    </div>
+    <div class="form-group">
+        <label asp-for="ShippingDetail.Street">Cadde/Sokak</label>
+        <input asp-for="ShippingDetail.Street" type="text" class="form-control" placeholder="" />
+        <span class="text-danger" asp-validation-for="ShippingDetail.Street"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ShippingDetail.Number">Kapı Numarası</label>
+        <input asp-for="ShippingDetail.Number" type="text" class="form-control" placeholder="" />
+        <span class="text-danger" asp-validation-for="ShippingDetail.Number"></span>
+    </div>
+    <input type="submit" value="Kaydet" class="btn btn-success btn-sm" />
+</form>
+
+

@@ -73,6 +73,14 @@ namespace WebUI
 
             services.AddSingleton<ICartService, CartManager>();
             services.AddSingleton<ICartSessionHelper, CartSessionHelper>();
+
+            services.AddSingleton<IShippingDetailService, ShippingDetailManager>();
+            services.AddSingleton<IShippingDetailDal, EfShippingDetailDal>();
+
+            services.AddSingleton<IOrderDal, EfOrderDal>();
+            services.AddSingleton<IOrderDetailDal, EfOrderDetailDal>();
+            services.AddSingleton<IOrderService, OrderManager>();
+            
             /*
                         services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
                             Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));

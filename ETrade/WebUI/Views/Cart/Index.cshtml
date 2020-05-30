@@ -5,6 +5,13 @@
 }
 
 <h2>Sepetiniz</h2>
+@if (TempData[TempDataTypes.StockInsufficient] != null)
+{
+
+
+    <div class="alert alert-warning">@TempData[TempDataTypes.StockInsufficient].ToString()</div>
+
+}
 @if (TempData[TempDataTypes.RemovedFromCart] != null)
 {
 
@@ -26,29 +33,29 @@ else
 {
     <table class="table table-responsive">
         <thead>
-        <tr>
-            <th>Id</th>
-            <th>Ürün Adı</th>
-            <th>Açıklama</th>
-            <th>Fiyat</th>
-            <th>Stok Adedi</th>
-            <th>Satış Adedi</th>
-        </tr>
+            <tr>
+                <th>Id</th>
+                <th>Ürün Adı</th>
+                <th>Açıklama</th>
+                <th>Fiyat</th>
+                <th>Stok Adedi</th>
+                <th>Satış Adedi</th>
+            </tr>
         </thead>
         @foreach (var cartLine in Model.Cart.CartLines)
         {
             <tbody>
-            <tr>
-                <td>@cartLine.Product.ProductId</td>
-                <td>@cartLine.Product.ProductName</td>
-                <td>@cartLine.Product.ProductDef</td>
-                <td>@cartLine.Product.UnitPrice</td>
-                <td>@cartLine.Product.UnitsInStock</td>
-                <td>@cartLine.Quantity</td>
-                <td><a class="btn btn-sm btn-danger" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-productId="@cartLine.Product.ProductId">Azalt</a></td>
-                <td><a class="btn btn-sm btn-danger" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-productId="@cartLine.Product.ProductId" asp-route-removeAll="true">Kaldır</a></td>
-                <!--Butona tıklayınca Cart controllerındaki addtocart fonksiyonunu çağırsın asp-route sonuna parametre gelince onnu gönderiyor-->
-            </tr>
+                <tr>
+                    <td>@cartLine.Product.ProductId</td>
+                    <td>@cartLine.Product.ProductName</td>
+                    <td>@cartLine.Product.ProductDef</td>
+                    <td>@cartLine.Product.UnitPrice</td>
+                    <td>@cartLine.Product.UnitsInStock</td>
+                    <td>@cartLine.Quantity</td>
+                    <td><a class="btn btn-sm btn-danger" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-productId="@cartLine.Product.ProductId">Azalt</a></td>
+                    <td><a class="btn btn-sm btn-danger" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-productId="@cartLine.Product.ProductId" asp-route-removeAll="true">Kaldır</a></td>
+                    <!--Butona tıklayınca Cart controllerındaki addtocart fonksiyonunu çağırsın asp-route sonuna parametre gelince onnu gönderiyor-->
+                </tr>
             </tbody>
         }
     </table>

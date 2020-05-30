@@ -9,7 +9,9 @@ namespace Business.Abstract
     public interface IShippingDetailService
     {
         IResult Add(ShippingDetail shippingDetail);
-        IDataResult<List<ShippingDetail>> GetList();
+        IResult Delete(ShippingDetail shippingDetail);
+        IDataResult<List<ShippingDetail>> GetList(int userId);
         IDataResult<ShippingDetail> GetById(int shippingDetailId);
+
     }
 }

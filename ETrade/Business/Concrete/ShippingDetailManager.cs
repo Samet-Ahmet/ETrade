@@ -30,15 +30,43 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.ErrorWhileGettingEntity);
             }
         }
-        //delete fonksiyonu ekle
-        public IDataResult<List<ShippingDetail>> GetList()
+
+        public IResult Delete(ShippingDetail shippingDetail)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _shippingDetailDal.Delete(shippingDetail);
+                return new SuccessResult();
+            }
+            catch (Exception)
+            {
+                return new ErrorResult(Messages.ErrorWhileDeletingEntity);
+            }
+        }
+
+        public IDataResult<List<ShippingDetail>> GetList(int userId)
+        {
+            try
+            {
+                return new SuccessDataResult<List<ShippingDetail>>(
+                    _shippingDetailDal.GetList(sd => sd.CustomerId == userId));
+            }
+            catch (Exception)
+            {
+               return new ErrorDataResult<List<ShippingDetail>>(Messages.ThereIsntShippingDetails);
+            }
         }
 
         public IDataResult<ShippingDetail> GetById(int shippingDetailId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return new SuccessDataResult<ShippingDetail>(_shippingDetailDal.Get(sd=>sd.ShippingDetailId == shippingDetailId));
+            }
+            catch (Exception)
+            {
+                return new ErrorDataResult<ShippingDetail>(Messages.ErrorWhileGettingEntity);
+            }
         }
     }
 }

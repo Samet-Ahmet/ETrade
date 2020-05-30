@@ -39,6 +39,7 @@ namespace Business.Constants
 
         public static string Max50Characters = "En fazla 50 karakter girebilirsiniz.";
         public static string Max30Characters = "En fazla 30 karakter girebilirsiniz.";
+        public static string Max15Characters = "En fazla 15 karakter girebilirsiniz.";
         public static string PhoneError = "Telefon numaranızı, 10 karakter olacak şekilde başında 0 olmadan giriniz.";
         public static string OnlyLetters = "Sadece harf girebilirsiniz";
         public static string TcError = "Geçersiz bir TC Kimlik Numarası girdiniz.";
@@ -46,5 +47,7 @@ namespace Business.Constants
 
         public static string PhotoUploaded = "Fotoğraf başarıyla yüklendi.";
         public static string ProductAddedSuccessfully = "Ürün başarıyla eklendi.";
+        public static string ThereIsntShippingDetails = "Sipariş bilgileri bulunamadı.";
+        public static string StockInsufficient = "Sepetinizdeki bazı ürünlerin stoğu yetersiz olduğu için ürünlerin sayısı değişiklik gösterebilir.";
     }
 }

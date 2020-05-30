@@ -1,0 +1,54 @@
+﻿@using Business.Abstract
+@model CompleteOrderViewModel
+@inject ICityService _cityService
+@{
+    Layout = "_ManageAccount";
+}
+<table class="table table-responsive">
+    <thead>
+    <tr>
+        <th>Adres Adı</th>
+        <th>Adres</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td>@Model.ShippingDetail.AddressName</td>
+        <td>
+            @Model.ShippingDetail.Street @Model.ShippingDetail.Number
+            @_cityService.GetDistrictById(Model.ShippingDetail.DistrictId).Data.DistrictName / @_cityService.GetCityById(Model.ShippingDetail.CityId).Data.CityName
+        </td>
+
+
+    </tr>
+    </tbody>
+
+</table>
+
+<table class="table table-responsive">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Ürün Adı</th>
+        <th>Açıklama</th>
+        <th>Fiyat</th>
+        <th>Stok Adedi</th>
+        <th>Satış Adedi</th>
+    </tr>
+    </thead>
+    @foreach (var cartLine in Model.Cart.CartLines)
+    {
+        <tbody>
+        <tr>
+            <td>@cartLine.Product.ProductId</td>
+            <td>@cartLine.Product.ProductName</td>
+            <td>@cartLine.Product.ProductDef</td>
+            <td>@cartLine.Product.UnitPrice</td>
+            <td>@cartLine.Product.UnitsInStock</td>
+            <td>@cartLine.Quantity</td>
+        </tr>
+        </tbody>
+    }
+</table>
+<a class="btn btn-sm btn-success" asp-controller="Cart" asp-action="Completed" asp-route-shippingDetail="@Model.ShippingDetail">Seç</a>

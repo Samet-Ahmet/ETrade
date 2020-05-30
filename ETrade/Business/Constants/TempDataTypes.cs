@@ -18,5 +18,6 @@ namespace Business.Constants
         public static string AddedToCart = "AddedToCart";
         public static string RemovedFromCart = "RemovedFromCart";
         public static string DecreasedFromCart = "DecreasedFromCart";
+        public static string StockInsufficient = "StockInsufficient";
     }
 }
