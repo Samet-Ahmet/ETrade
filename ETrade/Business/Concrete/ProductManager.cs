@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Results;
@@ -27,6 +28,7 @@ namespace Business.Concrete
             try
             {
                _productDal.Add(productDetailDto.Product);
+               Thread.Sleep(100);
                var productId = _productDal.Get(p => p.ProductDef == productDetailDto.Product.ProductDef
                                                     && p.ProductName == productDetailDto.Product.ProductName
                                                     && p.UnitPrice == productDetailDto.Product.UnitPrice

@@ -15,5 +15,8 @@ namespace Business.Constants
         public static string ManageUpdateError = "ManageUpdateError";
         public static string PhotoUploaded = "PhotoUploaded";
         public static string AdminInfo = "AdminInfo";
+        public static string AddedToCart = "AddedToCart";
+        public static string RemovedFromCart = "RemovedFromCart";
+        public static string DecreasedFromCart = "DecreasedFromCart";
     }
 }

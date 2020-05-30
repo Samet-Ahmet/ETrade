@@ -192,3 +192,6 @@ Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.csproj.Cor
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.MvcApplicationPartsAssemblyInfo.cs
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.MvcApplicationPartsAssemblyInfo.cache
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Product\Index.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\AdminProduct\GoBack.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Complete.cshtml.g.cs
+Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Index.cshtml.g.cs

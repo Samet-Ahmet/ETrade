@@ -79,7 +79,7 @@ namespace WebUI.Controllers
 
 
         [HttpPost]
-        public void Upload(IFormFile files)
+        public IActionResult Upload(IFormFile files)
         {
             if (files != null)
             {
@@ -101,26 +101,26 @@ namespace WebUI.Controllers
                     var filepath =
                         new PhysicalFileProvider(Path.Combine(/*Directory.GetCurrentDirectory(),*/ _environment.WebRootPath,/*"wwwroot",*/ "ProductPhotos")).Root + $@"\{newFileName}";
 
-                    string toBeSearched = "wwwroot";
+                  /*  string toBeSearched = "wwwroot";
                     int ix = filepath.IndexOf(toBeSearched);
                     string relativePath = new string("");
                     if (ix != -1)
                     {
-                        relativePath = filepath.Substring(ix + toBeSearched.Length);
+                        fileName = filepath.Substring(ix + toBeSearched.Length);
                         // do something here
-                    }
-
+                   }
+                   */
                     if (HttpContext.Session.GetString("sayac") != null)
                     {
                         var sayacString = HttpContext.Session.GetString("sayac");
                         int sayac = Convert.ToInt32(sayacString);
-                        HttpContext.Session.SetString(sayac.ToString(),relativePath);
+                        HttpContext.Session.SetString(sayac.ToString(), newFileName);
                         HttpContext.Session.SetString("sayac",(sayac+1).ToString());
                     }
                     else
                     {
                         HttpContext.Session.SetString("sayac",2.ToString());
-                        HttpContext.Session.SetString("1",relativePath);
+                        HttpContext.Session.SetString("1", newFileName);
                     }
                     
                     using (FileStream fs = System.IO.File.Create(filepath))
@@ -132,6 +132,13 @@ namespace WebUI.Controllers
             }
             TempData.Add(TempDataTypes.PhotoUploaded, Messages.PhotoUploaded);
             // return RedirectToAction("Add", "AdminProduct");
+           // return Ok();
+           return RedirectToAction("GoBack", "AdminProduct");
+        }
+
+        public IActionResult GoBack()
+        {
+            return View();
         }
     }
 }

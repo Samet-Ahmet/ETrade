@@ -10,6 +10,5 @@ namespace WebUI.Models
     public class AddProductViewModel
     {
         public ProductDetailDto ProductDetailDto { get; set; }
-        public IFormFileCollection FormFileCollection { get; set; }
     }
 }

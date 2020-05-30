@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using WebUI.Helpers;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace WebUI
@@ -69,10 +70,13 @@ namespace WebUI
 
             services.AddSingleton<IBrandDal, EfBrandDal>();
             services.AddSingleton<IBrandService, BrandManager>();
-/*
-            services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
-                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
-                */
+
+            services.AddSingleton<ICartService, CartManager>();
+            services.AddSingleton<ICartSessionHelper, CartSessionHelper>();
+            /*
+                        services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
+                            Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+                            */
             services.AddControllersWithViews()
                 .AddFluentValidation(option =>
                     option.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));

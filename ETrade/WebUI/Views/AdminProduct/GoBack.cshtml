@@ -1,0 +1,97 @@
+﻿<script>
+    function goBack() {
+        window.history.back();
+    }
+
+    goBack();
+</script>
+
+@using Business.Constants
+@using Business.Concrete
+@using Business.Abstract
+@inject ICategoryService _categoryService
+@inject IBrandService _brandService
+@{
+    Layout = "_AdminLayout";
+}
+
+
+<div class="container">
+    <h1>Ürün Ekle</h1>
+    @if (TempData[TempDataTypes.AdminInfo] != null)
+    {
+        <div class="alert alert-info">@TempData[TempDataTypes.AdminInfo].ToString()</div>
+    }
+    <form method="post">
+        <div class="form-group">
+            <label >Ürünün Adı</label>
+            <input  type="text" class="form-control" placeholder="" />
+            <span class="text-danger" class="alert-danger" ></span>
+        </div>
+        @{
+            var categories = _categoryService.GetAll().Data;
+            var categoryItems = new List<SelectListItem>();
+            foreach (var category in categories)
+            {
+                categoryItems.Add(new SelectListItem
+                {
+                    Text = category.CategoryName,
+                    Value = category.CategoryId.ToString()
+                });
+            }
+            <div class="form-group">
+                <label >Ürünün Kategorisi</label>
+                <select  class="form-control" asp-items="categoryItems"></select>
+            </div>
+        }
+        <div class="form-group">
+            <label >Ürünün Fiyatı</label>
+            <input  type="text" class="form-control" placeholder="" />
+            <span class="text-danger" ></span>
+        </div>
+        <div class="form-group">
+            <label >Ürünün Stok Adedi</label>
+            <input  type="text" class="form-control" placeholder="" />
+            <span class="text-danger"></span>
+        </div>
+        @{
+            var brands = _brandService.GetAll().Data;
+            var brandItems = new List<SelectListItem>();
+            foreach (var brand in brands)
+            {
+                brandItems.Add(new SelectListItem
+                {
+                    Text = brand.BrandName,
+                    Value = brand.BrandId.ToString()
+                });
+            }
+            <div class="form-group">
+                <label >Ürünün Markası</label>
+                <select class="form-control" asp-items="brandItems"></select>
+            </div>
+        }
+
+        <div class="form-group">
+            <label >Ürünün Açıklaması</label>
+            <textarea type="text" class="form-control" placeholder=""></textarea>
+            <span class="text-danger" ></span>
+        </div>
+        <input type="submit" value="Kaydet" style="position: relative; top: 250px;" class="btn btn-success btn-sm" />
+    </form>
+
+    <form method="post" enctype="multipart/form-data" >
+        <div class="form-group">
+            <p>Ürünün Fotoğraflarını Tek Tek Ekleyiniz</p>
+            <input class="form-control" name="files" type="file" />
+        </div>
+        <div class="form-group">
+            <input class="btn btn-info btn-sm" type="submit" value="Upload" />
+        </div>
+    </form>
+
+    @if (TempData[TempDataTypes.PhotoUploaded] != null)
+    {
+        <div class="alert alert-info">@TempData[TempDataTypes.PhotoUploaded].ToString()</div>
+    }
+
+</div>

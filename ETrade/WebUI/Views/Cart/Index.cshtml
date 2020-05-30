@@ -1,0 +1,56 @@
+﻿@using Business.Constants
+@model CartListViewModel
+@{
+    Layout = "_ManageAccount";
+}
+
+<h2>Sepetiniz</h2>
+@if (TempData[TempDataTypes.RemovedFromCart] != null)
+{
+
+    <div class="alert alert-danger">@TempData[TempDataTypes.RemovedFromCart].ToString()</div>
+
+}
+@if (TempData[TempDataTypes.DecreasedFromCart] != null)
+{
+
+
+    <div class="alert alert-danger">@TempData[TempDataTypes.DecreasedFromCart].ToString()</div>
+
+}
+@if (Model.Cart.CartLines.Count == 0)
+{
+    <h2 class="badge badge-danger">Sepetiniz Boş</h2>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ürün Adı</th>
+            <th>Açıklama</th>
+            <th>Fiyat</th>
+            <th>Stok Adedi</th>
+            <th>Satış Adedi</th>
+        </tr>
+        </thead>
+        @foreach (var cartLine in Model.Cart.CartLines)
+        {
+            <tbody>
+            <tr>
+                <td>@cartLine.Product.ProductId</td>
+                <td>@cartLine.Product.ProductName</td>
+                <td>@cartLine.Product.ProductDef</td>
+                <td>@cartLine.Product.UnitPrice</td>
+                <td>@cartLine.Product.UnitsInStock</td>
+                <td>@cartLine.Quantity</td>
+                <td><a class="btn btn-sm btn-danger" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-productId="@cartLine.Product.ProductId">Azalt</a></td>
+                <td><a class="btn btn-sm btn-danger" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-productId="@cartLine.Product.ProductId" asp-route-removeAll="true">Kaldır</a></td>
+                <!--Butona tıklayınca Cart controllerındaki addtocart fonksiyonunu çağırsın asp-route sonuna parametre gelince onnu gönderiyor-->
+            </tr>
+            </tbody>
+        }
+    </table>
+    <a href="/Cart/Complete" class="btn btn-success" role="button">Siparişi Tamamla</a>
+}

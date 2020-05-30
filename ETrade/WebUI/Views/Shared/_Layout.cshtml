@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using System.Security.Claims
+@using Business.Constants
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -82,11 +83,22 @@
         </div>
     </header>
 
-    <div class="container" style="margin-top: 100px">
-        <main role="main">
-            @RenderBody()
-        </main>
-    </div>
+<div class="container" style="margin-top: 100px">
+    @if (TempData[TempDataTypes.AddedToCart] != null)
+    {
+        <div class="row">
+            <div class="col-3">
+
+            </div>
+            <div class="col-9">
+                <div class="alert alert-success">@TempData[TempDataTypes.AddedToCart].ToString()</div>
+            </div>
+        </div>
+    }
+    <main role="main">
+        @RenderBody()
+    </main>
+</div>
 
     <script src="~/littlecloset/js/jquery-3.2.1.min.js"></script>
     <script src="~/littlecloset/styles/bootstrap-4.1.2/popper.js"></script>

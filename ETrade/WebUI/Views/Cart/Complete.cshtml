@@ -1,0 +1,22 @@
+﻿@model ShippingDetailsViewModel
+
+<form asp-controller="Cart" asp-action="Complete" method="post">
+    <div class="form-group">
+        <label asp-for="ShippingDetail.AddressName">Adresinize İsim Verin</label>
+        <input asp-for="ShippingDetail.AddressName" class="form-control" placeholder="Adres" />
+        <span asp-validation-for="ShippingDetail.AddressName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ShippingDetail.Street">Cadde/Sokak</label>
+        <input asp-for="ShippingDetail.Street" class="form-control" placeholder="Şehir" />
+        <span asp-validation-for="ShippingDetail.Street"></span>
+    </div>
+   
+    <div class="form-group">
+        <label asp-for="ShippingDetail.Age">Yaş</label>
+        <input asp-for="ShippingDetail.Age" class="form-control" placeholder="Müşteri Yaşı" />
+        <span asp-validation-for="ShippingDetail.Age"></span>
+    </div>
+    <input type="submit" value="Kaydet" class="btn btn-success btn-sm" />
+</form>
+    

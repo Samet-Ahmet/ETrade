@@ -18,7 +18,7 @@
     @foreach (var product in @Model.ProductDetailDtos)
     {
 
-        var path = /* _environment.WebRootPath*/ ".." + product.ProductPhotoPaths.First().PhotoPath;
+        var path = "../ProductPhotos/" + product.ProductPhotoPaths.First().PhotoPath;
         string s = product.Product.UnitPrice.ToString("0.00", CultureInfo.InvariantCulture);
         string[] parts = s.Split('.');
         int before = int.Parse(parts[0]);
@@ -30,11 +30,11 @@
                 
             }
 
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="product">
                                 <a href="/Product/Detail?productId=@product.Product.ProductId">
                                     <div class="product_image">
-                                        <img src="@path" alt="">
+                                        <center><img src="@path" height="300" alt=""></center>
                                     </div>
                                 </a>
                                 <div class="product_content">
@@ -52,26 +52,20 @@
                                         <!-- text-right-->
                                         <div class="product_price" style="position: relative; top: -10px;"><center>₺@before<span>.@after</span></center></div>
                                     </div>
-                                    <div class="product_buttons">
-                                        <div class="text-right d-flex flex-row align-items-start justify-content-start">
-                                            <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-                                                <div>
+                                    <a href="/Cart/AddToCart?productId=@product.Product.ProductId">
+                                        <div class="product_buttons" style=" width: 200%;">
+                                            <div class="text-right d-flex flex-row align-items-start justify-content-start">
+                                                <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
                                                     <div>
-                                                        <img src="~/littlecloset/images/heart_2.svg" class="svg" alt="">
-                                                        <div>+</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                                                <div>
-                                                    <div>
-                                                        <img src="~/littlecloset/images/cart.svg" class="svg" alt="">
-                                                        <div>+</div>
+                                                        <div>
+                                                            <img src="~/littlecloset/images/cart.svg" class="svg" alt="">
+                                                            <div>+</div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
 </div>
                         </div>
