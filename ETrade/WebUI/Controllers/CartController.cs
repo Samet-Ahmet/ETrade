@@ -215,9 +215,10 @@ namespace WebUI.Controllers
         }
 
         [Authorize(Roles = "Customer")]
-        [HttpGet]
-        public IActionResult Completed(ShippingDetail shippingDetail)
+        [HttpPost]
+        public IActionResult Completed(int shippingDetailId)
         {
+            var shippingDetail = _shippingDetailService.GetById(shippingDetailId).Data;
             var result = _orderService.Add(shippingDetail, _cartSessionHelper.GetCart("cart"));
 
             if (!result.Success)

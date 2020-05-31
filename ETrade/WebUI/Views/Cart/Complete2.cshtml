@@ -4,7 +4,8 @@
 @{
     Layout = "_ManageAccount";
 }
-<table class="table table-responsive">
+<h2>Teslimat Bilgisi</h2>
+<table  class="table table-responsive">
     <thead>
     <tr>
         <th>Adres Adı</th>
@@ -25,8 +26,8 @@
     </tbody>
 
 </table>
-
-<table class="table table-responsive">
+<h2>Alacağınız Ürünler</h2>
+<table style="width: 100%;" class="table table-responsive">
     <thead>
     <tr>
         <th>Id</th>
@@ -51,4 +52,20 @@
         </tbody>
     }
 </table>
-<a class="btn btn-sm btn-success" asp-controller="Cart" asp-action="Completed" asp-route-shippingDetail="@Model.ShippingDetail">Seç</a>
+<h4 class="text-black-50">
+    Sipariş Tutarı:  ₺
+    @{
+        decimal totalPrice = 0;
+        @foreach (var cartLine in Model.Cart.CartLines)
+        {
+            totalPrice += cartLine.Product.UnitPrice * cartLine.Quantity;
+        }
+        @totalPrice.ToString("#.##")
+    }
+</h4>
+<form asp-controller="Cart" asp-action="Completed" method="post">
+    <div class="form-group">
+        <input style="display: none;" name="shippingDetailId"  type="text" class="form-control" value="@Model.ShippingDetail.ShippingDetailId" />
+    </div>
+    <input type="submit" value="Onayla" class="btn btn-success btn-sm" />
+</form>

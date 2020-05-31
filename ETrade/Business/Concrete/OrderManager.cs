@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using Business.Abstract;
@@ -40,7 +41,8 @@ namespace Business.Concrete
                     Quantity = (short)cartLine.Quantity
                 });
             }
-
+            Random r = new Random();
+            var trackingNumber = r.Next(111111, 1999999999);
             var order = new Order
             {
                 ShippingDetailId = shippingDetail.ShippingDetailId,
@@ -48,14 +50,18 @@ namespace Business.Concrete
                 Delivered = false,
                 OrderDate = now,
                 Price = totalPrice,
-                ShippedDate = DateTime.Now
+                ShippedDate = now,
+                TrackingNumber = trackingNumber
             };
 
             try
             {
                 _orderDal.Add(order);
                 Thread.Sleep(100);
-                var orderId = _orderDal.Get(o => o.OrderDate == now && o.ShippingDetailId == shippingDetail.ShippingDetailId).OrderId;
+                var orderId = _orderDal.Get(o => o.CustomerId == shippingDetail.CustomerId 
+                                                 && o.ShippingDetailId == shippingDetail.ShippingDetailId
+                                                 && o.Price == totalPrice
+                                                 && o.TrackingNumber == trackingNumber).OrderId;
                 foreach (var orderDetail in orderDetails)
                 {
                     orderDetail.OrderId = orderId;
@@ -79,17 +85,35 @@ namespace Business.Concrete
 
         public IDataResult<List<Order>> GetOrders(int customerId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return new SuccessDataResult<List<Order>>(_orderDal.GetList(o => o.CustomerId == customerId));
+
+            }
+            catch (Exception)
+            {
+                return new ErrorDataResult<List<Order>>(Messages.ErrorWhileGettingEntity);
+            }
+
         }
 
         public IDataResult<List<OrderDetail>> GetOrderDetails(int orderId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return new SuccessDataResult<List<OrderDetail>>(_orderDetailDal.GetList(od => od.OrderId == orderId));
+
+            }
+            catch (Exception)
+            {
+                return new ErrorDataResult<List<OrderDetail>>(Messages.ErrorWhileGettingEntity);
+            }
         }
 
         public IResult Delete(int orderId)
         {
             throw new NotImplementedException();
+            
         }
     }
 }

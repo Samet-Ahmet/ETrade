@@ -1,6 +1,8 @@
-﻿@{
+﻿@using System.Security.Claims
+@{
     Layout = "_ManageAccount";
 }
 
 
-<h1>Siparişiniz Tamanlandı.</h1>
+<h1>Siparişiniz Tamamlandı.</h1>
+<a class ="btn btn-outline-info" href="/Order/GetByEmail?email=@User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Email).Value">Siparişlerimi Listele</a>

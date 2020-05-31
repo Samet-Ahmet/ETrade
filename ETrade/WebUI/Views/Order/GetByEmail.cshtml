@@ -1,0 +1,54 @@
+﻿@using Business.Constants
+@model OrderListViewModel
+
+@{
+    Layout = "_ManageAccount";
+}
+
+<h2>Teslimat Bilgisi</h2>
+
+@if (Model.Orders == null)
+{
+    @if (TempData[TempDataTypes.ThereIsNoOrder] != null)
+    {
+        <span class="text-danger">@TempData[TempDataTypes.ThereIsNoOrder].ToString()</span>
+    }
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Sipariş Numarası</th>
+                <th>Sipariş Tarihi</th>
+                <th>Kargo Takip Numarası</th>
+                <th>Kargoya Veriliş Tarihi</th>
+                <th>Teslim Durumu</th>
+                <th>Sipariş Tutarı</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.OrderDate</td>
+                    <td>@order.TrackingNumber</td>
+                    <td>@order.ShippedDate</td>
+                    <td>@if (order.Delivered)
+                        {
+                            @:Teslim Edildi
+                        }
+                        else
+                        {
+                            @:Teslim Edilmedi
+                        }
+                    </td>
+                    <td>₺@order.Price.ToString("#.##")</td>
+                    <td><a class="btn btn-sm btn-info" asp-controller="Order" asp-action="OrderDetails" asp-route-orderId="@order.OrderId">Detay</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
