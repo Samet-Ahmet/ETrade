@@ -43,18 +43,18 @@ namespace WebUI.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Login(UserForLoginDto userForLogin)
+        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
             var model = new LoginViewModel
             {
-                UserForLoginDto = userForLogin
+                UserForLoginDto = new UserForLoginDto()
             };
 
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var result = _authService.Login(userForLogin);
+            var result = _authService.Login(userForLoginDto);
             if (!result.Success)
             {
                 TempData.Add(TempDataTypes.LoginError, Messages.IncorrectEmailOrPassword);
@@ -65,7 +65,7 @@ namespace WebUI.Controllers
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Email, userForLogin.Email),
+                new Claim(ClaimTypes.Email, userForLoginDto.Email),
                 new Claim(ClaimTypes.Name,result.Data.FirstName + " " + result.Data.LastName)
             };
             bool isManagerOrWorker = false;

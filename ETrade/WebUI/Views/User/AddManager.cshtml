@@ -21,32 +21,32 @@
         <h4>Yöneticinin;</h4>
         <div class="form-group">
             <label asp-for="AddWorkerDto.IdentityNo">TC Kimlik Numarası</label>
-            <input name="IdentityNo" asp-for="AddWorkerDto.IdentityNo" type="text" class="form-control" placeholder="" />
+            <input  asp-for="AddWorkerDto.IdentityNo" type="text" class="form-control" placeholder="" />
             <span class="text-danger" asp-validation-for="AddWorkerDto.IdentityNo"></span>
         </div>
         <div class="form-group">
             <label asp-for="AddWorkerDto.FirstName">Adı</label>
-            <input name="FirstName" asp-for="AddWorkerDto.FirstName" type="text" class="form-control" placeholder="" />
+            <input  asp-for="AddWorkerDto.FirstName" type="text" class="form-control" placeholder="" />
             <span class="text-danger" asp-validation-for="AddWorkerDto.FirstName"></span>
         </div>
         <div class="form-group">
             <label asp-for="AddWorkerDto.LastName">Soyadı</label>
-            <input name="LastName" asp-for="AddWorkerDto.LastName" type="text" class="form-control" placeholder="" />
+            <input  asp-for="AddWorkerDto.LastName" type="text" class="form-control" placeholder="" />
             <span class="text-danger" asp-validation-for="AddWorkerDto.LastName"></span>
         </div>
         <div class="form-group">
             <label asp-for="AddWorkerDto.Email">E-posta Adresi</label>
-            <input name="Email" asp-for="AddWorkerDto.Email" type="text" class="form-control" placeholder="" />
+            <input  asp-for="AddWorkerDto.Email" type="text" class="form-control" placeholder="" />
             <span class="text-danger" asp-validation-for="AddWorkerDto.Email"></span>
         </div>
         <div class="form-group">
             <label asp-for="AddWorkerDto.PhoneNumber">Telefon Numarası</label>
-            <input name="PhoneNumber" asp-for="AddWorkerDto.PhoneNumber" type="text" class="form-control" placeholder="" />
+            <input  asp-for="AddWorkerDto.PhoneNumber" type="text" class="form-control" placeholder="" />
             <span class="text-danger" asp-validation-for="AddWorkerDto.PhoneNumber"></span>
         </div>
         <div class="form-group">
             <label asp-for="AddWorkerDto.Password">Şifresi</label>
-            <input name="Password" asp-for="AddWorkerDto.Password" id="sifre" type="password" class="form-control" placeholder="" />
+            <input  asp-for="AddWorkerDto.Password" id="sifre" type="password" class="form-control" placeholder="" />
             <div class="form-check-inline">
                 <label class="form-check-label">
                     <input type="checkbox" class="form-check-input" onclick="myFunction()">Şifreyi Göster
@@ -57,60 +57,65 @@
 
         <div class="form-group">
             <label asp-for="AddWorkerDto.GenderId">Cinsiyeti</label>
-            <select name="GenderId" asp-for="AddWorkerDto.GenderId" class="form-control" asp-items="@Model.GenderNamesSelectItems"></select>
+            <select  asp-for="AddWorkerDto.GenderId" class="form-control" asp-items="@Model.GenderNamesSelectItems"></select>
             @if (TempData[TempDataTypes.GenderError] != null)
             {
                 <span class="text-danger">@TempData[TempDataTypes.GenderError].ToString()</span>
             }
         </div>
-
-        <div class="form-group row">
-
-            <div class="col-4">
-                <label asp-for="AddWorkerDto.BirthDateDay">Doğum Tarihi</label>
-                <select name="BirthDateDay" asp-for="AddWorkerDto.BirthDateDay" class="form-control">
-                    <option value="0">Gün</option>
-                    @for (int i = 1; i < 32; i++)
-                    {
-                        <option value="@i">@i</option>
-                    }
-                </select>
-                <span class="text-danger" asp-validation-for="AddWorkerDto.BirthDateDay"></span>
-            </div>
-
-
-            <div class="col-4">
-                <label asp-for="AddWorkerDto.BirthDateMounth"></label>
-                <select name="BirthDateMounth" asp-for="AddWorkerDto.BirthDateMounth" class="form-control">
-                    <option value="0">Ay</option>
-                    @for (int i = 1; i < 13; i++)
-                    {
-                        <option value="@i">@i</option>
-                    }
-                </select>
-                <span class="text-danger" asp-validation-for="AddWorkerDto.BirthDateMounth"></span>
-            </div>
-
-            <div class="col-4">
-                <label asp-for="AddWorkerDto.BirthDateYear"></label>
-                <select name="BirthDateYear" asp-for="AddWorkerDto.BirthDateYear" class="form-control">
-                    <option value="0">Yıl</option>
-                    @for (int i = 2009; i > 1920; i--)
-                    {
-                        <option value="@i">@i</option>
-                    }
-                </select>
-                <span class="text-danger" asp-validation-for="AddWorkerDto.BirthDateYear"></span>
-            </div>
+    <div class="form-group row">
+        <div class="col-12">
+            <label>Doğum Tarihi</label>
+            @if (TempData[TempDataTypes.BirthdayError] != null)
+            {
+                <div class="text-danger">@TempData[TempDataTypes.BirthdayError].ToString()</div>
+            }
         </div>
+    </div>
+    <div class="form-group row">
+
+        <div class="col-4">
+            <select asp-for="AddWorkerDto.BirthDateDay" class="form-control">
+                <option value="0">Gün</option>
+                @for (int i = 1; i < 32; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+            <span class="text-danger" asp-validation-for="AddWorkerDto.BirthDateDay"></span>
+        </div>
+
+
+        <div class="col-4">
+            <select asp-for="AddWorkerDto.BirthDateMounth" class="form-control">
+                <option value="0">Ay</option>
+                @for (int i = 1; i < 13; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+            <span class="text-danger" asp-validation-for="AddWorkerDto.BirthDateMounth"></span>
+        </div>
+
+        <div class="col-4">
+            <select asp-for="AddWorkerDto.BirthDateYear" class="form-control">
+                <option value="0">Yıl</option>
+                @for (int i = 2009; i > 1920; i--)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+            <span class="text-danger" asp-validation-for="AddWorkerDto.BirthDateYear"></span>
+        </div>
+    </div>
         <div class="form-group">
             <label asp-for="AddWorkerDto.Street">Cadde/Sokak</label>
-            <input name="Street" asp-for="AddWorkerDto.Street" type="text" class="form-control" placeholder="" />
+            <input  asp-for="AddWorkerDto.Street" type="text" class="form-control" placeholder="" />
             <span class="text-danger" asp-validation-for="AddWorkerDto.Street"></span>
         </div>
         <div class="form-group">
             <label asp-for="AddWorkerDto.AddressNumber">Adres No</label>
-            <input name="AddressNumber" asp-for="AddWorkerDto.AddressNumber" type="text" class="form-control" placeholder="" />
+            <input  asp-for="AddWorkerDto.AddressNumber" type="text" class="form-control" placeholder="" />
             <span class="text-danger" asp-validation-for="AddWorkerDto.AddressNumber"></span>
         </div>
         @{
@@ -126,13 +131,13 @@
             }
             <div class="form-group">
                 <label asp-for="AddWorkerDto.CityId">İl</label>
-                <select name="CityId" id="city" asp-for="AddWorkerDto.CityId" class="form-control" asp-items="cityitems"></select>
+                <select  id="city" asp-for="AddWorkerDto.CityId" class="form-control" asp-items="cityitems"></select>
             </div>
         }
 
         <div class="form-group">
             <label asp-for="AddWorkerDto.DistrictId">İlçe</label>
-            <select id="district" name="DistrictId" asp-for="AddWorkerDto.DistrictId" class="form-control"></select>
+            <select id="district"  asp-for="AddWorkerDto.DistrictId" class="form-control"></select>
             <script type="text/javascript">
                 $("#city").change(function ()
                 {

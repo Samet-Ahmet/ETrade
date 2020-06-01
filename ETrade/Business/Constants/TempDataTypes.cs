@@ -20,5 +20,6 @@ namespace Business.Constants
         public static string DecreasedFromCart = "DecreasedFromCart";
         public static string StockInsufficient = "StockInsufficient";
         public static string ThereIsNoOrder = "ThereIsNoOrder";
+        public static string BirthdayError = "BirthdayError";
     }
 }

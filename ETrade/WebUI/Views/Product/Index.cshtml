@@ -23,59 +23,74 @@
         string[] parts = s.Split('.');
         int before = int.Parse(parts[0]);
         int after = int.Parse(parts[1]);
-       
-            @if (x % 3 == 0)
-            {
-                @:<div class="row">
-                
+
+        @if (x % 3 == 0)
+        {
+            @:<div class="row">
+
+
             }
 
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                            <div class="product">
-                                <a href="/Product/Detail?productId=@product.Product.ProductId">
-                                    <div class="product_image">
-                                        <center><img src="@path" height="300" alt=""></center>
-                                    </div>
-                                </a>
-                                <div class="product_content">
-                                    <div class="product_info d-flex flex-row align-items-start justify-content-start">
-                                        <div>
-                                            <div>
-                                                <div class="product_name"><a href="/Product/Detail?productId=@product.Product.ProductId">@product.Product.ProductName</a></div>
-                                                <div class="product_category" id="category"><a href="/Product/Index?categoryId=@product.Product.CategoryId">@_categoryDal.Get(c => c.CategoryId == product.Product.CategoryId).CategoryName</a></div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="" >
-                                        <!--ml-auto text-right-->
-                                        <!-- text-right-->
-                                        <div class="product_price" style="position: relative; top: -10px;"><center>₺@before<span>.@after</span></center></div>
-                                    </div>
-                                    <a href="/Cart/AddToCart?productId=@product.Product.ProductId">
-                                        <div class="product_buttons" style=" width: 200%;">
-                                            <div class="text-right d-flex flex-row align-items-start justify-content-start">
-                                                <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                                                    <div>
-                                                        <div>
-                                                            <img src="~/littlecloset/images/cart.svg" class="svg" alt="">
-                                                            <div>+</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-</div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="product">
+                <a href="/Product/Detail?productId=@product.Product.ProductId">
+                    <div class="product_image">
+                        <center><img src="@path" height="300" alt=""></center>
+                    </div>
+                </a>
+                <div class="product_content">
+                    <div class="product_info d-flex flex-row align-items-start justify-content-start">
+                        <div>
+                            <div>
+                                <div class="product_name"><a href="/Product/Detail?productId=@product.Product.ProductId">@product.Product.ProductName</a></div>
+                                <div class="product_category" id="category"><a href="/Product/Index?categoryId=@product.Product.CategoryId">@_categoryDal.Get(c => c.CategoryId == product.Product.CategoryId).CategoryName</a></div>
+                            </div>
                         </div>
 
+                    </div>
+                    <div class="">
+                        <!--ml-auto text-right-->
+                        <!-- text-right-->
+                        <div class="product_price" style="position: relative; top: -10px;"><center>₺@before<span>.@after</span></center></div>
+                    </div>
+                    @if (product.Product.UnitsInStock == 0)
+                    {
+                        <div class="product_buttons" style="width: 200%;">
+                            <div class="text-right d-flex flex-row align-items-start justify-content-start">
+                                <div class="text-center d-flex flex-column align-items-center justify-content-center">
+                                    <h3 style="position: relative; top: 5px">Stok Tükendi</h3>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <a href="/Cart/AddToCart?productId=@product.Product.ProductId">
+                            <div class="product_buttons" style="width: 200%;">
+                                <div class="text-right d-flex flex-row align-items-start justify-content-start">
+                                    <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
+                                        <div>
+                                            <div>
+                                                <img src="~/littlecloset/images/cart.svg" class="svg" alt="">
+                                                <div>+</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                    
+                </div>
+            </div>
+        </div>
 
 
-            @if (x % 3 == 2)
-            {
-                  @:</div>
-            }
+
+        @if (x % 3 == 2)
+        {
+        @:</div>
+    }
         x++;
 
     }

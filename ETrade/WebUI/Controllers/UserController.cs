@@ -9,12 +9,14 @@ using Core.Utilities.Security.Hashing;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebUI.Models;
 
 namespace WebUI.Controllers
 {
+    
     public class UserController : Controller
     {
         private IWorkerService _workerService;
@@ -33,6 +35,7 @@ namespace WebUI.Controllers
             _authService = authService;
         }
 
+        [Authorize(Roles = "Manager,Worker")]
         public IActionResult Index()
         {
             var result = _workerService.GetAllManagers();
@@ -47,6 +50,7 @@ namespace WebUI.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Manager,Worker")]
         public IActionResult Worker()
         {
             var result = _workerService.GetWorkers();
@@ -61,6 +65,7 @@ namespace WebUI.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Manager")]
         [HttpGet]
         public IActionResult AddManager()
         {
@@ -84,6 +89,7 @@ namespace WebUI.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Manager")]
         [HttpPost]
         public IActionResult AddManager(AddWorkerDto addWorkerDto)
         {
@@ -107,6 +113,13 @@ namespace WebUI.Controllers
             if (addWorkerDto.GenderId == 0)
             {
                 TempData.Add(TempDataTypes.GenderError, Messages.MustBeFilled);
+
+                return View(model);
+            }
+
+            if (addWorkerDto.BirthDateDay.Equals("0") || addWorkerDto.BirthDateMounth.Equals("0") || addWorkerDto.BirthDateYear.Equals("0"))
+            {
+                TempData.Add(TempDataTypes.BirthdayError, Messages.MustBeFilled);
 
                 return View(model);
             }
@@ -141,7 +154,7 @@ namespace WebUI.Controllers
                 Street = addWorkerDto.Street,
                 CityId = addWorkerDto.CityId,
                 DistrictId = addWorkerDto.DistrictId,
-                BirthDate = new DateTime(Convert.ToInt32(addWorkerDto.BirthDateYear), Convert.ToInt32(addWorkerDto.BirthDateMounth), Convert.ToInt32(addWorkerDto.BirthDateDay),0,0,0),
+                BirthDate = new DateTime(Convert.ToInt32(addWorkerDto.BirthDateYear), Convert.ToInt32(addWorkerDto.BirthDateMounth), Convert.ToInt32(addWorkerDto.BirthDateDay), 0, 0, 0),
                 WorkerId = user.Id
             };
 
@@ -152,7 +165,7 @@ namespace WebUI.Controllers
                 return RedirectToAction("InternalError", "Error", new { errorMessage = result2.Message });
             }
 
-            TempData.Add(TempDataTypes.ManageInfo,Messages.ManagerAddedSuccessfully);
+            TempData.Add(TempDataTypes.ManageInfo, Messages.ManagerAddedSuccessfully);
             return RedirectToAction("Index", "User");
         }
 
@@ -163,6 +176,13 @@ namespace WebUI.Controllers
 
             //return Ok(model);
             return Json(model);
+        }
+
+        //Burası Eklenicek
+        [HttpGet]
+        public IActionResult EditManager(int managerId)
+        {
+            return View();
         }
     }
 }
