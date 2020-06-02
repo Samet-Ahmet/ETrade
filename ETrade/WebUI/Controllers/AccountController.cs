@@ -88,9 +88,9 @@ namespace WebUI.Controllers
             
             if (isManagerOrWorker)
             {
-                return RedirectToAction("Index", "AdminCategory");
+                return RedirectToAction("Index", "Admin");
             }
-            return RedirectToAction("Index2", "Home");
+            return RedirectToAction("Index", "Product");
         }
 
         [HttpGet]

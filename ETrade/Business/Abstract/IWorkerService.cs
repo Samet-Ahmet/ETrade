@@ -9,7 +9,7 @@ namespace Business.Abstract
 {
     public interface IWorkerService
     {
-        IResult AddWorker(Worker worker, User user);
+        IResult AddWorker(Worker worker);
         IResult AddManager(Worker worker);
         IDataResult<Worker> GetById(int workerId);
         IResult Quit(Worker worker);

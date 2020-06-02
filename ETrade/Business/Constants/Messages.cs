@@ -44,11 +44,13 @@ namespace Business.Constants
         public static string OnlyLetters = "Sadece harf girebilirsiniz";
         public static string TcError = "Geçersiz bir TC Kimlik Numarası girdiniz.";
         public static string ManagerAddedSuccessfully = "Yönetici başarıyla eklendi. E-posta adresi ve şifresini kullanarak giriş yapabilir.";
+        public static string WorkerAddedSuccessfully = "Çalışan başarıyla eklendi. E-posta adresi ve şifresini kullanarak giriş yapabilir.";
 
         public static string PhotoUploaded = "Fotoğraf başarıyla yüklendi.";
         public static string ProductAddedSuccessfully = "Ürün başarıyla eklendi.";
         public static string ThereIsntShippingDetails = "Sipariş bilgileri bulunamadı.";
         public static string StockInsufficient = "Sepetinizdeki bazı ürünlerin stoğu yetersiz olduğu için ürünlerin sayısı değişiklik gösterebilir.";
         public static string ThereIsNoOrder = "Sipariş bilgisi bulunamadı.";
+       
     }
 }

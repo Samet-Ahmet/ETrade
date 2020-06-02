@@ -1,0 +1,6 @@
+﻿@using System.Security.Claims
+@{
+    Layout = "_AdminLayout";
+}
+
+<h3>Merhaba, @User.Claims.SingleOrDefault(c=>c.Type==ClaimTypes.Name).Value</h3>

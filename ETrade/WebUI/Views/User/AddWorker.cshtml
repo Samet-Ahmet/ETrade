@@ -1,0 +1,187 @@
+﻿@using Business.Constants
+@using DataAccess.Abstract
+@using Business.Abstract
+@model AddWorkerViewModel
+@inject ICityService _cityService
+@{
+    Layout = "_AdminLayout";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<ul style="width: 100%; margin-left:-2%" class="list-group list-group-horizontal">
+    <a style="width: 16%;  color: #818181" href="/User/Index" class="list-group-item">Yöneticiler</a>
+    <a style="width: 9%; background-color: #262626; color: #818181" href="/User/AddManager" class="list-group-item">Yönetici Ekle</a>
+    <a style="width: 25%;  color: #818181" href="/User/Worker" class="list-group-item">Çalışanlar</a>
+    <a style="width: 25%;  color: #818181" href="/User/Customer" class="list-group-item">Müşteriler</a>
+    <a style="width: 25%;  color: #818181" href="" class="list-group-item">Diğer</a>
+</ul>
+<div class="container" style="margin-top: 5%;">
+    <h1>Çalışan Ekle</h1>
+
+    <form asp-controller="User" asp-action="AddWorker" method="post">
+        <h4>Çalışanın;</h4>
+        <div class="form-group">
+            <label asp-for="AddWorkerDto.IdentityNo">TC Kimlik Numarası</label>
+            <input asp-for="AddWorkerDto.IdentityNo" type="text" class="form-control" placeholder="" />
+            <span class="text-danger" asp-validation-for="AddWorkerDto.IdentityNo"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AddWorkerDto.FirstName">Adı</label>
+            <input asp-for="AddWorkerDto.FirstName" type="text" class="form-control" placeholder="" />
+            <span class="text-danger" asp-validation-for="AddWorkerDto.FirstName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AddWorkerDto.LastName">Soyadı</label>
+            <input asp-for="AddWorkerDto.LastName" type="text" class="form-control" placeholder="" />
+            <span class="text-danger" asp-validation-for="AddWorkerDto.LastName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AddWorkerDto.Email">E-posta Adresi</label>
+            <input asp-for="AddWorkerDto.Email" type="text" class="form-control" placeholder="" />
+            <span class="text-danger" asp-validation-for="AddWorkerDto.Email"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AddWorkerDto.PhoneNumber">Telefon Numarası</label>
+            <input asp-for="AddWorkerDto.PhoneNumber" type="text" class="form-control" placeholder="" />
+            <span class="text-danger" asp-validation-for="AddWorkerDto.PhoneNumber"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AddWorkerDto.Password">Şifresi</label>
+            <input asp-for="AddWorkerDto.Password" id="sifre" type="password" class="form-control" placeholder="" />
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" onclick="myFunction()">Şifreyi Göster
+                </label>
+            </div>
+            <span class="text-danger" asp-validation-for="AddWorkerDto.Password"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="AddWorkerDto.GenderId">Cinsiyeti</label>
+            <select asp-for="AddWorkerDto.GenderId" class="form-control" asp-items="@Model.GenderNamesSelectItems"></select>
+            @if (TempData[TempDataTypes.GenderError] != null)
+            {
+                <span class="text-danger">@TempData[TempDataTypes.GenderError].ToString()</span>
+            }
+        </div>
+        <div class="form-group row">
+            <div class="col-12">
+                <label>Doğum Tarihi</label>
+                @if (TempData[TempDataTypes.BirthdayError] != null)
+                {
+                    <div class="text-danger">@TempData[TempDataTypes.BirthdayError].ToString()</div>
+                }
+            </div>
+        </div>
+        <div class="form-group row">
+
+            <div class="col-4">
+                <select asp-for="AddWorkerDto.BirthDateDay" class="form-control">
+                    <option value="0">Gün</option>
+                    @for (int i = 1; i < 32; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+                <span class="text-danger" asp-validation-for="AddWorkerDto.BirthDateDay"></span>
+            </div>
+
+
+            <div class="col-4">
+                <select asp-for="AddWorkerDto.BirthDateMounth" class="form-control">
+                    <option value="0">Ay</option>
+                    @for (int i = 1; i < 13; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+                <span class="text-danger" asp-validation-for="AddWorkerDto.BirthDateMounth"></span>
+            </div>
+
+            <div class="col-4">
+                <select asp-for="AddWorkerDto.BirthDateYear" class="form-control">
+                    <option value="0">Yıl</option>
+                    @for (int i = 2009; i > 1920; i--)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+                <span class="text-danger" asp-validation-for="AddWorkerDto.BirthDateYear"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AddWorkerDto.Street">Cadde/Sokak</label>
+            <input asp-for="AddWorkerDto.Street" type="text" class="form-control" placeholder="" />
+            <span class="text-danger" asp-validation-for="AddWorkerDto.Street"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AddWorkerDto.AddressNumber">Adres No</label>
+            <input asp-for="AddWorkerDto.AddressNumber" type="text" class="form-control" placeholder="" />
+            <span class="text-danger" asp-validation-for="AddWorkerDto.AddressNumber"></span>
+        </div>
+        @{
+            var cities = _cityService.GetAll().Data;
+            var cityitems = new List<SelectListItem>();
+            foreach (var city in cities)
+            {
+                cityitems.Add(new SelectListItem
+                {
+                    Text = city.CityName,
+                    Value = city.CityId.ToString()
+                });
+            }
+            <div class="form-group">
+                <label asp-for="AddWorkerDto.CityId">İl</label>
+                <select id="city" asp-for="AddWorkerDto.CityId" class="form-control" asp-items="cityitems"></select>
+            </div>
+        }
+
+        <div class="form-group">
+            <label asp-for="AddWorkerDto.DistrictId">İlçe</label>
+            <select id="district" asp-for="AddWorkerDto.DistrictId" class="form-control"></select>
+            <script type="text/javascript">
+                $("#city").change(function ()
+                {
+                    $("#district").empty();
+
+                    var city = $("#city").val();
+
+                    $.ajax(
+                        {
+                            url: '@Url.Action("GetDistricts", "User")',
+                            type: "POST",
+                            dataType: "json",
+                            data: { cityId: city },
+
+                            success: function (data)
+                            {
+                                $.each(data, function ()
+                                {
+                                    $("#district").append('<option id=' + this.districtId + ' value=' + this.districtId + '>' + this.districtName + '</option>');
+                                });
+                            }
+                        });
+                });
+            </script>
+        </div>
+
+        @if (TempData[TempDataTypes.ManageUpdateError] != null)
+        {
+            <div class="text-danger">@TempData[TempDataTypes.ManageUpdateError].ToString()</div>
+        }
+        <input type="submit" value="Kaydet" class="btn btn-success btn-sm" />
+    </form>
+</div>
+<br />
+<br />
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("sifre");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
