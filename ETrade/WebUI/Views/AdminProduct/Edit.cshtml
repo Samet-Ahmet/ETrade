@@ -1,0 +1,96 @@
+﻿@using Business.Constants
+@using Business.Abstract
+@model EditProductViewModel
+@{
+    Layout = "_AdminLayout";
+}
+@inject ICategoryService _categoryService
+@inject IBrandService _brandService
+
+<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<div class="container">
+    <h1>Ürün Düzenle</h1>
+    @if (TempData[TempDataTypes.ProductEdited] != null)
+    {
+        <div class="alert alert-info">@TempData[TempDataTypes.ProductEdited].ToString()</div>
+    }
+
+    <form asp-controller="AdminProduct" enctype="multipart/form-data" asp-action="Edit" method="post">
+
+        <input asp-for="Product.ProductId" style="display: none" name="ProductId" type="text" class="form-control" placeholder="" value="@Model.Product.ProductId"/>
+
+        <div class="form-group">
+            <label asp-for="Product.ProductName">Ürünün Adı</label>
+            <input asp-for="Product.ProductName" type="text" class="form-control" placeholder="" name="ProductName" value="@Model.Product.ProductName"/>
+            <span class="text-danger" class="alert-danger" asp-validation-for="Product.ProductName"></span>
+        </div>
+        @{
+            var categories = _categoryService.GetAll().Data;
+            var categoryItems = new List<SelectListItem>();
+            bool selected = false;
+            foreach (var category in categories)
+            {
+                if (category.CategoryId == Model.Product.CategoryId)
+                {
+                    selected = true;
+                }
+                categoryItems.Add(new SelectListItem
+                {
+                    Text = category.CategoryName,
+                    Value = category.CategoryId.ToString(),
+                    Selected = selected
+                });
+                selected = false;
+            }
+            <div class="form-group">
+                <label asp-for="Product.CategoryId">Ürünün Kategorisi</label>
+                <select asp-for="Product.CategoryId" class="form-control" name="CategoryId" asp-items="categoryItems"></select>
+            </div>
+        }
+        <div class="form-group">
+            <label asp-for="Product.UnitPrice">Ürünün Fiyatı</label>
+            <input asp-for="Product.UnitPrice" type="text" class="form-control" name="UnitPrice" placeholder="" value="@Model.Product.UnitPrice"/>
+            <span class="text-danger" asp-validation-for="Product.UnitPrice"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Product.UnitsInStock">Ürünün Stok Adedi</label>
+            <input asp-for="Product.UnitsInStock" type="text" class="form-control" name="UnitsInStock" placeholder="" value="@Model.Product.UnitsInStock"/>
+            <span class="text-danger" asp-validation-for="Product.UnitsInStock"></span>
+        </div>
+        @{
+            var brands = _brandService.GetAll().Data;
+            var brandItems = new List<SelectListItem>();
+            bool selected2 = false;
+            foreach (var brand in brands)
+            {
+                if (brand.BrandId == Model.Product.BrandId)
+                {
+                    selected2 = true;
+                }
+                brandItems.Add(new SelectListItem
+                {
+                    Text = brand.BrandName,
+                    Value = brand.BrandId.ToString(),
+                    Selected = selected2
+                });
+                selected2 = false;
+            }
+            <div class="form-group">
+                <label asp-for="Product.BrandId">Ürünün Markası</label>
+                <select asp-for="Product.BrandId" class="form-control" name="BrandId" asp-items="brandItems"></select>
+            </div>
+        }
+
+        <div class="form-group">
+            <label asp-for="Product.ProductDef">Ürünün Açıklaması</label>
+            <textarea id="CKEditor" asp-for="Product.ProductDef" name="ProductDef" type="text" class="form-control" value="@Model.Product.ProductDef" placeholder=""></textarea>
+            <span class="text-danger" asp-validation-for="Product.ProductDef"></span>
+        </div>
+
+        <script>
+            CKEDITOR.replace('CKEditor');
+        </script>
+
+        <input type="submit" value="Kaydet" class="btn btn-success btn-sm"/>
+    </form>
+</div>

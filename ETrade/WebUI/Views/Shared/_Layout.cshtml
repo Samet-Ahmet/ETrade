@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Site İsmi</title>
+    <title>@ViewData["Title"] - Kozoka</title>
     <link rel="stylesheet" type="text/css" href="~/littlecloset/styles/bootstrap-4.1.2/bootstrap.min.css">
     <link href="~/littlecloset/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="~/littlecloset/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
@@ -14,45 +14,155 @@
     <link rel="stylesheet" type="text/css" href="~/littlecloset/plugins/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="~/littlecloset/styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="~/littlecloset/styles/responsive.css">
+    <style>
+       
+        .footer-bs {
+            background-color: #343A40;
+            padding: 40px 40px;
+            color: rgba(255,255,255,1.00);
+            margin-bottom: 20px;
+            border-bottom-right-radius: 6px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 6px;
+        }
+
+            .footer-bs .footer-brand, .footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns {
+                padding: 10px 25px;
+            }
+
+            .footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns {
+                border-color: transparent;
+            }
+
+            .footer-bs .footer-brand h2 {
+                margin: 0px 0px 10px;
+            }
+
+            .footer-bs .footer-brand p {
+                font-size: 12px;
+                color: rgba(255,255,255,0.70);
+            }
+
+            .footer-bs .footer-nav ul.pages {
+                list-style: none;
+                padding: 0px;
+            }
+
+                .footer-bs .footer-nav ul.pages li {
+                    padding: 5px 0px;
+                }
+
+                .footer-bs .footer-nav ul.pages a {
+                    color: rgba(255,255,255,1.00);
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+
+                    .footer-bs .footer-nav ul.pages a:hover {
+                        color: rgba(255,255,255,0.80);
+                        text-decoration: none;
+                    }
+
+            .footer-bs .footer-nav h4 {
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                margin-bottom: 10px;
+            }
+
+            .footer-bs .footer-nav ul.list {
+                list-style: none;
+                padding: 0px;
+            }
+
+                .footer-bs .footer-nav ul.list li {
+                    padding: 5px 0px;
+                }
+
+                .footer-bs .footer-nav ul.list a {
+                    color: rgba(255,255,255,0.80);
+                }
+
+                    .footer-bs .footer-nav ul.list a:hover {
+                        color: rgba(255,255,255,0.60);
+                        text-decoration: none;
+                    }
+
+            .footer-bs .footer-social ul {
+                list-style: none;
+                padding: 0px;
+            }
+
+            .footer-bs .footer-social h4 {
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+            }
+
+            .footer-bs .footer-social li {
+                padding: 5px 4px;
+            }
+
+            .footer-bs .footer-social a {
+                color: rgba(255,255,255,1.00);
+            }
+
+                .footer-bs .footer-social a:hover {
+                    color: rgba(255,255,255,0.80);
+                    text-decoration: none;
+                }
+
+            .footer-bs .footer-ns h4 {
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                margin-bottom: 10px;
+            }
+
+            .footer-bs .footer-ns p {
+                font-size: 12px;
+                color: rgba(255,255,255,0.70);
+            }
+
+        @@media (min-width: 768px) {
+            .footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns {
+                border-left: solid 1px rgba(255,255,255,0.10);
+            }
+        }
+    </style>
+
 
 </head>
+
 <body>
 
 
     <!-- Header -->
     <header class="header">
-        <div class="header_overlay"></div>
         <div class="header_content d-flex flex-row align-items-center justify-content-start">
             <div class="logo">
-                <a href="#">
+                <a href="/Product/Index">
                     <div class="d-flex flex-row align-items-center justify-content-start">
                         <div><img src="~/littlecloset/images/logo_1.png" alt=""></div>
-                        <div>Ana Sayfa</div>
+                        <div>Kozoka</div>
                     </div>
                 </a>
             </div>
             <nav class="main_nav">
                 <ul class="d-flex flex-row align-items-start justify-content-start">
                     <li class="active">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index2">Index2</a>
+                        <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">Tüm Ürünler</a>
                     </li>
                     <li>
                         <a class="nav-link" asp-area="" asp-controller="Category" asp-action="Index">Kategoriler</a>
                     </li>
-                    <li>
-                        <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">Tüm Ürünler</a>
-                    </li>
                 </ul>
             </nav>
-            <div class="header_right d-flex flex-row align-items-center justify-content-start ml-auto">
+            <div class="" style="margin-left: 50px;">
                 <!-- Search -->
-                <div class="header_search">
-                    <form action="#" id="header_search_form">
-                        <input type="text" class="search_input" placeholder="Ürünlerde Ara" required="required">
-                        <button class="header_search_button"><img src="~/littlecloset/images/search.png" alt=""></button>
-                    </form>
-                </div>
-
+                @await Component.InvokeAsync("Search")
+            </div>
+            <div class="d-flex flex-row align-items-center justify-content-start ml-auto">
                 <!-- Cart -->
                 <div class="cart"><a href="/Cart/Index"><div><img class="svg" src="~/littlecloset/images/cart.svg" alt="https://www.flaticon.com/authors/freepik"></div></a></div>
 
@@ -69,36 +179,62 @@
                     }
 
                     <div class="user">
-                        
-                            <div>
-                                <a href="/Account/Manage"><img src="~/littlecloset/images/user.svg" style="width: 40px" alt="https://www.flaticon.com/authors/freepik"></a>
-                            </div>
-                        
+
+                        <div>
+                            <a href="/Account/Manage"><img src="~/littlecloset/images/user.svg" style="width: 40px" alt="https://www.flaticon.com/authors/freepik"></a>
+                        </div>
+
                     </div>
-                    <div><a href="@link">@text</a></div>
+                    <div><a style="text-decoration: none;" href="@link"><h4>@text</h4></a></div>
                 }
-
-
             </div>
+
+
         </div>
     </header>
+    <div>
+        <div class="container-lg" style="margin-top: 100px; margin-left: 15%; margin-right: 15%;">
+            @if (TempData[TempDataTypes.AddedToCart] != null)
+            {
+                <div class="row">
+                    <div class="col-3">
 
-<div class="container" style="margin-top: 100px">
-    @if (TempData[TempDataTypes.AddedToCart] != null)
-    {
-        <div class="row">
-            <div class="col-3">
-
-            </div>
-            <div class="col-9">
-                <div class="alert alert-success">@TempData[TempDataTypes.AddedToCart].ToString()</div>
-            </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="alert alert-success">@TempData[TempDataTypes.AddedToCart].ToString()</div>
+                    </div>
+                </div>
+            }
+            <main role="main">
+                @RenderBody()
+            </main>
         </div>
-    }
-    <main role="main">
-        @RenderBody()
-    </main>
-</div>
+        <br><br>
+        <footer class="footer-bs" style="position: absolute; bottom: -500px;  width: 100%;">
+            <div class="row">
+                <div class="col-md-4 col-xs-4 footer-brand animated fadeInLeft">
+                    <h2>Kozoka</h2>
+                    <p>
+                        Aradığınız tüm ürünler burada
+                    </p>
+                    <p>© 2020 Kozoka, All rights reserved</p>
+                </div>
+                <div class="col-md-4 col-xs-4 footer-nav animated fadeInUp">
+                    <ul class="list">
+                        <li><a href="/Product/Index">Ana Sayfa</a></li>
+                        <li><a href="/Category/Index">Kategoriler</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-xs-4 footer-social animated fadeInDown">
+                    <h4>Takip Edebilirsiniz</h4>
+                    <ul>
+                        <li><a href="https://www.instagram.com/">Instagram</a></li>
+                        <li><a href="https://www.twitter.com/">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
 
     <script src="~/littlecloset/js/jquery-3.2.1.min.js"></script>
     <script src="~/littlecloset/styles/bootstrap-4.1.2/popper.js"></script>

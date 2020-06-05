@@ -1,0 +1,21 @@
+﻿@using Business.Constants
+@model BuyProductViewModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container">
+    <h1>Ürün Satın Al</h1>
+
+    <form asp-controller="AdminProduct" asp-action="Buy" method="post">
+   
+            <input style="display: none" asp-for="ProductId" type="text" class="form-control" value="@Model.ProductId" placeholder="" />
+   
+        <div class="form-group">
+            <label asp-for="Unit">Kaç Adet Satın Aldınız?</label>
+            <input asp-for="Unit" type="text" class="form-control" placeholder="" />
+        </div>
+
+        <input type="submit" value="Satın Al" class="btn btn-success btn-sm" />
+    </form>
+</div>

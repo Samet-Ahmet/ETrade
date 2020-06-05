@@ -7,6 +7,7 @@ namespace Entities.Concrete
 {
     public class ProductPhotoPath : IEntity
     {
+        public int Id { get; set; }
         public int ProductId { get; set; }
         public string PhotoPath { get; set; }
 

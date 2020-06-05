@@ -87,5 +87,17 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.ErrorWhileUpdatingEntity);
             }
         }
+
+        public IDataResult<User> GetById(int userId)
+        {
+            try
+            {
+                return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
+            }
+            catch (Exception)
+            {
+                return new ErrorDataResult<User>(Messages.ErrorWhileGettingEntity);
+            }
+        }
     }
 }

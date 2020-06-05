@@ -23,20 +23,37 @@ namespace WebUI.Controllers
         private IGenderDal _genderDal;
         private IUserService _userService;
         private IAuthService _authService;
+        private IProductService _productService;
 
-        public AdminController(IWorkerService workerService, IGenderDal genderDal, IUserService userService, IAuthService authService)
+        public AdminController(IWorkerService workerService, IGenderDal genderDal, IUserService userService, IAuthService authService, IProductService productService)
         {
             _workerService = workerService;
             _genderDal = genderDal;
             _userService = userService;
             _authService = authService;
+            _productService = productService;
         }
 
         [Authorize(Roles = "Manager,Worker")]
         public IActionResult Index()
         {
-            
-            return View();
+            var lowStock = _productService.GetByStock(100);
+            if (!lowStock.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = lowStock.Message });
+            }
+
+            var outOfStock = _productService.GetByStock(0);
+            if (!outOfStock.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = outOfStock.Message });
+            }
+            var model = new AdminIndexViewModel
+            {
+                LowStock = lowStock.Data,
+                OutOfStock = outOfStock.Data
+            };
+            return View(model);
         }
 
         [Authorize(Roles = "Manager,Worker")]

@@ -43,8 +43,6 @@ namespace WebUI.Controllers
             return View(model);
         }
 
-        
-
         [HttpPost]
         public IActionResult Add(ProductDetailDto productDetailDto)
         {
@@ -79,7 +77,7 @@ namespace WebUI.Controllers
 
 
         [HttpPost]
-        public IActionResult Upload(IFormFile files)
+        public IActionResult Upload(IFormFile files) //yükle
         {
             if (files != null)
             {
@@ -131,14 +129,103 @@ namespace WebUI.Controllers
                 }
             }
             TempData.Add(TempDataTypes.PhotoUploaded, Messages.PhotoUploaded);
+
             // return RedirectToAction("Add", "AdminProduct");
-           // return Ok();
-           return RedirectToAction("GoBack", "AdminProduct");
+            // return Ok();
+           // string urlAnterior = Request.Headers["Referer"].ToString();
+           // return Redirect(urlAnterior);
+              return RedirectToAction("GoBack", "AdminProduct");
         }
 
         public IActionResult GoBack()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Buy(int productId)
+        {
+            var model = new BuyProductViewModel
+            {
+                Unit = new int(),
+                ProductId = productId
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Buy(BuyProductViewModel buyProductViewModel)
+        {
+            var result = _productService.Buy(buyProductViewModel.ProductId, buyProductViewModel.Unit);
+            if (!result.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = result.Message });
+            }
+
+            TempData.Add(TempDataTypes.ProductBought, Messages.ProductBought);
+            return RedirectToAction("Index", "Admin");
+        }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            var productList = _productService.Index();
+            if (!productList.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = productList.Message });
+            }
+            var model = new ProductIndexViewModel
+            {
+                Products = productList.Data
+            };
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int productId)
+        {
+            var product = _productService.GetById(productId);
+            if (!product.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = product.Message });
+            }
+
+            var model = new EditProductViewModel
+            {
+                Product = product.Data.Product
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Product productForUpdate)
+        {
+            var product = _productService.GetById(productForUpdate.ProductId);
+            if (!product.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = product.Message });
+            }
+
+            var model = new EditProductViewModel
+            {
+                Product = product.Data.Product
+            };
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var result = _productService.Update(productForUpdate);
+            if (!result.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = result.Message });
+            }
+
+            model.Product = productForUpdate;
+            TempData.Add(TempDataTypes.ProductEdited,Messages.ProductEditedSuccesfully);
+            return View(model);
+          
         }
     }
 }

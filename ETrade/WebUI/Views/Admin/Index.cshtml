@@ -1,6 +1,78 @@
-﻿@using System.Security.Claims
+﻿@model AdminIndexViewModel
+@using System.Security.Claims
+@using Business.Constants
 @{
     Layout = "_AdminLayout";
 }
 
-<h3>Merhaba, @User.Claims.SingleOrDefault(c=>c.Type==ClaimTypes.Name).Value</h3>
+    <div class="container">
+        <h3>Merhaba, @User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Name).Value</h3>
+        <p class="text-justify">Bu panelde stoğu azalan ve biten ürünleri görüntüleyebilirsiniz ve isterseniz sipariş verebilirsiniz. 
+            Sol taraftaki menü sekmelerini kullanarak ilgili işlem sayfasına gidip işlemlerinizi gerçekleştirebilirsiniz.</p>
+        @if (TempData[TempDataTypes.ProductBought] != null)
+        {
+            <div class="alert alert-info">@TempData[TempDataTypes.ProductBought].ToString()</div>
+        }
+        <div class="row">
+            <button type="button" class="btn btn-warning" style="width: 100%" data-toggle="collapse" data-target="#div1">Stoğu Azalan Ürünleri Görüntüle</button>
+            <div id="div1" class="collapse col-12">
+                @if (Model.LowStock.Count > 0)
+                {
+                    <table style="width: 100%" class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Ürün Numarası</th>
+                            <th>Ürün Adı</th>
+                            <th>Stok Durumu</th>
+                            <th>Satış Fiyatı</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var lowStock in Model.LowStock)
+                            {
+                            <tr>
+                                <td>@lowStock.ProductId</td>
+                                <td>@lowStock.ProductName</td>
+                                <td class="text-danger">@lowStock.UnitsInStock</td>
+                                <td>₺@lowStock.UnitPrice.ToString("#.##")</td>
+                                <td><a class="btn btn-success" href="/AdminProduct/Buy?productId=@lowStock.ProductId">Satın Al</a></td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-danger" style="width: 100%" data-toggle="collapse" data-target="#div2">Stoğu Biten Ürünleri Görüntüle</button>
+            <div id="div2" class="collapse col-12">
+                @if (Model.OutOfStock.Count > 0)
+                {
+                    <table style="width: 100%" class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Ürün Numarası</th>
+                            <th>Ürün Adı</th>
+                            <th>Stok Durumu</th>
+                            <th>Satış Fiyatı</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var outOfStock in Model.OutOfStock)
+                        {
+                            <tr>
+                                <td>@outOfStock.ProductId</td>
+                                <td>@outOfStock.ProductName</td>
+                                <td class="text-danger">@outOfStock.UnitsInStock</td>
+                                <td>₺@outOfStock.UnitPrice.ToString("#.##")</td>
+                                <td><a class="btn btn-success" href="/AdminProduct/Buy?productId=@outOfStock.ProductId">Satın Al</a></td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>

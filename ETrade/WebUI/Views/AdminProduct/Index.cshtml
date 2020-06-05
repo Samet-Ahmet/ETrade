@@ -1,0 +1,44 @@
+﻿@model ProductIndexViewModel
+@{
+    Layout = "_AdminLayout";
+}
+<style>
+    .btn-primary{
+        background-color: #00AA00 !important;
+    }
+                               
+</style>
+<div class="container">
+    
+    <br/>
+    @if (Model.Products.Count > 0)
+    {
+        <table style="width: 100%" class="table table-striped table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th>Ürün Numarası</th>
+                <th>Ürün Adı</th>
+                <th>Stok Durumu</th>
+                <th>Satış Fiyatı</th>
+                <th><a style="width: 100%" class="btn btn-primary" href="/AdminProduct/Add">Ürün Ekle</a></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>@product.ProductId</td>
+                    <td>@product.ProductName</td>
+                    <td>@product.UnitsInStock</td>
+                    <td>₺@product.UnitPrice.ToString("#.##")</td>
+                    <td><a class="btn btn-info" href="/AdminProduct/Edit?productId=@product.ProductId">Düzenle</a></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h2>Ürün Bulunamadı</h2>
+    }
+</div>

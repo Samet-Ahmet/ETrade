@@ -67,6 +67,19 @@ namespace Business.Concrete
             }
         }
 
+        public IResult Update(Product product)
+        {
+            try
+            {
+                _productDal.Update(product);
+                return new SuccessResult();
+            }
+            catch (Exception)
+            {
+                return new ErrorResult(Messages.ErrorWhileUpdatingEntity);
+            }
+        }
+
         public IResult UpdatePrice(int productId, decimal newPrice)
         {
             try
@@ -195,6 +208,76 @@ namespace Business.Concrete
             catch (Exception)
             {
                 return new ErrorResult(Messages.ErrorWhileUpdatingEntity);
+            }
+        }
+
+        public IDataResult<List<ProductDetailDto>> Search(string query)
+        {
+            try
+            {
+                var productDetails = new List<ProductDetailDto>();
+                var products = _productDal.GetList(p=>p.ProductName.Contains(query) || p.ProductDef.Contains(query));
+                foreach (var product in products)
+                {
+                    productDetails.Add(new ProductDetailDto
+                    {
+                        Product = product,
+                        ProductPhotoPaths = _productPhotoPathDal.GetList(p => p.ProductId == product.ProductId)
+                    });
+                }
+
+                return new SuccessDataResult<List<ProductDetailDto>>(productDetails);
+            }
+            catch (Exception)
+            {
+                return new ErrorDataResult<List<ProductDetailDto>>(Messages.ErrorWhileGettingEntity);
+            }
+        }
+
+        public IDataResult<List<Product>> GetByStock(int stock)
+        {
+            try
+            {
+                if (stock == 0)
+                {
+                    return new SuccessDataResult<List<Product>>(_productDal.GetList(p => p.UnitsInStock <= stock));
+                }
+                else
+                {
+                    return new SuccessDataResult<List<Product>>(_productDal.GetList(p => p.UnitsInStock <= stock && p.UnitsInStock != 0));
+                }
+                
+            }
+            catch (Exception)
+            {
+                return new ErrorDataResult<List<Product>>(Messages.ErrorWhileGettingEntity);
+            }
+        }
+
+        public IResult Buy(int productId, int unit)
+        {
+            try
+            {
+                var product = _productDal.Get(p => p.ProductId == productId);
+                product.UnitsInStock += unit;
+                _productDal.Update(product);
+                return new SuccessResult();
+            }
+            catch (Exception)
+            {
+                return new ErrorResult(Messages.ErrorWhileUpdatingEntity);
+            }
+        }
+
+        public IDataResult<List<Product>> Index()
+        {
+            try
+            {
+                return new SuccessDataResult<List<Product>>(_productDal.GetList());
+            }
+            catch (Exception)
+            {
+                return new ErrorDataResult<List<Product>>(Messages.ErrorWhileGettingEntity);
             }
         }
     }

@@ -80,7 +80,10 @@ namespace WebUI
             services.AddSingleton<IOrderDal, EfOrderDal>();
             services.AddSingleton<IOrderDetailDal, EfOrderDetailDal>();
             services.AddSingleton<IOrderService, OrderManager>();
-            
+
+            services.AddSingleton<ICommentDal, EfCommentDal>();
+            services.AddSingleton<ICommentService, CommentManager>();
+
             /*
                         services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
                             Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\WebUI.csproj": {}
+    "Y:\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\WebUI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Business\\Business.csproj": {
+    "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Business\\Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Business\\Business.csproj",
+        "projectUniqueName": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Business\\Business.csproj",
         "projectName": "Business",
-        "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Business\\Business.csproj",
-        "packagesPath": "C:\\Users\\samet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Business\\obj\\",
+        "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Business\\Business.csproj",
+        "packagesPath": "C:\\Users\\ahmet\\.nuget\\packages\\",
+        "outputPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Business\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\samet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ahmet\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -27,11 +27,11 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\DataAccess.csproj"
+              "Y:\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\DataAccess.csproj"
               },
-              "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj"
+              "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj": {
+                "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj"
               }
             }
           }
@@ -62,21 +62,21 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj": {
+    "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj",
+        "projectUniqueName": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\samet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Core\\obj\\",
+        "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\ahmet\\.nuget\\packages\\",
+        "outputPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\samet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ahmet\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -121,21 +121,21 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\DataAccess.csproj": {
+    "Y:\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\DataAccess.csproj",
+        "projectUniqueName": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\DataAccess.csproj",
-        "packagesPath": "C:\\Users\\samet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\obj\\",
+        "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\DataAccess.csproj",
+        "packagesPath": "C:\\Users\\ahmet\\.nuget\\packages\\",
+        "outputPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\samet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ahmet\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -148,11 +148,11 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj"
+              "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj": {
+                "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj"
               },
-              "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj"
+              "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj": {
+                "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj"
               }
             }
           }
@@ -183,21 +183,21 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj": {
+    "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj",
+        "projectUniqueName": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj",
-        "packagesPath": "C:\\Users\\samet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\obj\\",
+        "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj",
+        "packagesPath": "C:\\Users\\ahmet\\.nuget\\packages\\",
+        "outputPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\samet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ahmet\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -210,8 +210,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj"
+              "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj": {
+                "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj"
               }
             }
           }
@@ -242,21 +242,21 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\WebUI.csproj": {
+    "Y:\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\WebUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\WebUI.csproj",
+        "projectUniqueName": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\WebUI.csproj",
         "projectName": "WebUI",
-        "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\WebUI.csproj",
-        "packagesPath": "C:\\Users\\samet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\obj\\",
+        "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\WebUI.csproj",
+        "packagesPath": "C:\\Users\\ahmet\\.nuget\\packages\\",
+        "outputPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\samet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ahmet\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -269,8 +269,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Business\\Business.csproj": {
-                "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Business\\Business.csproj"
+              "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Business\\Business.csproj": {
+                "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Business\\Business.csproj"
               }
             }
           }
@@ -315,7 +315,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

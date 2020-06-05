@@ -22,8 +22,6 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
                 .HasKey(d => new {d.CityId, d.DistrictId});
             modelBuilder.Entity<OrderDetail>()
                 .HasKey(od => new { od.OrderId, od.ProductId });
-            modelBuilder.Entity<ProductPhotoPath>()
-                .HasKey(p=> new { p.ProductId, p.PhotoPath });
         }
 
         public DbSet<User> Users { get; set; }
@@ -41,5 +39,6 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<ShippingDetail> ShippingDetails { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }

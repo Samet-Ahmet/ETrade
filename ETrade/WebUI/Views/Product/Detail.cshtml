@@ -1,0 +1,173 @@
+﻿@using System.Globalization
+@using System.Security.Claims
+@using Business.Abstract
+@using Business.Constants
+@using DataAccess.Abstract
+@using Microsoft.AspNetCore.Http
+@model ProductDetailViewModel
+@inject ICategoryDal _categoryDal
+@{
+    Layout = "ProductDetailLayout";
+
+}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="~/littlecloset/styles/bootstrap-4.1.2/bootstrap.min.css">
+<link href="~/littlecloset/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="~/littlecloset/plugins/flexslider/flexslider.css">
+<link rel="stylesheet" type="text/css" href="~/littlecloset/styles/product.css">
+<link rel="stylesheet" type="text/css" href="~/littlecloset/styles/product_responsive.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style>
+    .custom-slider {
+        height: 360px !important;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        text-shadow: 2px 2px 4px #000000;
+        font-size: 30px;
+    }
+
+    .carousel-inner {
+        height: 100%;
+    }
+
+    .carousel-item {
+        height: 100%;
+    }
+
+    .carousel-img-container {
+        height: 100%;
+    }
+
+    img.photo {
+        max-width: 100% !important;
+        max-height: 100% !important;
+        width: auto !important;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
+@{
+    string s = Model.ProductDetailDto.Product.UnitPrice.ToString("0.00", CultureInfo.InvariantCulture);
+    string[] parts = s.Split('.');
+    int before = int.Parse(parts[0]);
+    int after = int.Parse(parts[1]);
+
+    <div class="product">
+
+        <div class="row">
+
+            <!-- Product Image -->
+            <div class="col-lg-6 col-sm-12">
+
+                <div id="carouselExampleIndicators" class="carousel slide custom-slider" style="border: 2px inset #262626; border-radius: 13px;" data-ride="carousel">
+                    <div class="carousel-inner">
+                        @{
+                            var classname = "carousel-item active";
+                            @foreach (var productPhotoPath in Model.ProductDetailDto.ProductPhotoPaths)
+                            {
+
+                                <div class="@classname">
+                                    <div class="carousel-img-container d-flex justify-content-center">
+                                        <center><a href="../ProductPhotos/@productPhotoPath.PhotoPath"><img src="../ProductPhotos/@productPhotoPath.PhotoPath" class="photo d-block w-100" alt="..."></a></center>
+                                    </div>
+                                </div>
+                                classname = "carousel-item";
+                            }
+                        }
+
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <i style="color: #000000;" class="fas fa-chevron-left"></i>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <i style="color: #000000;" class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Product Info -->
+            <div class="col-lg-6 product_col col-sm-12">
+                <div class="product_info">
+                    <div class="product_name"><h1>@Model.ProductDetailDto.Product.ProductName</h1></div>
+                    <div class="product_category"><a href="/Product/Index?categoryId=@Model.ProductDetailDto.Product.CategoryId">@_categoryDal.Get(c => c.CategoryId == Model.ProductDetailDto.Product.CategoryId).CategoryName</a></div>
+
+                    <div class="product_price">₺@before<span>.@after</span></div>
+
+                    <a href="/Cart/AddToCart?productId=@Model.ProductDetailDto.Product.ProductId">
+                        <div class="product_buttons">
+                            <div class="text-right d-flex flex-row align-items-start justify-content-start">
+                                <div style="width: 200%" class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
+                                    <div><div><img src="~/littlecloset/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <hr />
+    <div class="row">
+        <h3>Ürün Açıklaması</h3>
+    </div>
+    <div class="row">
+        <div class="product_text col-12">
+
+            <pre lang="HTML">
+                @Html.Raw(Model.ProductDetailDto.Product.ProductDef)
+            </pre>
+        </div>
+    </div>
+}
+<h3>Yorumlar</h3>
+@if (Context.Session.GetString("login") != null)
+{
+    @if (Context.Session.GetString("login").Equals("yes"))
+    {
+        <div class="border border-success" style="height: 70px;">
+            <form asp-controller="Product" asp-action="AddComment" method="post">
+                <input style="display: none;" asp-for="Comment.ProductId" type="text" class="form-control" value="@Model.ProductDetailDto.Product.ProductId" />
+                <div class="form-group">
+                    <input asp-for="Comment.CommentText" type="text" class="form-control" placeholder="Yorumunuzu buraya yazabilirsiniz..." />
+                    <span class="text-danger" class="alert-danger" asp-validation-for="Comment.CommentText"></span>
+                </div>
+                <input style="position: absolute; right: 0; bottom: 0;" type="submit" value="Yorum Yap" class="btn btn-success btn-sm" />
+            </form>
+        </div>
+    }
+}
+<br/><br/>
+@if (Model.Comments.Count > 0)
+{
+    <div>
+        
+        <ul class="list-group">
+            @foreach (var comment in Model.Comments)
+            {
+                <li class="list-group-item border border-secondary">
+                    <div style="font-size: 16px;" class="badge badge-info">@comment.FullName</div>
+                    <div class="text-dark">@comment.Comment.CommentDate</div>
+                    <hr/>
+                    <div>@comment.Comment.CommentText</div>
+                </li>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <h3>Bu ürün hakkında henüz yorum yapılmamış</h3>
+}
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>

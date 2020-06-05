@@ -1,0 +1,27 @@
+﻿@model OrderDetailsListViewModel
+@{
+    Layout = "_ManageAccount";
+}
+
+<h2>@Model.OrderId Numaralı Siparişinizin Detayı</h2>
+<table class="table table-hover table-striped">
+    <thead>
+    <th>Ürünün Adı</th>
+    <th>Satış Adedi</th>
+    <th>Birim Fiyatı</th>
+    <th>Toplam Fiyat</th>
+    </thead>
+    <tbody>
+        @foreach (var orderDetail in Model.OrderDetails)
+        {
+            var sum = (orderDetail.Quantity * orderDetail.UnitPrice).ToString("#.##"); 
+            
+            <tr>
+                <td>@orderDetail.ProductName</td>
+                <td>@orderDetail.Quantity</td>
+                <td>₺@orderDetail.UnitPrice.ToString("#.##")</td>
+                <td>₺@sum</td>
+            </tr>
+         }
+        </tbody>
+    </table>

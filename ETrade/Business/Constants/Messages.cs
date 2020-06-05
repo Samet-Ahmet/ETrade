@@ -51,6 +51,8 @@ namespace Business.Constants
         public static string ThereIsntShippingDetails = "Sipariş bilgileri bulunamadı.";
         public static string StockInsufficient = "Sepetinizdeki bazı ürünlerin stoğu yetersiz olduğu için ürünlerin sayısı değişiklik gösterebilir.";
         public static string ThereIsNoOrder = "Sipariş bilgisi bulunamadı.";
-       
+
+        public static string ProductBought = "Ürün başarıyla satın alındı.";
+        public static string ProductEditedSuccesfully = "Ürün başarıyla güncellendi.";
     }
 }

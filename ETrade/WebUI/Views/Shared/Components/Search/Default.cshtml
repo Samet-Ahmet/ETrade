@@ -1,0 +1,8 @@
+﻿@model SearchViewModel
+
+<div class="header_search">
+    <form asp-controller="Product" asp-action="Index" method="post">
+        <input type="text" class="search_input" asp-for="Query" placeholder="Ürünlerde Ara"/> 
+        <button class="header_search_button" type="submit"><img src="~/littlecloset/images/search.png" alt=""></button>
+    </form>
+</div>

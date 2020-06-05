@@ -6210,19 +6210,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\samet\\.nuget\\packages\\": {}
+    "C:\\Users\\ahmet\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj",
+      "projectUniqueName": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj",
       "projectName": "Entities",
-      "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj",
-      "packagesPath": "C:\\Users\\samet\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\obj\\",
+      "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\Entities.csproj",
+      "packagesPath": "C:\\Users\\ahmet\\.nuget\\packages\\",
+      "outputPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Entities\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\samet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ahmet\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6235,8 +6235,8 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj"
+            "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj": {
+              "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Core\\Core.csproj"
             }
           }
         }
@@ -6267,7 +6267,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

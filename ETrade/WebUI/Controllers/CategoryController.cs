@@ -51,7 +51,7 @@ namespace WebUI.Controllers
             if (resultSub.Message == Messages.ThereIsntSubCategory)
             {
                 //productları listele
-               // return RedirectToAction("Index", "Product", new { categoryId = result.Data.CategoryId });
+                return RedirectToAction("Index", "Product", new { categoryId = categoryId });
                 /* var result = _categoryService.GetMainCategory(categoryId);
                  return RedirectToAction("Index", "Category", new { categoryId = result.Data.CategoryId });*/
             }
