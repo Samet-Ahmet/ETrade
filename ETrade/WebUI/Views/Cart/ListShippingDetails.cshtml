@@ -1,0 +1,35 @@
+﻿@using Business.Constants
+@using Business.Abstract
+@model ShippingDetailsViewModel
+@inject ICityService _cityService
+
+@{
+    Layout = "_ManageAccount";
+    ViewBag.Title = "Teslimat Adresleri";
+}
+<h2>Teslimat Adresleri</h2>
+<a class="btn btn-success" href="/Cart/AddShippingDetail">Teslimat Adresi Ekle</a>
+<table style="width: 100%;" class="table table-responsive">
+    <thead>
+        <tr>
+            <th>Adres Adı</th>
+            <th>Adres</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var shippingDetail in Model.ShippingDetails)
+    {
+        <tbody>
+            <tr>
+                <td>@shippingDetail.AddressName</td>
+                <td>
+                    @shippingDetail.Street @shippingDetail.Number
+                    @_cityService.GetDistrictById(shippingDetail.DistrictId).Data.DistrictName / @_cityService.GetCityById(shippingDetail.CityId).Data.CityName
+                </td>
+                <td><a class="btn btn-sm btn-info" asp-controller="Cart" asp-action="EditShippingDetail" asp-route-shippingDetailId="@shippingDetail.ShippingDetailId">Düzenle</a></td>
+                <!--Butona tıklayınca Cart controllerındaki addtocart fonksiyonunu çağırsın asp-route sonuna parametre gelince onnu gönderiyor-->
+            </tr>
+        </tbody>
+    }
+</table>

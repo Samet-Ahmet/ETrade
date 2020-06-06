@@ -44,6 +44,8 @@ namespace Business.Concrete
                     RoleId = 2, //worker rolü
                     UserId = worker.WorkerId
                 };
+                var oldRole = _userRoleDal.Get(ur=>ur.UserId == worker.WorkerId);
+                _userRoleDal.Delete(oldRole);
                 _userRoleDal.Add(userRole);
                 return new SuccessResult();
             }
@@ -60,17 +62,14 @@ namespace Business.Concrete
                 worker.QuitDate = new DateTime(1900,01,01,0,0,0);
                 _workerDal.Add(worker);
 
-                var userRole = new UserRole
-                {
-                    RoleId = 2, //worker rolü
-                    UserId = worker.WorkerId
-                };
-                _userRoleDal.Add(userRole);
                 var userRole2 = new UserRole
                 {
                     RoleId = 3, //manager rolü
                     UserId = worker.WorkerId
                 };
+
+                var oldRole = _userRoleDal.Get(ur => ur.UserId == worker.WorkerId);
+                _userRoleDal.Delete(oldRole);
                 _userRoleDal.Add(userRole2);
                 return new SuccessResult();
             }
@@ -128,12 +127,9 @@ namespace Business.Concrete
         {
             try
             {
-                var userRole = new UserRole
-                {
-                    UserId = workerId,
-                    RoleId = 3
-                };
-                _userRoleDal.Add(userRole);
+                var oldRole = _userRoleDal.Get(ur => ur.UserId == workerId);
+                oldRole.RoleId = 3;
+                _userRoleDal.Update(oldRole);
                 return new SuccessResult();
             }
             catch (Exception)
@@ -146,8 +142,9 @@ namespace Business.Concrete
         {
             try
             {
-                var userRole = _userRoleDal.Get(ur => ur.UserId == workerId && ur.RoleId == 3);
-                _userRoleDal.Delete(userRole);
+                var oldRole = _userRoleDal.Get(ur => ur.UserId == workerId);
+                oldRole.RoleId = 2;
+                _userRoleDal.Update(oldRole);
                 return new SuccessResult();
             }
             catch (Exception)

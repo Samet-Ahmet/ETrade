@@ -6,11 +6,11 @@
 @model ProductListViewModel
 @{
     Layout = "_WithCategoryListLayout";
+    ViewData.Add("Title",Model.CategoryName);
 }
 
 @inject IHostingEnvironment _environment;
 @inject ICategoryDal _categoryDal;
-
 @if (Model.ProductDetailDtos.Count == 0)
 {
     <h3>Aradığınız Kriterlere Uygun Ürün Bulunamadı.</h3>

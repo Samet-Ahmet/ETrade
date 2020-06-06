@@ -275,6 +275,21 @@ namespace WebUI.Controllers
             return RedirectToAction("Worker", "User");
         }
 
+        [Authorize(Roles = "Manager,Worker")]
+        public IActionResult Customer()
+        {
+            var result = _userService.GetAllCustomers();
+            if (!result.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = result.Message });
+            }
+            var model = new CustomerListViewModel()
+            {
+                Users = result.Data
+            };
+            return View(model);
+        }
+
         [HttpPost]
         public ActionResult GetDistricts(int cityId)
         {

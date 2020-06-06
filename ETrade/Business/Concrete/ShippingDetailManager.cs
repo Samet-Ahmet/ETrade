@@ -68,5 +68,18 @@ namespace Business.Concrete
                 return new ErrorDataResult<ShippingDetail>(Messages.ErrorWhileGettingEntity);
             }
         }
+
+        public IResult Update(ShippingDetail shippingDetail)
+        {
+            try
+            {
+                _shippingDetailDal.Update(shippingDetail);
+                return new SuccessResult();
+            }
+            catch (Exception)
+            {
+                return new ErrorResult(Messages.ErrorWhileUpdatingEntity);
+            }
+        }
     }
 }

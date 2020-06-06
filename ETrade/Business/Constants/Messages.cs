@@ -54,5 +54,6 @@ namespace Business.Constants
 
         public static string ProductBought = "Ürün başarıyla satın alındı.";
         public static string ProductEditedSuccesfully = "Ürün başarıyla güncellendi.";
+        public static string ShippingDetailEditedSuccessfully = "Teslimat bilgisi başarıyla güncellendi.";
     }
 }

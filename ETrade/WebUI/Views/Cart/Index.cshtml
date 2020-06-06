@@ -2,9 +2,10 @@
 @model CartListViewModel
 @{
     Layout = "_ManageAccount";
+    ViewBag.Title = "Sepetim";
 }
 
-<h2>Sepetiniz</h2>
+<h2>Sepetim</h2>
 @if (TempData[TempDataTypes.StockInsufficient] != null)
 {
     <div class="alert alert-warning">@TempData[TempDataTypes.StockInsufficient].ToString()</div>

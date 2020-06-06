@@ -79,6 +79,7 @@ namespace WebUI.Controllers
             }
 
             var userIdentity = new ClaimsIdentity(claims, "login");
+            HttpContext.Session.SetString("Role",roles.Data.First().RoleName);
 
             ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
 
@@ -165,7 +166,7 @@ namespace WebUI.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("RegisteredSuccessfully", "Account");
+            return RedirectToAction("RegisteredSuccessfully", "Account",new {userForRegisterDto = userForRegisterDto});
             //   return RegisteredSuccessfully(userForRegisterDto);
         }
 
@@ -183,7 +184,8 @@ namespace WebUI.Controllers
         {
             await HttpContext.SignOutAsync();
             HttpContext.Session.Remove("login");
-            return RedirectToAction("Index", "Home");
+            HttpContext.Session.Remove("Role");
+            return RedirectToAction("Index", "Product");
         }
 
         public IActionResult AccessDenied()

@@ -12,6 +12,7 @@ namespace Business.Abstract
         IResult Delete(ShippingDetail shippingDetail);
         IDataResult<List<ShippingDetail>> GetList(int userId);
         IDataResult<ShippingDetail> GetById(int shippingDetailId);
+        IResult Update(ShippingDetail shippingDetail);
 
     }
 }

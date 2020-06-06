@@ -1,0 +1,108 @@
+﻿@using Business.Constants
+@using Business.Abstract
+@model EditShippingDetailViewModel
+@inject ICityService _cityService
+
+@{
+    Layout = "_ManageAccount";
+    ViewBag.Title = "Teslimat Bilgisini Güncelle";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<h2>Teslimat Bilgisi Ekle</h2>
+
+
+<form asp-controller="Cart" asp-action="EditShippingDetail" method="post">
+    <input asp-for="ShippingDetail.ShippingDetailId" style="display: none" type="text" class="form-control" value="@Model.ShippingDetail.ShippingDetailId" />
+    <input asp-for="ShippingDetail.CustomerId" style="display: none" type="text" class="form-control" value="@Model.ShippingDetail.CustomerId" />
+    <div class="form-group">
+        <label asp-for="ShippingDetail.AddressName">Adres İsmi</label>
+        <input asp-for="ShippingDetail.AddressName" type="text" class="form-control" value="@Model.ShippingDetail.AddressName" placeholder="" />
+        <span class="text-danger" asp-validation-for="ShippingDetail.AddressName"></span>
+    </div>
+    @{
+        var cities = _cityService.GetAll().Data;
+        var cityitems = new List<SelectListItem>();
+        bool selected = false;
+        foreach (var city in cities)
+        {
+            if (city.CityId == Model.ShippingDetail.CityId)
+            {
+                selected = true;
+            }
+            cityitems.Add(new SelectListItem
+            {
+                Text = city.CityName,
+                Value = city.CityId.ToString(),
+                Selected = selected
+            });
+            selected = false;
+        }
+        <div class="form-group">
+            <label asp-for="ShippingDetail.CityId">İl</label>
+            <select id="city" asp-for="ShippingDetail.CityId" class="form-control" asp-items="cityitems"></select>
+        </div>
+    }
+
+    @{
+        var districts = _cityService.GetDistrictsByCityId(Model.ShippingDetail.CityId).Data;
+        var districtitems = new List<SelectListItem>();
+        bool selected2 = false;
+        foreach (var district in districts)
+        {
+            if (district.DistrictId == Model.ShippingDetail.DistrictId)
+            {
+                selected2 = true;
+            }
+            districtitems.Add(new SelectListItem
+            {
+                Text = district.DistrictName,
+                Value = district.DistrictId.ToString(),
+                Selected = selected2
+            });
+            selected2 = false;
+
+        }
+        <div class="form-group">
+            <label asp-for="ShippingDetail.DistrictId">İlçe</label>
+            <select id="district" asp-for="ShippingDetail.DistrictId" asp-items="districtitems" class="form-control"></select>
+            <script type="text/javascript">
+            $("#city").change(function() {
+               $("#district").empty();
+
+                var city = $("#city").val();
+
+                $.ajax(
+                    {
+                        url: '@Url.Action("GetDistricts", "Cart")',
+                        type: "POST",
+                        dataType: "json",
+                        data: { cityId: city },
+
+                        success: function (data) {
+                            $("#district").append('<option id=' + "0" + ' value=' + "0" + '>' + "Seçiniz" + '</option>');
+                            $.each(data,
+                                function() {
+                                    $("#district").append('<option id=' + this.districtId + ' value=' + this.districtId + '>' + this.districtName + '</option>');
+                                });
+                        }
+                    });
+            });
+            </script>
+        </div>
+    }
+    <div class="form-group">
+        <label asp-for="ShippingDetail.Street">Cadde/Sokak</label>
+        <input asp-for="ShippingDetail.Street" type="text" class="form-control" value="@Model.ShippingDetail.Street" placeholder="" />
+        <span class="text-danger" asp-validation-for="ShippingDetail.Street"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ShippingDetail.Number">Kapı Numarası</label>
+        <input asp-for="ShippingDetail.Number" type="text" class="form-control" value="@Model.ShippingDetail.Number" placeholder="" />
+        <span class="text-danger" asp-validation-for="ShippingDetail.Number"></span>
+    </div>
+    <input type="submit" value="Kaydet" class="btn btn-success btn-sm" />
+</form>
+
+

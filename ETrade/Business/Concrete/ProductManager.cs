@@ -216,7 +216,7 @@ namespace Business.Concrete
             try
             {
                 var productDetails = new List<ProductDetailDto>();
-                var products = _productDal.GetList(p=>p.ProductName.Contains(query) || p.ProductDef.Contains(query));
+                var products = _productDal.GetList(p=>p.ProductName.Contains(query));
                 foreach (var product in products)
                 {
                     productDetails.Add(new ProductDetailDto

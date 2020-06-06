@@ -1,8 +1,10 @@
 ﻿@model AdminIndexViewModel
 @using System.Security.Claims
 @using Business.Constants
+@using Microsoft.AspNetCore.Http
 @{
     Layout = "_AdminLayout";
+    ViewBag.Title = Context.Session.GetString("Role");
 }
 
     <div class="container">
@@ -14,7 +16,7 @@
             <div class="alert alert-info">@TempData[TempDataTypes.ProductBought].ToString()</div>
         }
         <div class="row">
-            <button type="button" class="btn btn-warning" style="width: 100%" data-toggle="collapse" data-target="#div1">Stoğu Azalan Ürünleri Görüntüle</button>
+            <button type="button" class="btn btn-warning" style="width: 100%" data-toggle="collapse" data-target="#div1">Stoğu Azalan Ürünleri Görüntüle (@Model.LowStock.Count)</button>
             <div id="div1" class="collapse col-12">
                 @if (Model.LowStock.Count > 0)
                 {
@@ -45,7 +47,7 @@
             </div>
         </div>
         <div class="row">
-            <button type="button" class="btn btn-danger" style="width: 100%" data-toggle="collapse" data-target="#div2">Stoğu Biten Ürünleri Görüntüle</button>
+            <button type="button" class="btn btn-danger" style="width: 100%" data-toggle="collapse" data-target="#div2">Stoğu Biten Ürünleri Görüntüle (@Model.OutOfStock.Count)</button>
             <div id="div2" class="collapse col-12">
                 @if (Model.OutOfStock.Count > 0)
                 {

@@ -13,10 +13,12 @@ namespace Business.Concrete
     public class UserManager : IUserService
     {
         private IUserDal _userDal;
+        private IUserRoleDal _userRoleDal;
 
-        public UserManager(IUserDal userDal)
+        public UserManager(IUserDal userDal, IUserRoleDal userRoleDal)
         {
             _userDal = userDal;
+            _userRoleDal = userRoleDal;
         }
 
         public IDataResult<User> GetByMail(string email)
@@ -97,6 +99,28 @@ namespace Business.Concrete
             catch (Exception)
             {
                 return new ErrorDataResult<User>(Messages.ErrorWhileGettingEntity);
+            }
+        }
+
+        public IDataResult<List<User>> GetAllCustomers()
+        {
+            try
+            {
+                var userRoleList = _userRoleDal.GetList(ur=>ur.RoleId == 1);
+
+                var customerList = new List<User>();
+
+                foreach (var userRole in userRoleList)
+                {
+                    customerList.Add(GetById(userRole.UserId).Data);
+                }
+
+                return new SuccessDataResult<List<User>>(customerList);
+
+            }
+            catch (Exception)
+            {
+                return new ErrorDataResult<List<User>>(Messages.ErrorWhileGettingEntity);
             }
         }
     }

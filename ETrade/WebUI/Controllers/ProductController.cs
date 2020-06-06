@@ -17,12 +17,14 @@ namespace WebUI.Controllers
         private IProductService _productService;
         private ICommentService _commentService;
         private IUserService _userService;
+        private ICategoryService _categoryService;
 
-        public ProductController(IProductService productService, ICommentService commentService, IUserService userService)
+        public ProductController(IProductService productService, ICommentService commentService, IUserService userService, ICategoryService categoryService)
         {
             _productService = productService;
             _commentService = commentService;
             _userService = userService;
+            _categoryService = categoryService;
         }
 
         public IActionResult Index(int categoryId = -1, string query = null)
@@ -39,7 +41,8 @@ namespace WebUI.Controllers
 
                     var model = new ProductListViewModel
                     {
-                        ProductDetailDtos = result.Data
+                        ProductDetailDtos = result.Data,
+                        CategoryName = "Ana Sayfa "
                     };
                     return View(model);
                 }
@@ -52,7 +55,8 @@ namespace WebUI.Controllers
 
                 var model2 = new ProductListViewModel
                 {
-                    ProductDetailDtos = result2.Data
+                    ProductDetailDtos = result2.Data,
+                    CategoryName = _categoryService.GetByCategoryId(categoryId).Data.CategoryName
                 };
                 return View(model2);
             }
@@ -61,7 +65,8 @@ namespace WebUI.Controllers
                 var result = _productService.Search(query);
                 var model = new ProductListViewModel
                 {
-                    ProductDetailDtos = result.Data
+                    ProductDetailDtos = result.Data,
+                    CategoryName = query
                 };
                 return View(model);
             }

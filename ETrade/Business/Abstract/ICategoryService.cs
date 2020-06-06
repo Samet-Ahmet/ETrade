@@ -16,5 +16,6 @@ namespace Business.Abstract
         IResult DeleteCategory(Category category);
         IResult UpdateCategory(Category category, int newMainCategoryId = -1);
         IDataResult<Category> GetMainCategory(int categoryId);
+        IDataResult<Category> GetByCategoryId(int categoryId);
     }
 }

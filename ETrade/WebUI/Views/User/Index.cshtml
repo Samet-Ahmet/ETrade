@@ -2,15 +2,15 @@
 @model ManagerListViewModel
 @{
     Layout = "_AdminLayout";
+    ViewBag.Title = "Yöneticiler";
 }
 
 
     <ul style="width: 100%; margin-left:-2%" class="list-group list-group-horizontal">
-        <a style="width: 16%; background-color: #262626; color: #818181" href="/User/Index" class="list-group-item">Yöneticiler</a>
-        <a style="width: 9%;  color: #818181" href="/User/AddManager" class="list-group-item">Yönetici Ekle</a>
-        <a style="width: 25%;  color: #818181" href="/User/Worker" class="list-group-item">Çalışanlar</a>
-        <a style="width: 25%;  color: #818181" href="/User/Customer" class="list-group-item">Müşteriler</a>
-        <a style="width: 25%;  color: #818181" href="" class="list-group-item">Diğer</a>
+        <a style="width: 22%; background-color: #262626; color: #818181" href="/User/Index" class="list-group-item">Yöneticiler</a>
+        <a style="width: 12%;  color: #818181" href="/User/AddManager" class="list-group-item">Yönetici Ekle</a>
+        <a style="width: 33%;  color: #818181" href="/User/Worker" class="list-group-item">Çalışanlar</a>
+        <a style="width: 33%;  color: #818181" href="/User/Customer" class="list-group-item">Müşteriler</a>
     </ul>
 @if (TempData[TempDataTypes.ManageInfo] != null)
 {

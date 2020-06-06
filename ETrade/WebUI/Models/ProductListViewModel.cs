@@ -10,5 +10,6 @@ namespace WebUI.Models
     public class ProductListViewModel
     {
         public List<ProductDetailDto> ProductDetailDtos { get; set; }
+        public string CategoryName { get; set; }
     }
 }

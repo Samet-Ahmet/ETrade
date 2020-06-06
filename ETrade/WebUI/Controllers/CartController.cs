@@ -189,7 +189,7 @@ namespace WebUI.Controllers
                 return RedirectToAction("InternalError", "Error", new { errorMessage = result.Message });
             }
 
-            return RedirectToAction("Complete","Cart");
+            return RedirectToAction("Index","Cart");
         }
 
         [HttpPost]
@@ -229,6 +229,68 @@ namespace WebUI.Controllers
             _cartSessionHelper.Clear();
 
             return View();
+        }
+
+        [Authorize(Roles = "Customer")]
+        [HttpGet]
+        public IActionResult EditShippingDetail(int shippingDetailId)
+        {
+            var result = _shippingDetailService.GetById(shippingDetailId);
+
+            if (!result.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = result.Message });
+            }
+            var model = new EditShippingDetailViewModel
+            {
+                ShippingDetail = result.Data
+            };
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "Customer")]
+        [HttpPost]
+        public IActionResult EditShippingDetail(ShippingDetail shippingDetail)
+        {
+            if (!ModelState.IsValid || shippingDetail.DistrictId == 0)
+            {
+                return RedirectToAction("EditShippingDetail", "Cart", new { shippingDetailId = shippingDetail.ShippingDetailId });
+            }
+
+            var result = _shippingDetailService.Update(shippingDetail);
+            if (!result.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = result.Message });
+            }
+
+            TempData.Add(TempDataTypes.ManageInfo,Messages.ShippingDetailEditedSuccessfully);
+            return RedirectToAction("ListShippingDetails", "Cart");
+        }
+
+        [Authorize(Roles = "Customer")]
+        [HttpGet]
+        public IActionResult ListShippingDetails()
+        {
+
+            var model = new ShippingDetailsViewModel
+            {
+                ShippingDetails = new List<ShippingDetail>()
+            };
+            var user = _userService.GetByMail(User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Email).Value).Data;
+            var result = _shippingDetailService.GetList(user.Id);
+
+            if (!result.Success)
+            {
+                if (result.Message.Equals(Messages.ThereIsntShippingDetails))
+                {
+                    return RedirectToAction("AddShippingDetail", "Cart");
+                }
+            }
+
+            model.ShippingDetails = result.Data;
+
+            return View(model);
         }
 
 

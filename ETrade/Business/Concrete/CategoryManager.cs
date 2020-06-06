@@ -173,5 +173,17 @@ namespace Business.Concrete
                 return new ErrorDataResult<Category>(Messages.ErrorWhileGettingEntity);
             }
         }
+
+        public IDataResult<Category> GetByCategoryId(int categoryId)
+        {
+            try
+            {
+                return new SuccessDataResult<Category>(_categoryDal.Get(c => c.CategoryId == categoryId));
+            }
+            catch (Exception)
+            {
+                return new ErrorDataResult<Category>(Messages.ErrorWhileGettingEntity);
+            }
+        }
     }
 }

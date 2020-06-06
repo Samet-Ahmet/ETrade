@@ -137,9 +137,6 @@ C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebU
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\WebUI.RazorCoreGenerate.cache
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Account\AccessDenied.cshtml.g.cs
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
-C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index2.cshtml.g.cs
-C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -195,7 +192,6 @@ Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Prod
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\AdminProduct\GoBack.cshtml.g.cs
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Complete.cshtml.g.cs
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Index.cshtml.g.cs
-C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Admin.cshtml.g.cs
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\AdminCategory\Index.cshtml.g.cs
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\AdminProduct\Add.cshtml.g.cs
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\AdminProduct\GoBack.cshtml.g.cs
@@ -234,3 +230,14 @@ Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Admi
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\AdminProduct\Edit.cshtml.g.cs
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\ProductDetailLayout.cshtml.g.cs
 Y:\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\LoginRegisterLayout.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\AdminProduct\Buy.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\AdminProduct\Edit.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\AdminProduct\Index.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Order\OrderDetails.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Product\Detail.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Search\Default.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\LoginRegisterLayout.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\ProductDetailLayout.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\User\Customer.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Cart\ListShippingDetails.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Cart\EditShippingDetail.cshtml.g.cs

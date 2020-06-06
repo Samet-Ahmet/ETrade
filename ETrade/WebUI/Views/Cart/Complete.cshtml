@@ -5,6 +5,7 @@
 
 @{
     Layout = "_ManageAccount";
+    ViewBag.Title = "Teslimat Adresi";
 }
 
 <h2>Teslimat Adresini Seçiniz</h2>
@@ -28,7 +29,7 @@
                     @_cityService.GetDistrictById(shippingDetail.DistrictId).Data.DistrictName / @_cityService.GetCityById(shippingDetail.CityId).Data.CityName
                 </td>
                 <td><a class="btn btn-sm btn-success" asp-controller="Cart" asp-action="Complete2" asp-route-shippingDetailId="@shippingDetail.ShippingDetailId">Seç</a></td>
-                <td><a class="btn btn-sm btn-primary" asp-controller="Cart" asp-action="EditShippingDetail" asp-route-shippingDetail="@shippingDetail">Düzenle</a></td>
+                <td><a class="btn btn-sm btn-info" asp-controller="Cart" asp-action="EditShippingDetail" asp-route-shippingDetailId="@shippingDetail.ShippingDetailId">Düzenle</a></td>
                 <!--Butona tıklayınca Cart controllerındaki addtocart fonksiyonunu çağırsın asp-route sonuna parametre gelince onnu gönderiyor-->
             </tr>
         </tbody>
