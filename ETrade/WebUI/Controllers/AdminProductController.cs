@@ -65,6 +65,11 @@ namespace WebUI.Controllers
                 HttpContext.Session.Remove("sayac");
                 productDetailDto.ProductPhotoPaths = uploadedProductPhotoPaths;
             }
+            else
+            {
+                TempData.Add(TempDataTypes.ProductPhoto,Messages.ProductPhoto);
+                return View();
+            }
 
             var result = _productService.Add(productDetailDto);
             if (!result.Success)
@@ -213,6 +218,7 @@ namespace WebUI.Controllers
 
             if (!ModelState.IsValid)
             {
+                TempData.Add(TempDataTypes.ProductCantEdited,Messages.ProductCantEdited);
                 return View(model);
             }
 

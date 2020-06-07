@@ -135,17 +135,23 @@
 {
     @if (Context.Session.GetString("login").Equals("yes"))
     {
-        <div class="border border-success" style="height: 70px;">
+        <div class="border border-success" style="height: 65px;">
             <form asp-controller="Product" asp-action="AddComment" method="post">
                 <input style="display: none;" asp-for="Comment.ProductId" type="text" class="form-control" value="@Model.ProductDetailDto.Product.ProductId" />
                 <div class="form-group">
-                    <input asp-for="Comment.CommentText" type="text" class="form-control" placeholder="Yorumunuzu buraya yazabilirsiniz..." />
+                    <textarea asp-for="Comment.CommentText" type="text" class="form-control" placeholder="Yorumunuzu buraya yazabilirsiniz..."></textarea>
                     <span class="text-danger" class="alert-danger" asp-validation-for="Comment.CommentText"></span>
                 </div>
-                <input style="position: absolute; right: 0; bottom: 0;" type="submit" value="Yorum Yap" class="btn btn-success btn-sm" />
+                <input style="position: absolute; right: 88px; width: 85px; bottom: 0;" type="reset" value="İptal" class="btn btn-danger btn-sm" />
+                <input style="position: absolute; width: 85px; right: 0; bottom: 0;" type="submit" value="Yorum Yap" class="btn btn-success btn-sm" />
             </form>
         </div>
     }
+}
+else
+{
+    <div><p>Yorum yapmak için önce giriş yapmalısınız.</p></div>
+    <a href ="/Account/Login/" class="btn btn-success btn-sm" style="width: 150px;">Giriş Yap</a>
 }
 <br/><br/>
 @if (Model.Comments.Count > 0)

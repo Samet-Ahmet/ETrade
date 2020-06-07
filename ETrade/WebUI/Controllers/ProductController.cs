@@ -100,6 +100,10 @@ namespace WebUI.Controllers
         [HttpPost]
         public IActionResult AddComment(Comment comment)
         {
+            if (comment.CommentText == null)
+            {
+                return RedirectToAction("Detail", "Product", new { productId = comment.ProductId });
+            }
             var email = User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Email).Value;
             comment.UserId = _userService.GetByMail(email).Data.Id;
             var result = _commentService.Add(comment);

@@ -18,7 +18,7 @@
             var sum = (orderDetail.Quantity * orderDetail.UnitPrice).ToString("#.##"); 
             
             <tr>
-                <td>@orderDetail.ProductName</td>
+                <td><a href="/Product/Detail?productId=@orderDetail.ProductId" style="text-decoration: none">@orderDetail.ProductName</a></td>
                 <td>@orderDetail.Quantity</td>
                 <td>₺@orderDetail.UnitPrice.ToString("#.##")</td>
                 <td>₺@sum</td>

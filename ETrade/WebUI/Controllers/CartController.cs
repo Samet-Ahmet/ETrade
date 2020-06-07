@@ -255,6 +255,7 @@ namespace WebUI.Controllers
         {
             if (!ModelState.IsValid || shippingDetail.DistrictId == 0)
             {
+                TempData.Add(TempDataTypes.ShippingDetailInfo,Messages.ShippingDetailInfo);
                 return RedirectToAction("EditShippingDetail", "Cart", new { shippingDetailId = shippingDetail.ShippingDetailId });
             }
 

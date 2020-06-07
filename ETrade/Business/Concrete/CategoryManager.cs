@@ -81,7 +81,7 @@ namespace Business.Concrete
                     _categoryDal.Add(category);
                     return new SuccessResult();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                    return new ErrorResult(Messages.ErrorWhileAddingEntity);
                 }
@@ -89,13 +89,12 @@ namespace Business.Concrete
 
             try
             {
-                var mainCategory = _subCategoryDal.Get(sc => sc.CategoryId == mainCategoryId);
                 _categoryDal.Add(category);
-
+               var addedCategory = _categoryDal.Get(c => c.CategoryName == category.CategoryName);
                 var subCategory = new SubCategory
                 {
-                    CategoryId = mainCategory.CategoryId,
-                    SubCategoryId = category.CategoryId
+                    CategoryId = mainCategoryId,
+                    SubCategoryId = addedCategory.CategoryId
                 };
                 _subCategoryDal.Add(subCategory);
                 return new SuccessResult();
@@ -113,6 +112,11 @@ namespace Business.Concrete
             {
                 try
                 {
+                    if (!category.IsMainCategory)
+                    {
+                        var subCategory = _subCategoryDal.Get(sc => sc.SubCategoryId == category.CategoryId);
+                        _subCategoryDal.Delete(subCategory);
+                    }
                     _categoryDal.Delete(category);
                     return new SuccessResult();
                 }
@@ -124,41 +128,6 @@ namespace Business.Concrete
             return new ErrorResult(Messages.CategoryCantDeleted);
         }
 
-        public IResult UpdateCategory(Category category, int newMainCategoryId = -1)
-        {
-            if (newMainCategoryId == -1)
-            {
-                try
-                {
-                    _categoryDal.Update(category);
-                    return new SuccessResult();
-                }
-                catch (Exception)
-                {
-                    return new ErrorResult(Messages.ErrorWhileUpdatingEntity);
-                }
-            }
-            //bilgisayar elektronik //bilgisayar moda
-            try
-            {
-                var deletedSubCategory = _subCategoryDal.Get(sc => sc.SubCategoryId == category.CategoryId);
-                _subCategoryDal.Delete(deletedSubCategory);
-
-                _categoryDal.Update(category); //fk ile bağlı olduğu için
-
-                var addedSubCategory = new SubCategory
-                {
-                    CategoryId = newMainCategoryId,
-                    SubCategoryId = category.CategoryId
-                };
-                _subCategoryDal.Add(addedSubCategory);
-                return new SuccessResult();
-            }
-            catch (Exception)
-            {
-                return new ErrorResult(Messages.ErrorWhileUpdatingEntity);
-            }
-        }
 
         public IDataResult<Category> GetMainCategory(int categoryId)
         {

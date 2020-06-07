@@ -16,6 +16,7 @@
     {
         <div class="alert alert-info">@TempData[TempDataTypes.AdminInfo].ToString()</div>
     }
+
     
     
     <form asp-controller="AdminProduct" enctype="multipart/form-data" asp-action="Add" method="post">
@@ -89,7 +90,10 @@
             <input class="btn btn-info btn-sm" type="submit" value="Yükle" />
         </div>
     </form>
-
+    @if (TempData[TempDataTypes.ProductPhoto] != null)
+    {
+        <div class="alert alert-danger">@TempData[TempDataTypes.ProductPhoto].ToString()</div>
+    }
 
     @if (TempData[TempDataTypes.PhotoUploaded] != null)
     {

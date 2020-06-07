@@ -19,10 +19,6 @@
 
 <div class="container">
     <h1>Ürün Ekle</h1>
-    @if (TempData[TempDataTypes.AdminInfo] != null)
-    {
-        <div class="alert alert-info">@TempData[TempDataTypes.AdminInfo].ToString()</div>
-    }
     <form method="post">
         <div class="form-group">
             <label >Ürünün Adı</label>
@@ -89,10 +85,4 @@
             <input class="btn btn-info btn-sm" type="submit" value="Upload" />
         </div>
     </form>
-
-    @if (TempData[TempDataTypes.PhotoUploaded] != null)
-    {
-        <div class="alert alert-info">@TempData[TempDataTypes.PhotoUploaded].ToString()</div>
-    }
-
 </div>

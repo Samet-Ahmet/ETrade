@@ -1,0 +1,20 @@
+﻿@using Business.Constants
+@model AddCategoryViewModel
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Kategori Ekle";
+}
+<h1>Kategori Ekle</h1>
+<form asp-controller="AdminCategory" asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="CategoryDto.Category.CategoryName">Kategori Adı</label>
+        <input asp-for="CategoryDto.Category.CategoryName" type="text" class="form-control" placeholder="" />
+        <span class="text-danger" asp-validation-for="CategoryDto.Category.CategoryName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryDto.MainCategoryId">Üst Kategorisi</label>
+        <select id="category" asp-for="CategoryDto.MainCategoryId" class="form-control" asp-items="@Model.categories"></select>
+    </div>
+
+    <input type="submit" value="Kaydet" class="btn btn-success btn-sm" />
+</form>

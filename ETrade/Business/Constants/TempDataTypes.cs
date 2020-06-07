@@ -23,5 +23,10 @@ namespace Business.Constants
         public static string BirthdayError = "BirthdayError";
         public static string ProductBought = "ProductBought";
         public static string ProductEdited = "ProductEdited";
+        public static string CategoryInfo = "CategoryInfo";
+        public static string CategoryDelete = "CategoryDelete";
+        public static string ProductPhoto = "ProductPhoto";
+        public static string ShippingDetailInfo = "ShippingDetailInfo";
+        public static string ProductCantEdited = "ProductCantEdited";
     }
 }

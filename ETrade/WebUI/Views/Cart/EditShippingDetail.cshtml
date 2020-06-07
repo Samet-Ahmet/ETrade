@@ -11,7 +11,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <h2>Teslimat Bilgisi Ekle</h2>
-
+@if (TempData[TempDataTypes.ShippingDetailInfo] != null)
+{
+    <div class="alert alert-warning">@TempData[TempDataTypes.ShippingDetailInfo].ToString()</div>
+}
 
 <form asp-controller="Cart" asp-action="EditShippingDetail" method="post">
     <input asp-for="ShippingDetail.ShippingDetailId" style="display: none" type="text" class="form-control" value="@Model.ShippingDetail.ShippingDetailId" />
