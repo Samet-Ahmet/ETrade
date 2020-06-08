@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Business.Abstract;
+﻿using Business.Abstract;
 using Business.Constants;
-using DataAccess.Abstract;
 using Entities.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using WebUI.Models;
 
 namespace WebUI.Controllers
 {
-    [Authorize(Roles = "Customer")]
+    
     public class OrderController : Controller
     {
         private IOrderService _orderService;
@@ -84,6 +80,36 @@ namespace WebUI.Controllers
                 });
             }
             return View(model);
+        }
+
+        [Authorize(Roles = "Manager,Worker")]
+        public IActionResult Index(bool ship = false)
+        {
+            var result = _orderService.GetAll(ship);
+            if (!result.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = result.Message });
+            }
+
+            var model = new OrderIndexViewModel
+            {
+                Orders = result.Data,
+                Control = ship
+            };
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "Manager,Worker")]
+        public IActionResult Deliver(int orderId)
+        {
+            var result = _orderService.Deliver(orderId);
+            if (!result.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = result.Message });
+            }
+            TempData.Add(TempDataTypes.OrderDelivered,orderId + Messages.Delivered);
+            return RedirectToAction("Index", "Order");
         }
     }
 }

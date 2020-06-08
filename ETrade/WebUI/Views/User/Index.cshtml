@@ -6,55 +6,70 @@
 }
 
 
-    <ul style="width: 100%; margin-left:-2%" class="list-group list-group-horizontal">
-        <a style="width: 22%; background-color: #262626; color: #818181" href="/User/Index" class="list-group-item">Yöneticiler</a>
-        <a style="width: 12%;  color: #818181" href="/User/AddManager" class="list-group-item">Yönetici Ekle</a>
-        <a style="width: 33%;  color: #818181" href="/User/Worker" class="list-group-item">Çalışanlar</a>
-        <a style="width: 33%;  color: #818181" href="/User/Customer" class="list-group-item">Müşteriler</a>
-    </ul>
+<ul style="width: 100%; margin-left:-2%" class="list-group list-group-horizontal">
+    <a style="width: 22%; background-color: #262626; color: #818181" href="/User/Index" class="list-group-item">Yöneticiler</a>
+    <a style="width: 12%;  color: #818181" href="/User/AddManager" class="list-group-item">Yönetici Ekle</a>
+    <a style="width: 33%;  color: #818181" href="/User/Worker" class="list-group-item">Çalışanlar</a>
+    <a style="width: 33%;  color: #818181" href="/User/Customer" class="list-group-item">Müşteriler</a>
+</ul>
 @if (TempData[TempDataTypes.ManageInfo] != null)
 {
     <div class="alert alert-info">@TempData[TempDataTypes.ManageInfo].ToString()</div>
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<input class="form-control" id="search" type="text" placeholder="Ara..">
+<script>
+    $(document).ready(function(){
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#fields tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 <table class="table table-hover table-striped">
-    <thead>
-    <tr>
-        <th><center>TC Kimlik No</center></th>
-        <th><center>Adı Soyadı</center></th>
-        <th><center>E-posta Adresi</center></th>
-        <th><center>Telefon No</center></th>
-        <th><center>Adres</center></th>
-        <th><center>Cinsiyet</center></th>
-        <th><center>Doğum Tarihi</center></th>
-        <th><center>İşe Giriş Tarihi</center></th>
-        <th><center>İşten Çıkış Tarihi</center></th>
-    </tr>
-    </thead>
-    <tbody>
-
-    @foreach (var manager in Model.Managers)
-    {
+    <thead class="thead-dark">
         <tr>
-            <td><center>@manager.IdentityNo</center></td>
-            <td><center>@manager.FirstName @manager.LastName</center></td>
-            <td><center>@manager.Email</center></td>
-            <td><center>@manager.PhoneNumber</center></td>
-            <td><center>@manager.Street @manager.AddressNumber @manager.DistrictName / @manager.CityName</center></td>
-            <td><center>@manager.GenderName</center></td>
-            <td><center>@manager.BirthDate.ToString("dd/MM/yyyy")</center></td>
-            <td><center>@manager.HireDate.ToString("dd/MM/yyyy")</center></td>
-            <td>
-                <center>
-                    @if ((@manager.QuitDate - DateTime.MinValue).Days == 0)
-                    {
-                        @manager.QuitDate.ToString("dd/MM/yyyy")
-                    }
-                </center>
-            </td>
-            <td>
-                <a class="btn btn-info" href="/User/EditManager?managerId=@manager.WorkerId" role="button">Düzenle</a>
-            </td>
+            <th><center>TC Kimlik No</center></th>
+            <th><center>Adı Soyadı</center></th>
+            <th><center>E-posta Adresi</center></th>
+            <th><center>Telefon No</center></th>
+            <th><center>Adres</center></th>
+            <th><center>Cinsiyet</center></th>
+            <th><center>Doğum Tarihi</center></th>
+            <th><center>İşe Giriş Tarihi</center></th>
+            <th><center>İşten Çıkış Tarihi</center></th>
+            <th></th>
         </tr>
-    }
+    </thead>
+    <tbody id="fields">
+
+        @foreach (var manager in Model.Managers)
+        {
+            <tr>
+                <td><center>@manager.IdentityNo</center></td>
+                <td><center>@manager.FirstName @manager.LastName</center></td>
+                <td><center>@manager.Email</center></td>
+                <td><center>@manager.PhoneNumber</center></td>
+                <td><center>@manager.Street @manager.AddressNumber @manager.DistrictName / @manager.CityName</center></td>
+                <td><center>@manager.GenderName</center></td>
+                <td><center>@manager.BirthDate.ToString("dd/MM/yyyy")</center></td>
+                <td><center>@manager.HireDate.ToString("dd/MM/yyyy")</center></td>
+                <td>
+                    <center>
+                        @if ((@manager.QuitDate - DateTime.MinValue).Days == 0)
+                        {
+                            @manager.QuitDate.ToString("dd/MM/yyyy")
+                        }
+                    </center>
+                </td>
+                <td>
+                    <a class="btn btn-info" href="/User/EditManager?managerId=@manager.WorkerId" role="button">Düzenle</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

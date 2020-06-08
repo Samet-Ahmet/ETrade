@@ -8,21 +8,39 @@
 <h1>Kategoriler</h1>
 @if (TempData[TempDataTypes.CategoryInfo] != null)
 {
-    <div class="alert alert-warning">@TempData[TempDataTypes.CategoryInfo].ToString()</div>
+    <div class="alert alert-info">@TempData[TempDataTypes.CategoryInfo].ToString()</div>
 }
 @if (TempData[TempDataTypes.CategoryDelete] != null)
 {
     <div class="alert alert-info">@TempData[TempDataTypes.CategoryDelete].ToString()</div>
 }
+@if (TempData[TempDataTypes.CategoryCantDeleted] != null)
+{
+    <div class="alert alert-warning">@TempData[TempDataTypes.CategoryCantDeleted].ToString()</div>
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<input class="form-control" id="search" type="text" placeholder="Ara..">
+<script>
+    $(document).ready(function(){
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#fields tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 <table class="table table-hover table-striped table-sm">
-    <thead>
+    <thead class="thead-dark">
         <tr>
             <th><center>Kategori Numarası</center></th>
             <th><center>Kategori Adı</center></th>
             <th><center><a href="/AdminCategory/Add" class="btn btn-success btn-sm">Kategori Ekle</a></center></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="fields">
 
         @foreach (var category in Model.Categories)
         {

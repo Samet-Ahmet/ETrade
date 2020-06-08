@@ -70,9 +70,21 @@ namespace Business.Concrete
             {
                 return new SuccessDataResult<List<Brand>>(_brandDal.GetList());
             }
-            catch (Exception )
+            catch (Exception)
             {
                 return new ErrorDataResult<List<Brand>>(Messages.ErrorWhileGettingEntity);
+            }
+        }
+
+        public IDataResult<Brand> GetById(int brandId)
+        {
+            try
+            {
+                return new SuccessDataResult<Brand>(_brandDal.Get(b=>b.BrandId == brandId));
+            }
+            catch (Exception)
+            {
+                return new ErrorDataResult<Brand>(Messages.ErrorWhileGettingEntity);
             }
         }
     }

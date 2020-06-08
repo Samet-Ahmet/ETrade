@@ -13,5 +13,7 @@ namespace Business.Abstract
         IDataResult<List<Order>> GetOrders(int customerId);
         IDataResult<List<OrderDetail>> GetOrderDetails(int orderId);
         IResult Delete(int orderId);
+        IDataResult<List<Order>> GetAll(bool ship = false);
+        IResult Deliver(int orderId);
     }
 }

@@ -13,11 +13,13 @@ namespace Business.Concrete
     {
         private ICategoryDal _categoryDal;
         private ISubCategoryDal _subCategoryDal;
+        private IProductDal _productDal;
 
-        public CategoryManager(ICategoryDal categoryDal, ISubCategoryDal subCategoryDal)
+        public CategoryManager(ICategoryDal categoryDal, ISubCategoryDal subCategoryDal, IProductDal productDal)
         {
             _categoryDal = categoryDal;
             _subCategoryDal = subCategoryDal;
+            _productDal = productDal;
         }
 
         public IDataResult<List<Category>> GetAll()
@@ -56,7 +58,7 @@ namespace Business.Concrete
             List<Category> categories = new List<Category>();
             foreach (var subCategory in subCategories)
             {
-                categories.Add(_categoryDal.Get(c=>c.CategoryId==subCategory.SubCategoryId));
+                categories.Add(_categoryDal.Get(c => c.CategoryId == subCategory.SubCategoryId));
             }
             return new SuccessDataResult<List<Category>>(categories);
         }
@@ -64,7 +66,7 @@ namespace Business.Concrete
         public bool IsEndCategory(int categoryId)
         {
             //var deneme = _subCategoryDal.GetList(sc => sc.CategoryId == categoryId);
-            if (_subCategoryDal.GetList(c=>c.CategoryId == categoryId).Count == 0)
+            if (_subCategoryDal.GetList(c => c.CategoryId == categoryId).Count == 0)
             {
                 return true;
             }
@@ -83,14 +85,14 @@ namespace Business.Concrete
                 }
                 catch (Exception)
                 {
-                   return new ErrorResult(Messages.ErrorWhileAddingEntity);
+                    return new ErrorResult(Messages.ErrorWhileAddingEntity);
                 }
             }
 
             try
             {
                 _categoryDal.Add(category);
-               var addedCategory = _categoryDal.Get(c => c.CategoryName == category.CategoryName);
+                var addedCategory = _categoryDal.Get(c => c.CategoryName == category.CategoryName);
                 var subCategory = new SubCategory
                 {
                     CategoryId = mainCategoryId,
@@ -152,6 +154,39 @@ namespace Business.Concrete
             catch (Exception)
             {
                 return new ErrorDataResult<Category>(Messages.ErrorWhileGettingEntity);
+            }
+        }
+
+        public IDataResult<int> GetProductCount(int categoryId)
+        {
+            try
+            {
+                int count = 0;
+                count = _productDal.GetList(p => p.CategoryId == categoryId).Count;
+
+                if (!IsEndCategory(categoryId))
+                {
+                    var subCategories = GetSubCategories(categoryId).Data;
+                    foreach (var subCategory in subCategories)
+                    {
+                        count += _productDal.GetList(p => p.CategoryId == subCategory.CategoryId).Count;
+
+                        if (!IsEndCategory(subCategory.CategoryId))
+                        {
+                            var subCategories2 = GetSubCategories(subCategory.CategoryId).Data;
+                            foreach (var subcategory2 in subCategories2)
+                            {
+                                count += _productDal.GetList(p => p.CategoryId == subcategory2.CategoryId).Count;
+                            }
+                        }
+                    }
+                }
+
+                return new SuccessDataResult<int>(count);
+            }
+            catch (Exception)
+            {
+                return new ErrorDataResult<int>(Messages.ErrorWhileGettingEntity);
             }
         }
     }

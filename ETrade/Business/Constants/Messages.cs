@@ -34,7 +34,7 @@ namespace Business.Constants
             "Silmeye çalıştığınız kategorinin, alt kategorleri bulunduğu için işleminiz gerçekleştirilmedi. Bu kategoriyi silmek istiyorsanız lütfen ilk önce alt kategorilerini siliniz.";
 
         public static string BrandCantDeleted =
-            "Silmeye çalıştığınız markaya ait ürünler olduğu için işleminiz gerçekleştirilmedi. Bu markayı silmek istiyorsanız lütfen ilk öne ürünlerini siliniz.";
+            "Silmeye çalıştığınız markaya ait ürünler olduğu için işleminiz gerçekleştirilmedi. Bu markayı silmek istiyorsanız lütfen ilk önce ürünlerini siliniz.";
 
 
         public static string Max50Characters = "En fazla 50 karakter girebilirsiniz.";
@@ -56,9 +56,12 @@ namespace Business.Constants
         public static string ProductEditedSuccesfully = "Ürün başarıyla güncellendi.";
         public static string ShippingDetailEditedSuccessfully = "Teslimat bilgisi başarıyla güncellendi.";
         public static string CategoryAdded = "Kategori başarıyla eklendi.";
-        public static string CategoryDeleted = "Kategori başarıyla silndi.";
+        public static string CategoryDeleted = "Kategori başarıyla silindi.";
         public static string ProductPhoto = "Lütfen ürünün fotoğrafını yükleyiniz.";
         public static string ShippingDetailInfo = "Tüm alanları doğru girdiğinizden emin olun.";
         public static string ProductCantEdited = "Tüm alanları doğru girdiğinizden emin olun.";
+        public static string BrandAdded = "Marka başarıyla eklendi.";
+        public static string BrandDeleted = "Marka başarıyla silindi.";
+        public static string Delivered = " sipariş numaralı ürün teslim edildi.";
     }
 }

@@ -1,0 +1,83 @@
+﻿@using Business.Constants
+@model OrderIndexViewModel
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Teslimatlar";
+}
+
+<h1>Teslimatlar</h1>
+@if (TempData[TempDataTypes.OrderDelivered] != null)
+{
+    <div class="alert alert-success">@TempData[TempDataTypes.OrderDelivered].ToString()</div>
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<input class="form-control" id="search" type="text" placeholder="Ara..">
+<script>
+    $(document).ready(function(){
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#fields tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+<table class="table table-hover table-striped table-sm">
+    <thead class="thead-dark">
+        <tr>
+            <th><center>Sipariş Numarası</center></th>
+            <th><center>Sipariş Tarihi</center></th>
+            <th><center>Müşteri Numarası</center></th>
+            <th><center>Teslim Durumu</center></th>
+            <th><center>Takip Numarası</center></th>
+            @{
+                var link = "/Order/Index?ship=true";
+                var text = "Teslim Edilmeyenleri Göster";
+
+                if (Model.Control == true)
+                {
+                    link = "/Order/Index";
+                    text = "Tümünü Göster";
+                }
+                <th style="width: 200px;"><center><a href="@link" class="btn btn-success btn-sm">@text</a></center></th>
+            }
+        </tr>
+    </thead>
+    <tbody id="fields">
+
+        @foreach (var order in Model.Orders)
+        {
+            var css = "";
+            if (order.Delivered)
+            {
+                css = "table-success";
+            }
+            <tr class="@css">
+                <td><center>@order.OrderId</center></td>
+                <td><center>@order.OrderDate</center></td>
+                <td><center>@order.CustomerId</center></td>
+
+                @{
+                    var deliver = "Teslim Edilmedi";
+
+                    if (order.Delivered)
+                    {
+                        deliver = "Teslim Edildi";
+                    }
+                    <td><center>@deliver</center></td>
+                }
+                <td><center>@order.TrackingNumber</center></td>
+                @if (!order.Delivered)
+                {
+                    <td><center><a href="/Order/Deliver?orderId=@order.OrderId" class="btn btn-success btn-sm">Teslim Et</a></center></td>
+                }
+                else
+                {
+                    <td class="text-dark"><center>Teslim Edildi</center></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

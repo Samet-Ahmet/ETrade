@@ -141,7 +141,7 @@ namespace WebUI.Controllers
             {
                 if (result.Message.Equals(Messages.CategoryCantDeleted))
                 {
-                    TempData.Add(TempDataTypes.CategoryInfo,result.Message);
+                    TempData.Add(TempDataTypes.CategoryCantDeleted,result.Message);
                     return RedirectToAction("Index", "AdminCategory");
                 }
                 else

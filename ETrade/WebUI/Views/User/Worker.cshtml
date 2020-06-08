@@ -16,8 +16,22 @@
 {
     <div class="alert alert-info">@TempData[TempDataTypes.ManageInfo].ToString()</div>
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<input class="form-control" id="search" type="text" placeholder="Ara..">
+<script>
+    $(document).ready(function(){
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#fields tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 <table class="table table-hover table-striped">
-    <thead>
+    <thead class="thead-dark">
         <tr>
             <th><center>TC Kimlik No</center></th>
             <th><center>Adı Soyadı</center></th>
@@ -28,11 +42,12 @@
             <th><center>Doğum Tarihi</center></th>
             <th><center>İşe Giriş Tarihi</center></th>
             <th><center>İşten Çıkış Tarihi</center></th>
+            <th></th>
         </tr>
 
 
     </thead>
-    <tbody>
+    <tbody id="fields">
 
         @foreach (var worker in Model.Workers)
         {

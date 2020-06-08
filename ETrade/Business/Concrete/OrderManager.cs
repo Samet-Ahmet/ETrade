@@ -115,5 +115,36 @@ namespace Business.Concrete
             throw new NotImplementedException();
             
         }
+
+        public IDataResult<List<Order>> GetAll(bool ship = false) //true ise teslim edilmeyenleri getir 
+        {
+            try
+            {
+                if (!ship)
+                {
+                    return new SuccessDataResult<List<Order>>(_orderDal.GetList());
+                }
+                return new SuccessDataResult<List<Order>>(_orderDal.GetList(o=>o.Delivered == false));
+            }
+            catch (Exception)
+            {
+                return new ErrorDataResult<List<Order>>(Messages.ErrorWhileGettingEntity);
+            }
+        }
+
+        public IResult Deliver(int orderId)
+        {
+            try
+            {
+                var order = _orderDal.Get(o => o.OrderId == orderId);
+                order.Delivered = true;
+                _orderDal.Update(order);
+                return new SuccessResult();
+            }
+            catch (Exception)
+            {
+                return new ErrorResult(Messages.ErrorWhileUpdatingEntity);
+            }
+        }
     }
 }

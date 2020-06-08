@@ -16,8 +16,22 @@
 {
     <div class="alert alert-info">@TempData[TempDataTypes.ManageInfo].ToString()</div>
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<input class="form-control" id="search" type="text" placeholder="Ara..">
+<script>
+    $(document).ready(function(){
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#fields tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 <table class="table table-hover table-striped">
-    <thead>
+    <thead class="thead-dark">
         <tr>
             <th><center>Adı Soyadı</center></th>
             <th><center>E-posta Adresi</center></th>
@@ -25,7 +39,7 @@
             <th><center>Cinsiyet</center></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="fields">
 
         @foreach (var user in Model.Users)
         {
@@ -33,7 +47,7 @@
                 <td><center>@user.FirstName @user.LastName</center></td>
                 <td><center>@user.Email</center></td>
                 <td><center>@user.PhoneNumber</center></td>
-                <td><center>@_genderDal.Get(g=>g.GenderId == user.GenderId).GenderName</center></td>
+                <td><center>@_genderDal.Get(g => g.GenderId == user.GenderId).GenderName</center></td>
             </tr>
         }
     </tbody>

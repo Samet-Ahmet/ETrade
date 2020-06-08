@@ -16,5 +16,6 @@ namespace Business.Abstract
         IResult DeleteCategory(Category category);
         IDataResult<Category> GetMainCategory(int categoryId);
         IDataResult<Category> GetByCategoryId(int categoryId);
+        IDataResult<int> GetProductCount(int categoryId);
     }
 }

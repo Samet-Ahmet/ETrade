@@ -242,3 +242,6 @@ C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razo
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Cart\ListShippingDetails.cshtml.g.cs
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Cart\EditShippingDetail.cshtml.g.cs
 C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\AdminCategory\Add.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Brand\Index.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Brand\Add.cshtml.g.cs
+C:\Users\samet\Documents\GitHub\ETrade\ETrade\WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Order\Index.cshtml.g.cs

@@ -1,0 +1,15 @@
+﻿@using Business.Constants
+@model AddBrandViewModel
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Marka Ekle";
+}
+<h1>Kategori Ekle</h1>
+<form asp-controller="Brand" asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="Brand.BrandName">Marka Adı</label>
+        <input asp-for="Brand.BrandName" type="text" class="form-control" placeholder="" />
+        <span class="text-danger" asp-validation-for="Brand.BrandName"></span>
+    </div>
+    <input type="submit" value="Kaydet" class="btn btn-success btn-sm" />
+</form>

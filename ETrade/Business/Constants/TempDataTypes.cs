@@ -28,5 +28,10 @@ namespace Business.Constants
         public static string ProductPhoto = "ProductPhoto";
         public static string ShippingDetailInfo = "ShippingDetailInfo";
         public static string ProductCantEdited = "ProductCantEdited";
+        public static string BrandInfo = "BrandInfo";
+        public static string BrandDelete = "BrandDelete";
+        public static string BrandCantDeleted = "BrandCantDeleted";
+        public static string CategoryCantDeleted = "CategoryCantDeleted";
+        public static string OrderDelivered = "OrderDelivered";
     }
 }
