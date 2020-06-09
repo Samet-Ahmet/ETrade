@@ -26,7 +26,7 @@ namespace WebUI.Controllers
             _userService = userService;
             _categoryService = categoryService;
         }
-
+        
         public IActionResult Index(int categoryId = -1, string query = null)
         {
             if (query == null)
@@ -63,6 +63,10 @@ namespace WebUI.Controllers
             else //search
             {
                 var result = _productService.Search(query);
+                if (!result.Success)
+                {
+                    return RedirectToAction("InternalError", "Error", new { errorMessage = result.Message });
+                }
                 var model = new ProductListViewModel
                 {
                     ProductDetailDtos = result.Data,

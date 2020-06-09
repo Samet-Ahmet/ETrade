@@ -14,7 +14,7 @@
     <h1>Hesabım</h1>
     @if (TempData[TempDataTypes.ManageInfo] != null)
     {
-        <div class="alert-info">@TempData[TempDataTypes.ManageInfo].ToString()</div>
+        <div class="alert alert-info">@TempData[TempDataTypes.ManageInfo].ToString()</div>
     }
     <form asp-controller="Admin" asp-action="ManageAccount" method="post">
         <div class="form-group">

@@ -1,0 +1,123 @@
+﻿@using Business.Abstract
+@using Business.Constants
+@model EditWorkerViewModel
+@inject ICityService _cityService
+
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Çalışan Düzenle";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<div class="container">
+    <h1>Çalışan Düzenle</h1>
+    @if (TempData[TempDataTypes.AdminInfo] != null)
+    {
+        <div class="alert alert-info">@TempData[TempDataTypes.AdminInfo].ToString()</div>
+    }
+    <form asp-controller="User" asp-action="UpdateWorker" method="post">
+        <input style="display: none" asp-for="EditWorkerDto.Email" type="text" class="form-control" value="@Model.EditWorkerDto.Email" placeholder="" />
+        <input style="display: none" asp-for="EditWorkerDto.WorkerId" type="text" class="form-control" value="@Model.EditWorkerDto.WorkerId" placeholder="" />
+
+        <div class="form-group">
+            <input style="display: none" asp-for="EditWorkerDto.IdentityNo" type="text" class="form-control" value="@Model.EditWorkerDto.IdentityNo" placeholder=""/>
+        </div>
+        <div class="form-group">
+            <label asp-for="EditWorkerDto.FirstName">Adı</label>
+            <input asp-for="EditWorkerDto.FirstName" type="text" class="form-control" value="@Model.EditWorkerDto.FirstName" placeholder=""/>
+            <span class="text-danger" asp-validation-for="EditWorkerDto.FirstName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EditWorkerDto.LastName">Soyadı</label>
+            <input asp-for="EditWorkerDto.LastName" type="text" class="form-control" value="@Model.EditWorkerDto.LastName" placeholder=""/>
+            <span class="text-danger" asp-validation-for="EditWorkerDto.LastName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EditWorkerDto.PhoneNumber">Telefon Numarası</label>
+            <input asp-for="EditWorkerDto.PhoneNumber" type="text" class="form-control" value="@Model.EditWorkerDto.PhoneNumber" placeholder=""/>
+            <span class="text-danger" asp-validation-for="EditWorkerDto.PhoneNumber"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EditWorkerDto.GenderId">Cinsiyeti</label>
+            <select asp-for="EditWorkerDto.GenderId" class="form-control" asp-items="@Model.GenderNamesSelectItems"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="EditWorkerDto.Street">Cadde/Sokak</label>
+            <input asp-for="EditWorkerDto.Street" type="text" class="form-control" value="@Model.EditWorkerDto.Street" placeholder=""/>
+            <span class="text-danger" asp-validation-for="EditWorkerDto.Street"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EditWorkerDto.AddressNumber">Adres No</label>
+            <input asp-for="EditWorkerDto.AddressNumber" type="text" class="form-control" value="@Model.EditWorkerDto.AddressNumber" placeholder=""/>
+            <span class="text-danger" asp-validation-for="EditWorkerDto.AddressNumber"></span>
+        </div>
+        @{
+            var cities = _cityService.GetAll().Data;
+            var cityitems = new List<SelectListItem>();
+            foreach (var city in cities)
+            {
+                cityitems.Add(new SelectListItem
+                {
+                    Text = city.CityName,
+                    Value = city.CityId.ToString()
+                });
+            }
+            <div class="form-group">
+                <label asp-for="EditWorkerDto.CityId">İl</label>
+                <select id="city" asp-for="EditWorkerDto.CityId" class="form-control" asp-items="cityitems"></select>
+            </div>
+        }
+        @{
+            bool selected = false;
+            var districts = _cityService.GetDistrictsByCityId(Model.EditWorkerDto.CityId).Data;
+            var districtitems = new List<SelectListItem>();
+            foreach (var district in districts)
+            {
+                if (district.DistrictId == Model.EditWorkerDto.DistrictId)
+                {
+                    selected = true;
+                }
+
+                districtitems.Add(new SelectListItem
+                {
+                    Text = district.DistrictName,
+                    Value = district.DistrictId.ToString(),
+                    Selected = selected
+                });
+
+                selected = false;
+            }
+        }
+        <div class="form-group">
+            <label asp-for="EditWorkerDto.DistrictId">İlçe</label>
+            <select id="district" asp-for="EditWorkerDto.DistrictId" class="form-control" asp-items="districtitems"></select>
+            <script type="text/javascript">
+                $("#city").change(function() {
+                    $("#district").empty();
+
+                    var city = $("#city").val();
+
+                    $.ajax(
+                        {
+                            url: '@Url.Action("GetDistricts", "User")',
+                            type: "POST",
+                            dataType: "json",
+                            data: { cityId: city },
+
+                            success: function(data) {
+                                $.each(data,
+                                    function() {
+                                        $("#district").append('<option id=' + this.districtId + ' value=' + this.districtId + '>' + this.districtName + '</option>');
+                                    });
+                            }
+                        });
+                });
+            </script>
+        </div>
+        <input type="submit" value="Kaydet" class="btn btn-success btn-sm"/>
+    </form>
+</div>
+<br />
+<br />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>

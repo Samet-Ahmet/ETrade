@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Constants;
@@ -288,6 +289,165 @@ namespace WebUI.Controllers
                 Users = result.Data
             };
             return View(model);
+        }
+
+        [Authorize(Roles = "Manager")]
+        [HttpGet]
+        public IActionResult EditManager(int managerId)
+        {
+            var user = _userService.GetById(managerId);
+            if (!user.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = user.Message });
+            }
+
+            var manager = _workerService.GetById(managerId);
+            if (!manager.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = manager.Message });
+            }
+
+            var editWorkerDto = new EditWorkerDto
+            {
+                AddressNumber = manager.Data.AddressNumber,
+                LastName = user.Data.LastName,
+                IdentityNo = manager.Data.IdentityNo,
+                GenderId = user.Data.GenderId,
+                Street = manager.Data.Street,
+                FirstName = user.Data.FirstName,
+                CityId = manager.Data.CityId,
+                Email = user.Data.Email,
+                DistrictId = manager.Data.DistrictId,
+                PhoneNumber = user.Data.PhoneNumber,
+                WorkerId = managerId
+            };
+
+            var model = new EditManagerViewModel
+            {
+                EditWorkerDto = editWorkerDto,
+                GenderNamesSelectItems = new List<SelectListItem>
+                {
+                    new SelectListItem{Text = "Cinsiyet",Value = "0"}
+                }
+            };
+            foreach (var gender in _genderDal.GetList())
+            {
+                bool selected = gender.GenderId == user.Data.GenderId;
+                model.GenderNamesSelectItems.Add(new SelectListItem
+                {
+                    Text = gender.GenderName,
+                    Value = gender.GenderId.ToString(),
+                    Selected = selected
+                });
+            }
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "Manager,Worker")]
+        [HttpGet]
+        public IActionResult EditWorker(int workerId)
+        {
+            var user = _userService.GetById(workerId);
+            if (!user.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = user.Message });
+            }
+
+            var manager = _workerService.GetById(workerId);
+            if (!manager.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = manager.Message });
+            }
+
+            var editWorkerDto = new EditWorkerDto
+            {
+                AddressNumber = manager.Data.AddressNumber,
+                LastName = user.Data.LastName,
+                IdentityNo = manager.Data.IdentityNo,
+                GenderId = user.Data.GenderId,
+                Street = manager.Data.Street,
+                FirstName = user.Data.FirstName,
+                CityId = manager.Data.CityId,
+                Email = user.Data.Email,
+                DistrictId = manager.Data.DistrictId,
+                PhoneNumber = user.Data.PhoneNumber,
+                WorkerId = workerId
+            };
+
+            var model = new EditWorkerViewModel
+            {
+                EditWorkerDto = editWorkerDto,
+                GenderNamesSelectItems = new List<SelectListItem>
+                {
+                    new SelectListItem{Text = "Cinsiyet",Value = "0"}
+                }
+            };
+            foreach (var gender in _genderDal.GetList())
+            {
+                bool selected = gender.GenderId == user.Data.GenderId;
+                model.GenderNamesSelectItems.Add(new SelectListItem
+                {
+                    Text = gender.GenderName,
+                    Value = gender.GenderId.ToString(),
+                    Selected = selected
+                });
+            }
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "Manager,Worker")]
+        [HttpPost]
+        public IActionResult UpdateWorker(EditWorkerDto editWorkerDto, bool isManager=false)
+        {
+            if (!ModelState.IsValid || editWorkerDto.GenderId == 0)
+            {
+                if (isManager)
+                {
+                    return RedirectToAction("EditManager", "User");
+                }
+
+                return RedirectToAction("EditWorker", "User");
+            }
+
+            var user = _userService.GetById(editWorkerDto.WorkerId);
+            if (!user.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = user.Message });
+            }
+
+            var worker = _workerService.GetById(editWorkerDto.WorkerId);
+            if (!worker.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = worker.Message });
+            }
+
+            user.Data.LastName = editWorkerDto.LastName;
+            user.Data.FirstName = editWorkerDto.FirstName;
+            user.Data.GenderId = editWorkerDto.GenderId;
+            user.Data.PhoneNumber = editWorkerDto.PhoneNumber;
+
+            worker.Data.AddressNumber = editWorkerDto.AddressNumber;
+            worker.Data.CityId = editWorkerDto.CityId;
+            worker.Data.DistrictId = editWorkerDto.DistrictId;
+            worker.Data.IdentityNo = editWorkerDto.IdentityNo;
+            worker.Data.Street = editWorkerDto.Street;
+            var result = _workerService.Update(worker.Data, user.Data);
+            if (!result.Success)
+            {
+                return RedirectToAction("InternalError", "Error", new { errorMessage = result.Message });
+            }
+
+            if (isManager)
+            {
+                TempData.Remove(TempDataTypes.AdminInfo);
+                TempData.Add(TempDataTypes.AdminInfo,Messages.ManagerUpdated);
+                return RedirectToAction("EditManager", "User", new { managerId = editWorkerDto.WorkerId });
+            }
+            TempData.Remove(TempDataTypes.AdminInfo);
+            TempData.Add(TempDataTypes.AdminInfo, Messages.WorkerUpdated);
+            return RedirectToAction("EditWorker", "User", new { workerId = editWorkerDto.WorkerId });
         }
 
         [HttpPost]

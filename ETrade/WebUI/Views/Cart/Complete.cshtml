@@ -10,18 +10,21 @@
 
 <h2>Teslimat Adresini Seçiniz</h2>
 <a class="btn btn-success" href="/Cart/AddShippingDetail">Yeni Teslimat Bilgisi Ekle</a>
-<table style="width: 100%;" class="table table-responsive">
-    <thead class="thead-dark">
+<br/>
+@if (Model.ShippingDetails.Count > 0)
+{
+    <table style="width: 100%;" class="table table-responsive">
+        <thead class="thead-dark">
         <tr>
             <th>Adres Adı</th>
             <th>Adres</th>
             <th></th>
             <th></th>
         </tr>
-    </thead>
-    @foreach (var shippingDetail in Model.ShippingDetails)
-    {
-        <tbody>
+        </thead>
+        @foreach (var shippingDetail in Model.ShippingDetails)
+        {
+            <tbody>
             <tr>
                 <td>@shippingDetail.AddressName</td>
                 <td>
@@ -32,9 +35,10 @@
                 <td><a class="btn btn-sm btn-info" asp-controller="Cart" asp-action="EditShippingDetail" asp-route-shippingDetailId="@shippingDetail.ShippingDetailId">Düzenle</a></td>
                 <!--Butona tıklayınca Cart controllerındaki addtocart fonksiyonunu çağırsın asp-route sonuna parametre gelince onnu gönderiyor-->
             </tr>
-        </tbody>
-    }
-</table>
+            </tbody>
+        }
+    </table>
+}
 
 
 

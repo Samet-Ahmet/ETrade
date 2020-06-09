@@ -49,7 +49,7 @@ namespace WebUI.Controllers
             _cartService.AddToCart(cart, productDetailDto.Product);
 
             _cartSessionHelper.SetCart("cart", cart);
-
+            TempData.Remove(TempDataTypes.AddedToCart);
             TempData.Add(TempDataTypes.AddedToCart, productDetailDto.Product.ProductName + " sepete eklendi!");
 
             return RedirectToAction("Index", "Product");

@@ -27,13 +27,13 @@ namespace Business.Concrete
         {
             try
             {
-                _productDal.Add(productDetailDto.Product);
-                Thread.Sleep(200);
-                var productId = _productDal.Get(p => p.ProductDef == productDetailDto.Product.ProductDef
-                                                     && p.ProductName == productDetailDto.Product.ProductName
+                int productId = _productDal.Add(productDetailDto.Product);
+             //   Thread.Sleep(500);
+             /*   var productId = _productDal.Get(p=>
+                                                     p.ProductName == productDetailDto.Product.ProductName
                                                      && p.UnitPrice == productDetailDto.Product.UnitPrice
                                                      && p.BrandId == productDetailDto.Product.BrandId
-                                                     && p.CategoryId == productDetailDto.Product.CategoryId).ProductId;
+                                                     && p.CategoryId == productDetailDto.Product.CategoryId).ProductId;*/
 
                 foreach (var productPhotoPath in productDetailDto.ProductPhotoPaths)
                 {

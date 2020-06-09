@@ -5137,19 +5137,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\samet\\.nuget\\packages\\": {}
+    "C:\\Users\\ahmet\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\WebUI.csproj",
+      "projectUniqueName": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\WebUI.csproj",
       "projectName": "WebUI",
-      "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\WebUI.csproj",
-      "packagesPath": "C:\\Users\\samet\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\obj\\",
+      "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\WebUI.csproj",
+      "packagesPath": "C:\\Users\\ahmet\\.nuget\\packages\\",
+      "outputPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\WebUI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\samet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ahmet\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5162,8 +5162,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Business\\Business.csproj": {
-              "projectPath": "C:\\Users\\samet\\Documents\\GitHub\\ETrade\\ETrade\\Business\\Business.csproj"
+            "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Business\\Business.csproj": {
+              "projectPath": "Y:\\Documents\\GitHub\\ETrade\\ETrade\\Business\\Business.csproj"
             }
           }
         }
@@ -5200,6 +5200,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.2, 3.1.2]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -5208,7 +5214,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

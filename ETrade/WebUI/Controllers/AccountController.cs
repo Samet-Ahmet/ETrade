@@ -166,16 +166,19 @@ namespace WebUI.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("RegisteredSuccessfully", "Account",new {userForRegisterDto = userForRegisterDto});
+            return RedirectToAction("RegisteredSuccessfully", "Account",new { email = userForRegisterDto.Email});
             //   return RegisteredSuccessfully(userForRegisterDto);
         }
 
-        public IActionResult RegisteredSuccessfully(UserForRegisterDto userForRegisterDto)
+        public IActionResult RegisteredSuccessfully(string email)
         {
-            var model = new RegisterViewModel
+            var user = _userService.GetByMail(email);
+            if (!user.Success)
             {
-                UserForRegisterDto = userForRegisterDto
-            };
+                return RedirectToAction("InternalError", "Error", new { errorMessage = user.Message });
+            }
+
+            var model = user.Data;
 
             return View(model);
         }

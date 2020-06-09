@@ -6,22 +6,29 @@
 @inject ICategoryService _categoryService
 <h2>Kategoriler</h2>
 <div class="list-group">
-    @foreach (var category in Model.Categories)
-    {
-        <a href="/Category/Index?categoryId=@category.CategoryId" class="list-group-item list-group-item-action">
-            @category.CategoryName
-            <span class="badge badge-success badge-pill">
-                @{
-                    var result = _categoryService.GetProductCount(category.CategoryId);
-                    if (result.Success)
-                    {
-                        @:@result.Data
-                    }
-                }
-            </span>
-            <form style="display: inline" asp-action="Index" asp-controller="Product" asp-route-categoryId="@category.CategoryId" method="get">
-                <input style="position: absolute; right: 0px" class="btn btn-success btn-sm" type="submit" value="Ürünler" />
-            </form>
-        </a>
-    }
+    <table class="table-hover">
+        @foreach (var category in Model.Categories)
+        {
+            <tr style="width: 100%">
+                <td style="width: 95%">
+                    <a style="color: black;" href="/Category/Index?categoryId=@category.CategoryId" class="list-group-item list-group-item-action">
+                        @category.CategoryName
+                        <span class="badge badge-success badge-pill">
+                            @{
+                                var result = _categoryService.GetProductCount(category.CategoryId);
+                                if (result.Success)
+                                {
+                                    @:@result.Data
+                                }
+                            }
+                        </span>
+                    </a>
+                </td>
+                <td style="width: 5%">
+                    <a class="btn btn-success btn-sm" href="/Product/Index?categoryId=@category.CategoryId">Ürünler</a>
+                </td>
+            </tr>
+
+        }
+    </table>
 </div>

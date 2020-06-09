@@ -1,10 +1,10 @@
-﻿@model RegisterViewModel
+﻿@model Entities.Concrete.User
 @{
     ViewBag.Title = "Kayıt Başarılı";
 }
 
 <h1>Kayıt Başarılı </h1>
-<h3>Merhaba, @Model.UserForRegisterDto.FirstName @Model.UserForRegisterDto.LastName.</h3>
+<h3>Merhaba, @Model.FirstName @Model.LastName.</h3>
 <h3>Aşağıda verilen e-posta adresi ve oluşturduğunuz şifre ile giriş yapabilirsiniz.</h3>
-<h3>E-Posta Adresi: @Model.UserForRegisterDto.Email</h3>
+<h3>E-Posta Adresi: @Model.Email</h3>
 <a href="/Account/Login" class="btn btn-success">Giriş Yap</a>

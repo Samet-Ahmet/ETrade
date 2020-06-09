@@ -5,12 +5,12 @@
 
 @{
     Layout = "_ManageAccount";
-    ViewBag.Title = "Teslimat Bilgisini Güncelle";
+    ViewBag.Title = "Teslimat Bilgisini Düzenle";
 }
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<h2>Teslimat Bilgisi Ekle</h2>
+<h2>Teslimat Bilgisi Düzenle</h2>
 @if (TempData[TempDataTypes.ShippingDetailInfo] != null)
 {
     <div class="alert alert-warning">@TempData[TempDataTypes.ShippingDetailInfo].ToString()</div>
