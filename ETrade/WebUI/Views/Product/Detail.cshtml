@@ -49,6 +49,94 @@
         max-height: 100% !important;
         width: auto !important;
     }
+
+
+
+    #myImg {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #myImg:hover {opacity: 0.7;}
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    }
+
+    /* Modal Content (image) */
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    /* Caption of Modal Image */
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    }
+
+    /* Add Animation */
+    .modal-content, #caption {  
+        -webkit-animation-name: zoom;
+        -webkit-animation-duration: 0.6s;
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+
+    @@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+    }
+
+    @@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+    }
+
+    /* The Close Button */
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* 100% Image Width on Smaller Screens */
+    @@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+    }
 </style>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
@@ -65,7 +153,7 @@
             <!-- Product Image -->
             <div class="col-lg-6 col-sm-12">
 
-                <div id="carouselExampleIndicators" class="carousel slide custom-slider" style="border: 2px inset #262626; border-radius: 13px;" data-ride="carousel">
+                <div id="carouselExampleIndicators" class="carousel slide custom-slider" style="border: 1px inset #262626; border-radius: 13px;" data-ride="carousel">
                     <div class="carousel-inner">
                         @{
                             var classname = "carousel-item active";
@@ -74,13 +162,12 @@
 
                                 <div class="@classname">
                                     <div class="carousel-img-container d-flex justify-content-center">
-                                        <center><a href="../ProductPhotos/@productPhotoPath.PhotoPath"><img src="../ProductPhotos/@productPhotoPath.PhotoPath" class="photo d-block w-100" alt="..."></a></center>
+                                        <center><img src="../ProductPhotos/@productPhotoPath.PhotoPath" class="product_photo_for_modal photo d-block w-100" alt="..."></center>
                                     </div>
                                 </div>
                                 classname = "carousel-item";
                             }
                         }
-
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <i style="color: #000000;" class="fas fa-chevron-left"></i>
@@ -90,6 +177,11 @@
                     </a>
                 </div>
 
+            </div>
+            
+            <div id="myModal" class="modal" style="margin-top: 80px;">
+                <span class="close">&times;</span>
+                <img class="modal-content" id="photo_place" style="height: 600px; width: auto;">
             </div>
 
             <!-- Product Info -->
@@ -112,9 +204,6 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
     <hr />
     <div class="row">
@@ -128,6 +217,8 @@
             </pre>
         </div>
     </div>
+    
+    
 }
 <h3>Yorumlar</h3>
 @if (Context.Session.GetString("login") != null)
@@ -177,3 +268,28 @@ else
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    var modalImg = document.getElementById("photo_place");
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+
+
+    document.querySelectorAll('.product_photo_for_modal').forEach(item => {
+        item.addEventListener('click',
+            event => {
+                modal.style.display = "block";
+                modalImg.src = item.src;
+                
+            });
+    });
+
+// Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+    span.onclick = function() { 
+        modal.style.display = "none";
+    }
+</script>
