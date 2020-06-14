@@ -1,0 +1,157 @@
+CREATE TABLE [dbo].[Brands] (
+    [BrandId]   INT           IDENTITY (1, 1) NOT NULL,
+    [BrandName] VARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([BrandId] ASC)
+);
+
+CREATE TABLE [dbo].[Categories] (
+    [CategoryId]     INT          IDENTITY (1, 1) NOT NULL,
+    [CategoryName]   VARCHAR (50) NOT NULL,
+    [IsMainCategory] BIT          NOT NULL,
+    PRIMARY KEY CLUSTERED ([CategoryId] ASC)
+);
+
+CREATE TABLE [dbo].[Cities] (
+    [CityId]   TINYINT      NOT NULL,
+    [CityName] VARCHAR (30) NOT NULL,
+    PRIMARY KEY CLUSTERED ([CityId] ASC)
+);
+
+CREATE TABLE [dbo].[Districts] (
+    [CityId]       TINYINT      NOT NULL,
+    [DistrictId]   SMALLINT     NOT NULL,
+    [DistrictName] VARCHAR (50) NOT NULL,
+    CONSTRAINT [pk_districts] PRIMARY KEY CLUSTERED ([CityId] ASC, [DistrictId] ASC),
+    CONSTRAINT [FK_Districts_CityId_To_Cities_CityId] FOREIGN KEY ([CityId]) REFERENCES [dbo].[Cities] ([CityId])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [districtid_index]
+    ON [dbo].[Districts]([DistrictId] ASC);
+	
+CREATE TABLE [dbo].[Genders] (
+    [GenderId]   TINYINT    IDENTITY (1, 1) NOT NULL,
+    [GenderName] NCHAR (25) NOT NULL,
+    PRIMARY KEY CLUSTERED ([GenderId] ASC)
+);
+
+CREATE TABLE [dbo].[Roles] (
+    [RoleId]   TINYINT      IDENTITY (1, 1) NOT NULL,
+    [RoleName] VARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([RoleId] ASC)
+);
+
+CREATE TABLE [dbo].[Users] (
+    [Id]           INT             IDENTITY (1, 1) NOT NULL,
+    [FirstName]    VARCHAR (30)    NOT NULL,
+    [LastName]     VARCHAR (30)    NOT NULL,
+    [Email]        VARCHAR (50)    NOT NULL,
+    [PhoneNumber]  VARCHAR (13)    NOT NULL,
+    [PasswordHash] VARBINARY (500) NOT NULL,
+    [PasswordSalt] VARBINARY (500) NOT NULL,
+    [GenderId]     TINYINT         NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Users_GenderId_To_Genders_GenderId] FOREIGN KEY ([GenderId]) REFERENCES [dbo].[Genders] ([GenderId])
+);
+
+CREATE TABLE [dbo].[UserRoles] (
+    [UserId] INT     NOT NULL,
+    [RoleId] TINYINT NOT NULL,
+    CONSTRAINT [pk_UserRoler] PRIMARY KEY CLUSTERED ([UserId] ASC, [RoleId] ASC),
+    CONSTRAINT [FK_UserRoles_UserId_To_Users_Id] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([Id]),
+    CONSTRAINT [FK_UserRoles_RoleId_To_Roles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[Roles] ([RoleId])
+);
+
+CREATE TABLE [dbo].[Workers] (
+    [WorkerId]      INT          NOT NULL,
+    [IdentityNo]    BIGINT       NOT NULL,
+    [BirthDate]     DATETIME     NOT NULL,
+    [HireDate]      DATETIME     NOT NULL,
+    [CityId]        TINYINT      NOT NULL,
+    [DistrictId]    SMALLINT     NOT NULL,
+    [Street]        VARCHAR (50) NOT NULL,
+    [AddressNumber] VARCHAR (15) NOT NULL,
+    [QuitDate]      DATETIME     NULL,
+    PRIMARY KEY CLUSTERED ([WorkerId] ASC),
+    UNIQUE NONCLUSTERED ([IdentityNo] ASC),
+    CONSTRAINT [FK_Workers_CityId_To_Cities_CityId] FOREIGN KEY ([CityId]) REFERENCES [dbo].[Cities] ([CityId]),
+    CONSTRAINT [FK_Workers_WorkerId_To_Users_Id] FOREIGN KEY ([WorkerId]) REFERENCES [dbo].[Users] ([Id])
+);
+
+CREATE TABLE [dbo].[Products] (
+    [ProductId]    INT           IDENTITY (1, 1) NOT NULL,
+    [ProductName]  VARCHAR (MAX) NOT NULL,
+    [UnitPrice]    MONEY         NOT NULL,
+    [UnitsInStock] INT           NOT NULL,
+    [CategoryId]   INT           NOT NULL,
+    [ProductDef]   VARCHAR (MAX) NOT NULL,
+    [BrandId]      INT           NOT NULL,
+    PRIMARY KEY CLUSTERED ([ProductId] ASC),
+    CONSTRAINT [FK_Products_BrandId_To_Brands_BrandId] FOREIGN KEY ([BrandId]) REFERENCES [dbo].[Brands] ([BrandId]),
+    CONSTRAINT [FK_Products_CategoryId_To_Categories_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [dbo].[Categories] ([CategoryId])
+);
+
+CREATE TABLE [dbo].[ShippingDetails] (
+    [ShippingDetailId] INT          IDENTITY (1, 1) NOT NULL,
+    [AddressName]      VARCHAR (50) NULL,
+    [CustomerId]       INT          NOT NULL,
+    [CityId]           TINYINT      NOT NULL,
+    [DistrictId]       SMALLINT     NOT NULL,
+    [Street]           VARCHAR (50) NOT NULL,
+    [Number]           VARCHAR (15) NOT NULL,
+    PRIMARY KEY CLUSTERED ([ShippingDetailId] ASC),
+    CONSTRAINT [FK_ShippingDetails_CityId_To_Cities_CityId] FOREIGN KEY ([CityId]) REFERENCES [dbo].[Cities] ([CityId]),
+    CONSTRAINT [FK_ShippingDetails_CustomerId_To_Users_UserId] FOREIGN KEY ([CustomerId]) REFERENCES [dbo].[Users] ([Id])
+);
+
+CREATE TABLE [dbo].[SubCategories] (
+    [CategoryId]    INT NOT NULL,
+    [SubCategoryId] INT NOT NULL,
+    CONSTRAINT [pk_sub_category] PRIMARY KEY CLUSTERED ([CategoryId] ASC, [SubCategoryId] ASC),
+    CONSTRAINT [FK_SubCategories_CategoryId_To_Categories_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [dbo].[Categories] ([CategoryId]),
+    CONSTRAINT [FK_SubCategories_SubCategoryId_To_Categories_CategoryId] FOREIGN KEY ([SubCategoryId]) REFERENCES [dbo].[Categories] ([CategoryId])
+);
+
+CREATE TABLE [dbo].[Orders] (
+    [OrderId]          INT      IDENTITY (1, 1) NOT NULL,
+    [CustomerId]       INT      NOT NULL,
+    [OrderDate]        DATETIME NOT NULL,
+    [ShippedDate]      DATETIME NULL,
+    [TrackingNumber]   INT      NOT NULL,
+    [ShippingDetailId] INT      NOT NULL,
+    [Delivered]        BIT      NOT NULL,
+    [Price]            MONEY    NOT NULL,
+    PRIMARY KEY CLUSTERED ([OrderId] ASC),
+    CONSTRAINT [FK_Orders_CustomerId_To_Users_UserId] FOREIGN KEY ([CustomerId]) REFERENCES [dbo].[Users] ([Id])
+);
+
+CREATE TABLE [dbo].[ProductPhotoPaths] (
+    [ProductId] INT           NOT NULL,
+    [PhotoPath] VARCHAR (MAX) NOT NULL,
+    [Id]        INT           IDENTITY (1, 1) NOT NULL,
+    CONSTRAINT [PK_ProductPhotoPaths] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_ProductPhotoPaths_PoductId_To_Products_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [dbo].[Products] ([ProductId])
+);
+
+CREATE TABLE [dbo].[OrderDetails] (
+    [OrderId]   INT      NOT NULL,
+    [ProductId] INT      NOT NULL,
+    [Quantity]  SMALLINT NOT NULL,
+    [UnitPrice] MONEY    NOT NULL,
+    CONSTRAINT [pk_orderdetails] PRIMARY KEY CLUSTERED ([OrderId] ASC, [ProductId] ASC),
+    CONSTRAINT [FK_OrderDetails_OrderId_To_Orders_OrderId] FOREIGN KEY ([OrderId]) REFERENCES [dbo].[Orders] ([OrderId]),
+    CONSTRAINT [FK_OrderDetails_ProductId_To_Products_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [dbo].[Products] ([ProductId])
+);
+
+CREATE TABLE [dbo].[Comments] (
+    [CommentId]   INT           IDENTITY (1, 1) NOT NULL,
+    [CommentText] VARCHAR (MAX) NULL,
+    [UserId]      INT           NULL,
+    [ProductId]   INT           NULL,
+    [CommentDate] DATETIME      NULL,
+    PRIMARY KEY CLUSTERED ([CommentId] ASC),
+    CONSTRAINT [FK_Comments_ProductId_To_Products_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [dbo].[Products] ([ProductId]),
+    CONSTRAINT [FK_Comments_UserId_To_Users_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([Id])
+);
+
